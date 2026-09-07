@@ -108,7 +108,7 @@
         <div class="max-w-5xl mx-auto p-4 md:p-8 space-y-12">
             
             <!-- SECTION 0: Notice -->
-            <section id="notice" class="scroll-mt-20">
+            <section id="notice" class="scroll-mt-20 search-section">
                 <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-red-500 pb-2 mb-6 flex items-center">
                     <i class="fa-solid fa-triangle-exclamation text-red-500 mr-2"></i> 시작 전에 꼭 읽을 것
                 </h3>
@@ -151,11 +151,20 @@
                         <h4 class="font-bold text-purple-800 mb-1">3. 이 파이썬은 진짜 파이썬이 아닙니다</h4>
                         <p class="text-sm text-purple-700">문법 제한이 있습니다. 아래의 <a href="#appendix-b" class="underline font-bold hover:text-purple-900">부록: 문법 주의사항</a>을 꼭 먼저 확인하세요.</p>
                     </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-blue-800 mb-2">4. 실행 및 대기 시간에 대해 (부록 C)</h4>
+                        <ul class="text-sm text-blue-700 list-disc pl-5 space-y-1">
+                            <li>로봇 명령은 <strong>순서대로 실행</strong>됩니다. (함수 안에서도 동일)</li>
+                            <li><code>artibo_move</code>는 최소 <strong>1초</strong>, 소리 함수는 약 <strong>2초</strong>, LCD 전송은 약 <strong>1초</strong>를 기다린 뒤 다음 줄로 넘어갑니다.</li>
+                            <li>정지 버튼을 누르면 진행 중이던 명령 뒤의 코드는 실행되지 않습니다.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
             <!-- SECTION 1: Artibo Head -->
-            <section id="head" class="scroll-mt-20 search-section">
+            <section id="head" class="scroll-mt-20 search-section hidden">
                 <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">1. Artibo_head - 말하기·표정·번역</h3>
                 
                 <div class="grid grid-cols-1 gap-6">
@@ -214,7 +223,7 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 gap-6">
                         <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                             <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
                                 <h4 class="font-bold text-lg font-mono text-blue-700">artibo_display_text(text, font_size)</h4>
@@ -231,7 +240,7 @@
                             <div class="p-4">
                                 <p class="text-sm text-gray-600 mb-3">글자를 번역해 문자열로 돌려줍니다.</p>
                                 <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>result = artibo_translate("ko", "Hello")<br>artibo_speak(result, "Korean_Seoyeon")</code></pre>
-                                <p class="text-xs text-gray-500">지원 언어 코드: ko(한), en(영), ja(일), zh(중간), zh-TW(중번), fr(불), de(독), es(스페인), it(이탈리아), pt(포르투갈), ru(러), ar(아랍), hi(힌디), id(인니), th(태국)</p>
+                                <p class="text-xs text-gray-500">지원 언어 코드: ko, en, ja, zh, zh-TW, fr, de, es, it, pt, ru, ar, hi, id, th</p>
                             </div>
                         </div>
                     </div>
@@ -239,7 +248,7 @@
             </section>
 
             <!-- SECTION 2: Artibo Body -->
-            <section id="body" class="scroll-mt-20 search-section">
+            <section id="body" class="scroll-mt-20 search-section hidden">
                 <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">2. Artibo_body - 이동·센서</h3>
                 
                 <div class="grid grid-cols-1 gap-6">
@@ -258,7 +267,7 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 gap-6">
                         <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                             <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
                                 <h4 class="font-bold text-lg font-mono text-blue-700">is_obstacle_detected()</h4>
@@ -282,71 +291,69 @@
                 </div>
             </section>
 
-            <!-- SECTION 3 & 4: Image & Speech Recognition -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <section id="vision" class="scroll-mt-20 search-section">
-                    <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">3. Image_recognition</h3>
-                    <div class="space-y-6">
-                        <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                                <h4 class="font-bold text-lg font-mono text-blue-700">artibo_image_recognition(timer)</h4>
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm text-gray-600 mb-3">사진을 찍어 사물 이름을 문자열로 돌려줍니다. (timer = 촬영 전 대기 초)</p>
-                                <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>result = artibo_image_recognition(3)</code></pre>
-                            </div>
+            <!-- SECTION 3: Vision -->
+            <section id="vision" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">3. Image_recognition - 사물·글자 인식</h3>
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_image_recognition(timer)</h4>
                         </div>
-                        <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                                <h4 class="font-bold text-lg font-mono text-blue-700">artibo_text_recognition(timer)</h4>
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm text-gray-600 mb-3">사진 속 글자를 문자열로 돌려줍니다. 못 찾으면 빈 문자열(<code>""</code>) 반환.</p>
-                                <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>text = artibo_text_recognition(2)</code></pre>
-                            </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600 mb-3">사진을 찍어 사물 이름을 문자열로 돌려줍니다. (timer = 촬영 전 대기 초)</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>result = artibo_image_recognition(3)</code></pre>
                         </div>
                     </div>
-                </section>
-
-                <section id="speech" class="scroll-mt-20 search-section">
-                    <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">4. Speech_recognition</h3>
-                    <div class="space-y-6">
-                        <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                                <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_text(lang, record_time, timer)</h4>
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm text-gray-600 mb-3">마이크로 녹음해 글자로 바꿉니다. (lang: 2글자 언어 코드, record_time: 녹음시간, timer: 대기시간)</p>
-                                <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>result = artibo_speech_to_text("ko", 3, 3)</code></pre>
-                            </div>
+                    <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_text_recognition(timer)</h4>
                         </div>
-                        <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                                <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_translate(src, tgt, r_time, timer)</h4>
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm text-gray-600 mb-3">녹음한 말을 다른 언어로 번역해 돌려줍니다. (src는 <code>ko-KR</code>형식, tgt는 <code>en</code> 2글자 형식)</p>
-                                <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>res = artibo_speech_to_translate("ko-KR", "en", 3, 3)</code></pre>
-                            </div>
-                        </div>
-                        <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                                <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_text_by_whisper(r_time, timer)</h4>
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm text-gray-600 mb-3">Whisper로 음성 인식. 언어 자동 감지.</p>
-                                <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>result = artibo_speech_to_text_by_whisper(3, 3)</code></pre>
-                            </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600 mb-3">사진 속 글자를 문자열로 돌려줍니다. 못 찾으면 빈 문자열(<code>""</code>) 반환.</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>text = artibo_text_recognition(2)</code></pre>
                         </div>
                     </div>
-                </section>
-            </div>
+                </div>
+            </section>
 
-            <!-- SECTION 5 & 6: Face Recognition & AI -->
-            <section id="face" class="scroll-mt-20 search-section">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">5. Facial_recognition & 6. AI</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- SECTION 4: Speech -->
+            <section id="speech" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">4. Speech_recognition - 음성 인식·통역</h3>
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_text(lang, record_time, timer)</h4>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600 mb-3">마이크로 녹음해 글자로 바꿉니다. (lang: 2글자 언어 코드, record_time: 녹음시간, timer: 대기시간)</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>result = artibo_speech_to_text("ko", 3, 3)</code></pre>
+                        </div>
+                    </div>
+                    <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_translate(src, tgt, r_time, timer)</h4>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600 mb-3">녹음한 말을 번역해 돌려줍니다. (src는 <code>ko-KR</code>형식, tgt는 <code>en</code> 2글자 형식)</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>res = artibo_speech_to_translate("ko-KR", "en", 3, 3)</code></pre>
+                        </div>
+                    </div>
+                    <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_text_by_whisper(r_time, timer)</h4>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600 mb-3">Whisper로 음성 인식. 언어 자동 감지.</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>result = artibo_speech_to_text_by_whisper(3, 3)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: Face Recognition -->
+            <section id="face" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">5. Facial_recognition - 얼굴 인식</h3>
+                <div class="grid grid-cols-1 gap-6">
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
                             <h4 class="font-bold text-lg font-mono text-blue-700">artibo_detect_face(option, timer)</h4>
@@ -369,7 +376,13 @@
                             </ul>
                         </div>
                     </div>
+                </div>
+            </section>
 
+            <!-- SECTION 6: AI -->
+            <section id="ai" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">6. AI - 대화·시각·이미지 생성</h3>
+                <div class="grid grid-cols-1 gap-6">
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
                             <h4 class="font-bold text-lg font-mono text-blue-700">artibo_gpt_chat(prompt)</h4>
@@ -389,11 +402,22 @@
                             <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>desc = artibo_gpt_vision("ko", 0)</code></pre>
                         </div>
                     </div>
+
+                    <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_image_generation(prompt, api_key)</h4>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600 mb-3">글로 설명한 이미지를 생성해 화면에 표시합니다.</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>artibo_image_generation("귀여운 고양이 우주비행사", "sk-...")</code></pre>
+                            <p class="text-xs text-red-500 font-bold mt-3">※ 주의: 발급받은 OpenAI API 키가 필요하며, 없으면 경고창만 뜹니다. (일반 수업용 아님)</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- SECTION 7: Jarvis -->
-            <section id="jarvis" class="scroll-mt-20 search-section">
+            <section id="jarvis" class="scroll-mt-20 search-section hidden">
                 <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6 flex items-center">
                     <i class="fa-solid fa-desktop text-gray-500 mr-2"></i> 7. Jarvis - PC 스피커·카메라·화면
                 </h3>
@@ -405,7 +429,7 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm">
                             <thead class="bg-gray-100 text-gray-700">
-                                <tr><th class="p-3 border-b">함수</th><th class="p-3 border-b">설명</th></tr>
+                                <tr><th class="p-3 border-b whitespace-nowrap">함수</th><th class="p-3 border-b">설명</th></tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 <tr class="hover:bg-gray-50 search-item">
@@ -449,101 +473,115 @@
                 </div>
             </section>
 
-            <!-- SECTION 8 & 9: Extension & LCD -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <section id="extension" class="scroll-mt-20 search-section">
-                    <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">8. Extension (기본 도구)</h3>
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 space-y-4">
-                        <div class="search-item pb-4 border-b">
-                            <h4 class="font-bold font-mono text-blue-700 mb-1">sleep(seconds)</h4>
-                            <p class="text-sm text-gray-600">지정 초만큼 대기. 0.5 같은 소수 가능</p>
-                        </div>
-                        <div class="search-item pb-4 border-b">
-                            <h4 class="font-bold font-mono text-blue-700 mb-1">randint(minimum, maximum)</h4>
-                            <p class="text-sm text-gray-600">양 끝을 포함한 무작위 정수</p>
-                        </div>
-                        <div class="search-item">
-                            <h4 class="font-bold font-mono text-blue-700 mb-1">print(값, ...)</h4>
-                            <p class="text-sm text-gray-600">화면 오른쪽 실행 로그에 출력</p>
-                        </div>
-                        <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mt-4 overflow-x-auto"><code>n = randint(1, 6)<br>print("주사위 :", n)<br>sleep(1)</code></pre>
+            <!-- SECTION 8: Extension -->
+            <section id="extension" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">8. Extension (기본 도구)</h3>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 md:p-6 space-y-4">
+                    <div class="search-item pb-4 border-b">
+                        <h4 class="font-bold font-mono text-blue-700 mb-1">sleep(seconds)</h4>
+                        <p class="text-sm text-gray-600">지정 초만큼 대기. 0.5 같은 소수 가능</p>
                     </div>
-                </section>
+                    <div class="search-item pb-4 border-b">
+                        <h4 class="font-bold font-mono text-blue-700 mb-1">randint(minimum, maximum)</h4>
+                        <p class="text-sm text-gray-600">양 끝을 포함한 무작위 정수</p>
+                    </div>
+                    <div class="search-item">
+                        <h4 class="font-bold font-mono text-blue-700 mb-1">print(값, ...)</h4>
+                        <p class="text-sm text-gray-600">화면 오른쪽 실행 로그에 출력</p>
+                    </div>
+                    <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mt-4 overflow-x-auto"><code>n = randint(1, 6)<br>print("주사위 :", n)<br>sleep(1)</code></pre>
+                </div>
+            </section>
 
-                <section id="lcd" class="scroll-mt-20 search-section">
-                    <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">9. Artibo LCD (표정·그림·글자)</h3>
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 space-y-4 text-sm h-full max-h-[500px] overflow-y-auto">
+            <!-- SECTION 9: LCD -->
+            <section id="lcd" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">9. Artibo LCD (표정·그림·글자)</h3>
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 space-y-4 text-sm">
                         <div class="search-item pb-3 border-b">
                             <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_lcd_face(face_id)</h4>
                             <p class="text-gray-600">LCD 표정 표시 (11종): smile, grin, blank, happy, unamused, surprised, suspicious, neutral, friendly, cute, beaming</p>
                         </div>
                         <div class="search-item pb-3 border-b">
-                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_lcd_face_blink(face_id) / artibo_lcd_blink_stop()</h4>
+                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_lcd_face_blink(face_id)<br>artibo_lcd_blink_stop()</h4>
                             <p class="text-gray-600">3초마다 눈 깜빡이는 표정 지속 / 명시적 멈춤</p>
                         </div>
                         <div class="search-item pb-3 border-b">
-                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_scroll_text(text, speed) / artibo_scroll_stop()</h4>
+                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_scroll_text(text, speed)<br>artibo_scroll_stop()</h4>
                             <p class="text-gray-600">글자 흐르게 표시 (speed: 2~12, 기본 6) / 정지</p>
                         </div>
                         <div class="search-item pb-3 border-b">
-                            <h4 class="font-bold font-mono text-blue-700 mb-1">직접 그리기 (가로 128 x 세로 64)</h4>
-                            <p class="text-gray-600 mb-2">그리기 함수는 화면 밖 캔버스에 그리고, 반드시 <code class="bg-gray-100 text-red-600 px-1 rounded">artibo_lcd_send()</code>를 불러야 전송됩니다.</p>
-                            <ul class="list-disc pl-4 text-gray-500 mb-2">
-                                <li>artibo_lcd_pixel(x, y)</li>
-                                <li>artibo_lcd_line(x1, y1, x2, y2)</li>
-                                <li>artibo_lcd_circle(cx, cy, r)</li>
-                                <li>artibo_lcd_rect(x, y, w, h)</li>
-                                <li>artibo_lcd_text(text, x, y, size)</li>
-                                <li>artibo_lcd_clear() - 지우기</li>
-                            </ul>
-                            <pre class="bg-gray-800 text-green-400 p-2 rounded-lg text-xs overflow-x-auto"><code>artibo_lcd_clear()<br>artibo_lcd_circle(64, 32, 20)<br>artibo_lcd_text("Hi", 54, 26, 12)<br>artibo_lcd_send()</code></pre>
+                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_lcd_image(icon_id)</h4>
+                            <p class="text-gray-600">내장 아이콘 표시 (8종): heart, star, arrow_up, arrow_down, arrow_left, arrow_right, check, x_mark</p>
                         </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- SECTION 10 & 11: Sounds & Info -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <section id="sound" class="scroll-mt-20 search-section">
-                    <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">10. 소리 (효과음·캐릭터)</h3>
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 space-y-4">
+                        <div class="search-item pb-3 border-b">
+                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_take_photo_to_lcd()</h4>
+                            <p class="text-gray-600">사진을 찍어 흑백으로 LCD에 표시합니다.</p>
+                        </div>
                         <div class="search-item">
-                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_play_effect(name)</h4>
-                            <p class="text-sm text-gray-600 mb-2">아티보 스피커로 효과음 (18종)</p>
-                            <p class="text-xs text-gray-500 bg-gray-50 p-2 rounded">beep, ding, whoosh, boot, shutdown, hello_beep, connected, disconnected, charging, success, fail, correct, wrong, warning, level_up, fanfare, giggle, curious</p>
-                        </div>
-                        <div class="search-item pt-4 border-t">
-                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_play_character(name)</h4>
-                            <p class="text-sm text-gray-600">캐릭터 멘트 재생 (robot_ment_01 등)</p>
-                        </div>
-                        <div class="search-item pt-4 border-t">
-                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_play_robot_sfx(name)</h4>
-                            <p class="text-sm text-gray-600">로봇 소리 재생 (robot_misc_01~05, robot_vox_01~10)</p>
+                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_lcd_drawing_popup(slot)<br>artibo_lcd_drawing_send(slot)</h4>
+                            <p class="text-gray-600">그림판 창을 열어 직접 그리고, 지정한 슬롯(1~5)에 저장한 후 로봇으로 전송합니다.</p>
+                            <pre class="bg-gray-800 text-green-400 p-2 rounded-lg text-xs mt-2 overflow-x-auto"><code>artibo_lcd_drawing_popup(1)<br>artibo_lcd_drawing_send(1)</code></pre>
                         </div>
                     </div>
-                </section>
+                    
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 text-sm h-fit search-item">
+                        <h4 class="font-bold font-mono text-blue-700 mb-2 border-b pb-2">직접 그리기 (가로 128 x 세로 64)</h4>
+                        <p class="text-gray-600 mb-3 bg-yellow-50 p-2 rounded text-xs border border-yellow-200">그리기 함수는 화면 밖 캔버스에 그리고, 반드시 <code class="bg-yellow-200 text-red-600 px-1 rounded font-bold">artibo_lcd_send()</code>를 불러야 전송됩니다.</p>
+                        <ul class="list-disc pl-4 text-gray-700 mb-4 space-y-1">
+                            <li><code class="font-mono text-blue-600">artibo_lcd_pixel(x, y)</code> - 점</li>
+                            <li><code class="font-mono text-blue-600">artibo_lcd_line(x1, y1, x2, y2)</code> - 선</li>
+                            <li><code class="font-mono text-blue-600">artibo_lcd_circle(cx, cy, r)</code> - 원</li>
+                            <li><code class="font-mono text-blue-600">artibo_lcd_rect(x, y, w, h)</code> - 사각형</li>
+                            <li><code class="font-mono text-blue-600">artibo_lcd_text(text, x, y, size)</code> - 글자</li>
+                            <li><code class="font-mono text-blue-600">artibo_lcd_clear()</code> - 화면 초기화</li>
+                        </ul>
+                        <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-xs overflow-x-auto"><code>artibo_lcd_clear()<br>artibo_lcd_circle(64, 32, 20)<br>artibo_lcd_text("Hi", 54, 26, 12)<br>artibo_lcd_send()</code></pre>
+                    </div>
+                </div>
+            </section>
 
-                <section id="info" class="scroll-mt-20 search-section">
-                    <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">11. 정보 (날씨·시계)</h3>
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 space-y-4">
-                        <div class="search-item">
-                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_weather(city, info)</h4>
-                            <p class="text-sm text-gray-600 mb-2">실시간 날씨 문자열로 반환</p>
-                            <pre class="bg-gray-800 text-green-400 p-2 rounded-lg text-xs mb-2 overflow-x-auto"><code>temp = artibo_weather("서울", "기온")</code></pre>
-                            <p class="text-xs text-gray-500">city: 서울, 부산, 대구 등 주요도시 18곳<br>info: 기온, 하늘상태, 강수, 습도, 풍속</p>
-                        </div>
-                        <div class="search-item pt-4 border-t">
-                            <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_clock(info)</h4>
-                            <p class="text-sm text-gray-600 mb-2">현재 날짜·시간 문자열로 반환</p>
-                            <pre class="bg-gray-800 text-green-400 p-2 rounded-lg text-xs mb-2 overflow-x-auto"><code>now = artibo_clock("시각")</code></pre>
-                            <p class="text-xs text-gray-500">info: 시각(14:05), 시분초(14, 5, 30), 년월일(2026, 9, 7), 요일(월요일), 날짜(2026-09-07)</p>
-                        </div>
+            <!-- SECTION 10: Sounds -->
+            <section id="sound" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">10. 소리 (효과음·캐릭터)</h3>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 md:p-6 space-y-4">
+                    <div class="search-item">
+                        <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_play_effect(name)</h4>
+                        <p class="text-sm text-gray-600 mb-2">아티보 스피커로 효과음 (18종)</p>
+                        <p class="text-xs text-gray-500 bg-gray-50 p-2 rounded">beep, ding, whoosh, boot, shutdown, hello_beep, connected, disconnected, charging, success, fail, correct, wrong, warning, level_up, fanfare, giggle, curious</p>
                     </div>
-                </section>
-            </div>
+                    <div class="search-item pt-4 border-t">
+                        <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_play_character(name)</h4>
+                        <p class="text-sm text-gray-600">캐릭터 멘트 재생 (robot_ment_01 등)</p>
+                    </div>
+                    <div class="search-item pt-4 border-t">
+                        <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_play_robot_sfx(name)</h4>
+                        <p class="text-sm text-gray-600">로봇 소리 재생 (robot_misc_01~05, robot_vox_01~10)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 11: Info -->
+            <section id="info" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">11. 정보 (날씨·시계)</h3>
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 search-item">
+                        <h4 class="font-bold font-mono text-blue-700 mb-2 border-b pb-2">artibo_weather(city, info)</h4>
+                        <p class="text-sm text-gray-600 mb-3">실시간 날씨 문자열로 반환</p>
+                        <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>temp = artibo_weather("서울", "기온")</code></pre>
+                        <p class="text-xs text-gray-500"><strong>city:</strong> 서울, 부산, 대구 등 주요도시 18곳<br><strong>info:</strong> 기온, 하늘상태, 강수, 습도, 풍속</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 search-item">
+                        <h4 class="font-bold font-mono text-blue-700 mb-2 border-b pb-2">artibo_clock(info)</h4>
+                        <p class="text-sm text-gray-600 mb-3">현재 날짜·시간 문자열로 반환</p>
+                        <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>now = artibo_clock("시각")</code></pre>
+                        <p class="text-xs text-gray-500"><strong>info 허용값:</strong> 시각(14:05), 시분초(14, 5, 30), 년월일(2026, 9, 7), 요일(월요일), 날짜(2026-09-07)</p>
+                    </div>
+                </div>
+            </section>
 
             <!-- SECTION Appendix B: Syntax -->
-            <section id="appendix-b" class="scroll-mt-20 search-section">
+            <section id="appendix-b" class="scroll-mt-20 search-section hidden">
                 <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-purple-500 pb-2 mb-6 flex items-center">
                     <i class="fa-solid fa-code text-purple-500 mr-2"></i> 부록 B. 문법 - 되는 것과 안 되는 것
                 </h3>
@@ -551,7 +589,7 @@
                     <p class="text-purple-800">아티보 파이썬은 브라우저에서 도는 파이썬 해석기라 <strong>일부 문법이 제한</strong>됩니다. 안 되는 것을 쓰면 오류가 나거나, 오류 없이 틀린 값이 나옵니다.</p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 gap-6">
                     <!-- 되는 것 -->
                     <div class="bg-white rounded-xl shadow-sm border border-green-200 overflow-hidden">
                         <div class="bg-green-50 px-4 py-3 border-b border-green-200">
@@ -592,10 +630,6 @@
                     </div>
                 </div>
             </section>
-            
-            <div class="text-center text-gray-400 text-sm py-8 border-t border-gray-200 mt-12">
-                <p>부록 C: 로봇 명령은 순서대로 실행되며, sleep, move 등은 지정된 시간만큼 다음 줄로 넘어가지 않고 대기합니다.</p>
-            </div>
 
         </div>
     </main>
@@ -606,18 +640,7 @@
             const navLinks = document.querySelectorAll('.sidebar-link');
             const mainContent = document.getElementById('main-content');
 
-            // --- 0. 탭 뷰를 위한 레이아웃 구조 개선 ---
-            // 기존에 그리드(grid)로 묶여있던 섹션들을 개별 화면으로 넓게 쓰기 위해 밖으로 꺼냅니다.
-            const gridWrappers = document.querySelectorAll('.max-w-5xl > .grid');
-            gridWrappers.forEach(wrapper => {
-                const sections = Array.from(wrapper.querySelectorAll('section'));
-                sections.forEach(sec => {
-                    wrapper.parentNode.insertBefore(sec, wrapper);
-                });
-                wrapper.remove();
-            });
-
-            // 구조 변경 후 전체 섹션과 검색 아이템을 다시 가져옵니다.
+            // HTML 구조상 모든 섹션이 개별적으로 분리되어 있으므로 직관적인 선택 가능
             const searchSections = document.querySelectorAll('.max-w-5xl > section');
             const searchItems = document.querySelectorAll('.search-item');
 
@@ -752,7 +775,7 @@
                 copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> 복사';
                 
                 copyBtn.addEventListener('click', () => {
-                    // 코드 텍스트 추출 (br 태그 등은 innerText를 통해 자동으로 줄바꿈 처리됨)
+                    // 코드 텍스트 추출
                     const codeText = pre.querySelector('code').innerText;
                     
                     // iframe 보안 및 호환성을 위해 execCommand 방식 사용
