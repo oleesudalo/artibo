@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파이썬 문법 레퍼런스</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        python: {
+                            blue: '#3776AB',
+                            yellow: '#FFD43B',
+                            dark: '#1e293b',
+                            light: '#f8fafc',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        pre[class*="language-"] {
+            margin: 0;
+            border-radius: 0.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+        code[class*="language-"], pre[class*="language-"] {
+            text-shadow: none;
+        }
+        .sidebar-item {
+            transition: all 0.2s;
+        }
+        .sidebar-item.active {
+            background-color: #3776AB;
+            color: white;
+            font-weight: 600;
+        }
+        .sidebar-item:hover:not(.active) {
+            background-color: #e2e8f0;
+        }
+        .dark .sidebar-item:hover:not(.active) {
+            background-color: #334155;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Toast animation */
+        @keyframes slideIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        .toast-enter {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        .toast-exit {
+            animation: fadeOut 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200">
+    
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <i class="fa-brands fa-python text-python-blue text-3xl"></i>
+                    <span class="font-bold text-xl tracking-tight">파이썬 문법 레퍼런스</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <!-- Search Bar -->
+                    <div class="relative hidden sm:block">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input type="text" id="searchInput" placeholder="문법 검색..." 
+                            class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md leading-5 bg-white dark:bg-gray-700 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-python-blue focus:border-python-blue sm:text-sm transition duration-150 ease-in-out">
+                    </div>
+                    <!-- Dark Mode Toggle -->
+                    <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-python-blue">
+                        <i class="fas fa-moon dark:hidden text-gray-600"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-gray-600 dark:text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Search (visible only on small screens) -->
+            <div class="pb-3 sm:hidden">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </div>
+                    <input type="text" id="mobileSearchInput" placeholder="문법 검색..." 
+                        class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md leading-5 bg-white dark:bg-gray-700 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-python-blue focus:border-python-blue sm:text-sm transition duration-150 ease-in-out">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row min-h-[calc(100vh-4rem)]">
+        
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="w-full md:w-64 flex-shrink-0 md:block hidden border-r border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 md:sticky md:top-16 md:h-[calc(100vh-4rem)] overflow-y-auto">
+            <nav class="p-4 space-y-1" id="navMenu">
+                <!-- Navigation items will be injected here by JS -->
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 w-full max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 overflow-y-auto">
+            
+            <!-- Breadcrumb -->
+            <nav class="flex mb-4 text-sm text-gray-500 dark:text-gray-400" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="#" class="inline-flex items-center hover:text-python-blue dark:hover:text-python-blue transition-colors">
+                            <i class="fas fa-home mr-2"></i>
+                            홈
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fas fa-chevron-right text-xs mx-2"></i>
+                            <span id="breadcrumbCurrent" class="text-gray-700 dark:text-gray-300 font-medium">기초</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+
+            <!-- Content Container -->
+            <div id="contentContainer" class="space-y-8 pb-12">
+                <!-- Content will be injected here by JS -->
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Toast Notification (for copy action) -->
+    <div id="toast" class="fixed bottom-4 right-4 z-50 hidden">
+        <div class="bg-gray-800 text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-3">
+            <i class="fas fa-check-circle text-green-400"></i>
+            <span id="toastMessage" class="text-sm font-medium">클립보드에 복사되었습니다!</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <script>
+        // Data Structure for Python Syntax Reference
+        const syntaxData = [
+            {
+                id: 'basics',
+                title: '기초 & 변수',
+                icon: 'fa-cube',
+                sections: [
+                    {
+                        title: 'Hello World & 주석',
+                        description: '기본적인 시작점과 코드에 주석을 다는 방법입니다.',
+                        code: `# 한 줄 주석
+print("Hello, World!")
+
+"""
+이것은 
+여러 줄 주석
+또는 독스트링(docstring)입니다.
+"""`
+                    },
+                    {
+                        title: '변수 & 데이터 타입',
+                        description: '파이썬은 동적 타이핑 언어입니다. 변수의 타입을 선언할 필요가 없습니다.',
+                        code: `x = 5             # 정수 (int)
+y = 3.14          # 실수 (float)
+name = "Alice"    # 문자열 (str)
+is_active = True  # 불리언 (bool)
+empty = None      # None 타입
+
+# 다중 할당
+a, b, c = 1, 2, 3`
+                    },
+                    {
+                        title: '타입 확인 & 형 변환 (캐스팅)',
+                        description: '타입을 확인하고 다른 타입으로 변환합니다.',
+                        code: `num_str = "10"
+print(type(num_str))  # <class 'str'>
+
+# 형 변환
+num_int = int(num_str)
+num_float = float(num_str)
+str_again = str(num_int)`
+                    }
+                ]
+            },
+            {
+                id: 'operators',
+                title: '연산자',
+                icon: 'fa-calculator',
+                sections: [
+                    {
+                        title: '산술 연산자',
+                        description: '기본적인 수학 연산입니다.',
+                        code: `a, b = 10, 3
+
+print(a + b)  # 덧셈: 13
+print(a - b)  # 뺄셈: 7
+print(a * b)  # 곱셈: 30
+print(a / b)  # 나눗셈: 3.333...
+print(a // b) # 몫: 3
+print(a % b)  # 나머지: 1
+print(a ** b) # 거듭제곱: 1000`
+                    },
+                    {
+                        title: '비교 & 논리 연산자',
+                        description: '값을 비교하고 조건을 결합합니다.',
+                        code: `# 비교
+print(5 == 5)  # 같음 (True)
+print(5 != 3)  # 다름 (True)
+print(5 > 3)   # 큼 (True)
+print(5 <= 5)  # 작거나 같음 (True)
+
+# 논리
+x = 5
+print(x > 3 and x < 10)  # True
+print(x > 10 or x < 10)  # True
+print(not(x > 3))        # False`
+                    },
+                    {
+                        title: '식별 & 멤버십 연산자',
+                        description: '객체의 식별성을 확인하고 시퀀스 포함 여부를 확인합니다.',
+                        code: `x = ["apple", "banana"]
+y = ["apple", "banana"]
+z = x
+
+# 식별 (is, is not)
+print(x is z)      # True (같은 객체)
+print(x is y)      # False (내용은 같지만 다른 객체)
+print(x == y)      # True (내용이 같음)
+
+# 멤버십 (in, not in)
+print("banana" in x)     # True
+print("orange" not in x) # True`
+                    }
+                ]
+            },
+            {
+                id: 'control-flow',
+                title: '제어문 (Control Flow)',
+                icon: 'fa-code-branch',
+                sections: [
+                    {
+                        title: 'If...Else 조건문',
+                        description: '조건에 따라 코드 블록을 실행합니다.',
+                        code: `age = 18
+
+if age < 13:
+    print("어린이")
+elif age < 18:
+    print("청소년")
+else:
+    print("성인")
+    
+# 삼항 연산자 (조건 표현식)
+status = "성인" if age >= 18 else "미성년자"`
+                    },
+                    {
+                        title: 'For 반복문',
+                        description: '시퀀스(리스트, 튜플, 문자열 등)를 순회합니다.',
+                        code: `fruits = ["사과", "바나나", "체리"]
+
+# 기본 순회
+for fruit in fruits:
+    print(fruit)
+
+# range() 사용
+for i in range(5):        # 0 부터 4 까지
+    print(i)
+    
+for i in range(2, 6):     # 2 부터 5 까지
+    print(i)
+    
+for i in range(0, 10, 2): # 0, 2, 4, 6, 8 (2씩 증가)
+    print(i)`
+                    },
+                    {
+                        title: 'While 반복문 & 제어 구문',
+                        description: '조건에 따라 반복하고 루프 실행을 제어합니다.',
+                        code: `count = 0
+while count < 5:
+    print(count)
+    count += 1
+    
+# break 와 continue
+for num in range(10):
+    if num == 3:
+        continue  # 3을 건너뜀
+    if num == 7:
+        break     # 7에서 중단
+    print(num)`
+                    },
+                    {
+                        title: '컴프리헨션 (반복문/조건문 축약)',
+                        description: '반복문과 조건문을 한 줄로 결합하여 리스트나 딕셔너리를 매우 간결하게 생성하는 파이썬 특유의 강력한 문법입니다.',
+                        code: `# 1. 리스트 컴프리헨션 기본
+# [표현식 for 항목 in 반복가능객체]
+numbers = [1, 2, 3, 4, 5]
+squared = [x**2 for x in numbers]
+print(squared)  # [1, 4, 9, 16, 25]
+
+# 2. 조건문(if)이 포함된 필터링
+# [표현식 for 항목 in 객체 if 조건문]
+evens = [x for x in numbers if x % 2 == 0]
+print(evens)    # [2, 4]
+
+# 3. if-else (삼항 연산자) 결합
+# [참일때값 if 조건 else 거짓일때값 for 항목 in 객체]
+labels = ["짝수" if x % 2 == 0 else "홀수" for x in numbers]
+print(labels)   # ['홀수', '짝수', '홀수', '짝수', '홀수']
+
+# 4. 딕셔너리 & 세트 컴프리헨션
+square_dict = {x: x**2 for x in range(1, 4)} 
+print(square_dict)  # {1: 1, 2: 4, 3: 9}
+
+unique_squares = {x**2 for x in [-2, -1, 1, 2]}
+print(unique_squares)  # {1, 4}`
+                    }
+                ]
+            },
+            {
+                id: 'data-structures',
+                title: '자료 구조',
+                icon: 'fa-layer-group',
+                sections: [
+                    {
+                        title: '리스트 (Lists)',
+                        description: '순서가 있고, 변경 가능하며, 중복된 항목을 허용합니다.',
+                        code: `my_list = ["사과", "바나나", "체리"]
+
+# 접근 및 수정
+print(my_list[0])      # "사과"
+my_list[1] = "망고"
+
+# 항목 추가
+my_list.append("오렌지")
+my_list.insert(1, "레몬")
+
+# 항목 제거
+my_list.remove("사과")
+popped = my_list.pop() # 마지막 항목 제거 및 반환
+
+# 리스트 컴프리헨션 (List Comprehension)
+squares = [x**2 for x in range(5)] # [0, 1, 4, 9, 16]`
+                    },
+                    {
+                        title: '딕셔너리 (Dictionaries)',
+                        description: '순서가 있고 (Python 3.7+), 변경 가능하며, 중복된 키를 허용하지 않습니다.',
+                        code: `person = {
+    "name": "존",
+    "age": 30,
+    "city": "서울"
+}
+
+# 접근
+print(person["name"])
+print(person.get("age")) # 안전한 접근, 키가 없으면 None 반환
+
+# 추가/수정
+person["email"] = "john@example.com"
+person["age"] = 31
+
+# 순회
+for key, value in person.items():
+    print(f"{key}: {value}")`
+                    },
+                    {
+                        title: '튜플 (Tuples) & 세트 (Sets)',
+                        description: '튜플은 변경할 수 없습니다(불변). 세트는 순서가 없고, 인덱스가 없으며 중복을 허용하지 않습니다.',
+                        code: `# 튜플 (불변)
+my_tuple = ("사과", "바나나", "체리")
+print(my_tuple[0])
+# my_tuple[0] = "오렌지" # TypeError 발생
+
+# 세트 (순서 없음, 고유한 요소)
+my_set = {"사과", "바나나", "사과"}
+print(my_set) # {'바나나', '사과'}
+
+my_set.add("오렌지")
+my_set.remove("바나나")`
+                    }
+                ]
+            },
+            {
+                id: 'functions',
+                title: '함수 & 람다',
+                icon: 'fa-bolt',
+                sections: [
+                    {
+                        title: '함수 정의',
+                        description: '재사용 가능한 코드 블록을 만듭니다.',
+                        code: `def greet(name, greeting="안녕하세요"):
+    """사람에게 인사하는 함수입니다."""
+    return f"{greeting}, {name}님!"
+
+print(greet("앨리스"))
+print(greet("밥", "안녕"))
+
+# 다중 반환 값 (튜플로 반환됨)
+def get_user():
+    return "앨리스", 25
+
+name, age = get_user()`
+                    },
+                    {
+                        title: 'Args 와 Kwargs',
+                        description: '임의의 개수의 인수를 처리합니다.',
+                        code: `def sum_all(*args):
+    """임의의 개수의 위치 인수를 받습니다."""
+    total = 0
+    for num in args:
+        total += num
+    return total
+
+print(sum_all(1, 2, 3, 4)) # 10
+
+def print_info(**kwargs):
+    """키워드 인수를 딕셔너리 형태로 받습니다."""
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_info(name="앨리스", age=30)`
+                    },
+                    {
+                        title: '람다 (Lambda) 함수',
+                        description: '작은 익명 인라인 함수입니다.',
+                        code: `# lambda 인자 : 표현식
+multiply = lambda x, y: x * y
+print(multiply(5, 6)) # 30
+
+# map(), filter() 와 자주 사용됨
+numbers = [1, 2, 3, 4]
+squared = list(map(lambda x: x**2, numbers))
+evens = list(filter(lambda x: x % 2 == 0, numbers))`
+                    }
+                ]
+            },
+            {
+                id: 'classes',
+                title: '클래스 & 객체지향 (OOP)',
+                icon: 'fa-sitemap',
+                sections: [
+                    {
+                        title: '기본 클래스',
+                        description: '클래스를 정의하고 객체를 생성합니다.',
+                        code: `class Dog:
+    # 클래스 속성
+    species = "Canis familiaris"
+    
+    # 초기화 메서드 (인스턴스 속성 설정)
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        
+    # 인스턴스 메서드
+    def bark(self):
+        return f"{self.name}가 멍멍 짖습니다!"
+
+# 인스턴스화
+my_dog = Dog("바둑이", 3)
+print(my_dog.bark())
+print(my_dog.species)`
+                    },
+                    {
+                        title: '상속 (Inheritance)',
+                        description: '기존 클래스로부터 새로운 클래스를 생성합니다.',
+                        code: `class Animal:
+    def __init__(self, name):
+        self.name = name
+        
+    def speak(self):
+        pass
+
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name}가 야옹합니다!"
+
+cat = Cat("나비")
+print(cat.speak())`
+                    }
+                ]
+            },
+            {
+                id: 'exceptions',
+                title: '예외 처리 (Exception Handling)',
+                icon: 'fa-triangle-exclamation',
+                sections: [
+                    {
+                        title: 'Try / Except / Finally',
+                        description: '런타임 오류를 안전하게 처리합니다.',
+                        code: `try:
+    # 예외가 발생할 수 있는 코드
+    result = 10 / 0
+except ZeroDivisionError as e:
+    # 특정 예외 처리
+    print(f"오류: 0으로 나눌 수 없습니다. ({e})")
+except Exception as e:
+    # 기타 모든 예외 처리
+    print(f"예기치 않은 오류 발생: {e}")
+else:
+    # 예외가 발생하지 않았을 때만 실행
+    print(f"결과는 {result} 입니다.")
+finally:
+    # 예외 발생 여부와 상관없이 항상 실행
+    print("실행 완료.")`
+                    },
+                    {
+                        title: '예외 발생시키기 (Raising)',
+                        description: '수동으로 오류를 발생시킵니다.',
+                        code: `def validate_age(age):
+    if age < 0:
+        raise ValueError("나이는 음수가 될 수 없습니다.")
+    return age
+
+try:
+    validate_age(-5)
+except ValueError as e:
+    print(f"오류 포착: {e}")`
+                    }
+                ]
+            }
+        ];
+
+        // App State
+        let currentSectionId = syntaxData[0].id;
+        
+        // DOM Elements
+        const navMenu = document.getElementById('navMenu');
+        const contentContainer = document.getElementById('contentContainer');
+        const breadcrumbCurrent = document.getElementById('breadcrumbCurrent');
+        const themeToggle = document.getElementById('themeToggle');
+        const searchInputs = [document.getElementById('searchInput'), document.getElementById('mobileSearchInput')];
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+
+        // Initialize App
+        function init() {
+            renderSidebar();
+            renderContent(currentSectionId);
+            setupEventListeners();
+            initTheme();
+        }
+
+        // Render Sidebar Navigation
+        function renderSidebar() {
+            navMenu.innerHTML = syntaxData.map(section => `
+                <a href="#${section.id}" 
+                   class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white ${section.id === currentSectionId ? 'active' : ''}"
+                   data-id="${section.id}">
+                    <i class="fas ${section.icon} w-5 text-center"></i>
+                    ${section.title}
+                </a>
+            `).join('');
+        }
+
+        // Render Main Content
+        function renderContent(sectionId) {
+            const sectionData = syntaxData.find(s => s.id === sectionId);
+            if (!sectionData) return;
+
+            currentSectionId = sectionId;
+            breadcrumbCurrent.textContent = sectionData.title;
+
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                if (item.dataset.id === sectionId) {
+                    item.classList.add('active');
+                    item.classList.remove('text-gray-700', 'dark:text-gray-300');
+                } else {
+                    item.classList.remove('active');
+                    item.classList.add('text-gray-700', 'dark:text-gray-300');
+                }
+            });
+
+            // Generate HTML for content
+            const html = `
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-3">
+                        <i class="fas ${sectionData.icon} text-python-blue"></i>
+                        ${sectionData.title}
+                    </h1>
+                    <div class="h-1 w-20 bg-python-blue rounded mt-4"></div>
+                </div>
+                
+                <div class="space-y-10">
+                    ${sectionData.sections.map((subSection, index) => `
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden transform transition duration-300 hover:shadow-md">
+                            <div class="p-5 border-b border-gray-100 dark:border-gray-700">
+                                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-1">${subSection.title}</h2>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">${subSection.description}</p>
+                            </div>
+                            <div class="relative group">
+                                <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                                    <button class="copy-btn bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-md text-xs flex items-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-python-blue" data-code="${encodeURIComponent(subSection.code)}">
+                                        <i class="far fa-copy"></i> 복사
+                                    </button>
+                                </div>
+                                <pre class="!m-0 !rounded-none !bg-[#1e1e1e] border-t-0 p-4"><code class="language-python">${escapeHtml(subSection.code)}</code></pre>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            contentContainer.innerHTML = html;
+            
+            // Re-highlight syntax
+            Prism.highlightAll();
+
+            // Setup copy buttons for newly rendered content
+            setupCopyButtons();
+        }
+
+        // Helper: Escape HTML to prevent execution in code blocks
+        function escapeHtml(unsafe) {
+            return unsafe
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        }
+
+        // Setup Copy to Clipboard functionality
+        function setupCopyButtons() {
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const codeToCopy = decodeURIComponent(e.currentTarget.dataset.code);
+                    copyToClipboard(codeToCopy, e.currentTarget);
+                });
+            });
+        }
+
+        function copyToClipboard(text, buttonElement) {
+            // Use textarea hack for better compatibility in iframes
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            
+            // Avoid scrolling to bottom
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast();
+                    // Temporary UI feedback on button
+                    const originalHTML = buttonElement.innerHTML;
+                    buttonElement.innerHTML = '<i class="fas fa-check text-green-400"></i> 복사됨';
+                    setTimeout(() => {
+                        buttonElement.innerHTML = originalHTML;
+                    }, 2000);
+                }
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // Toast Notification
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden', 'toast-exit');
+            toast.classList.add('toast-enter');
+            
+            setTimeout(() => {
+                toast.classList.remove('toast-enter');
+                toast.classList.add('toast-exit');
+                setTimeout(() => toast.classList.add('hidden'), 300); // Wait for animation to finish
+            }, 3000);
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Sidebar Navigation
+            navMenu.addEventListener('click', (e) => {
+                const target = e.target.closest('.sidebar-item');
+                if (target) {
+                    e.preventDefault();
+                    const id = target.dataset.id;
+                    renderContent(id);
+                    
+                    // On mobile, close sidebar after clicking
+                    if (window.innerWidth < 768) {
+                        sidebar.classList.add('hidden');
+                    }
+                    
+                    // Smooth scroll to top of content
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            // Theme Toggle
+            themeToggle.addEventListener('click', toggleTheme);
+
+            // Mobile Menu Toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('hidden');
+                // Adjust z-index and absolute positioning for mobile dropdown
+                if (!sidebar.classList.contains('hidden')) {
+                    sidebar.classList.add('absolute', 'z-40', 'w-full', 'shadow-xl', 'h-auto', 'border-b');
+                } else {
+                    sidebar.classList.remove('absolute', 'z-40', 'w-full', 'shadow-xl', 'h-auto', 'border-b');
+                }
+            });
+
+            // Handle resize to reset mobile classes
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    sidebar.classList.remove('hidden', 'absolute', 'z-40', 'w-full', 'shadow-xl', 'h-auto', 'border-b');
+                } else {
+                    sidebar.classList.add('hidden');
+                }
+            });
+
+            // Search Functionality
+            searchInputs.forEach(input => {
+                input.addEventListener('input', (e) => handleSearch(e.target.value));
+            });
+        }
+
+        // Search Logic
+        function handleSearch(query) {
+            query = query.toLowerCase().trim();
+            
+            if (!query) {
+                // If search is empty, re-render current section normally
+                renderContent(currentSectionId);
+                return;
+            }
+
+            let searchResults = [];
+
+            // Search through all data
+            syntaxData.forEach(section => {
+                section.sections.forEach(subSection => {
+                    if (
+                        subSection.title.toLowerCase().includes(query) ||
+                        subSection.description.toLowerCase().includes(query) ||
+                        subSection.code.toLowerCase().includes(query)
+                    ) {
+                        searchResults.push({
+                            parentSection: section.title,
+                            parentIcon: section.icon,
+                            ...subSection
+                        });
+                    }
+                });
+            });
+
+            // Render Search Results
+            breadcrumbCurrent.textContent = '검색 결과';
+            
+            // Remove active state from sidebar
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.add('text-gray-700', 'dark:text-gray-300');
+            });
+
+            if (searchResults.length === 0) {
+                contentContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fas fa-search text-gray-300 dark:text-gray-600 text-5xl mb-4"></i>
+                        <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">검색 결과가 없습니다.</h2>
+                        <p class="text-gray-500 dark:text-gray-500">"${escapeHtml(query)}"와(과) 일치하는 항목을 찾을 수 없습니다.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const html = `
+                <div class="mb-8">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                        "${escapeHtml(query)}" 검색 결과
+                    </h1>
+                    <p class="text-gray-500 dark:text-gray-400">${searchResults.length}개의 항목을 찾았습니다.</p>
+                </div>
+                
+                <div class="space-y-8">
+                    ${searchResults.map((result, index) => `
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                            <div class="p-5 border-b border-gray-100 dark:border-gray-700">
+                                <div class="flex items-center gap-2 text-xs font-semibold text-python-blue mb-2 uppercase tracking-wider">
+                                    <i class="fas ${result.parentIcon}"></i> ${result.parentSection}
+                                </div>
+                                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-1">${highlightText(result.title, query)}</h2>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm">${highlightText(result.description, query)}</p>
+                            </div>
+                            <div class="relative group">
+                                <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                                    <button class="copy-btn bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-md text-xs flex items-center gap-2 transition-colors" data-code="${encodeURIComponent(result.code)}">
+                                        <i class="far fa-copy"></i> 복사
+                                    </button>
+                                </div>
+                                <pre class="!m-0 !rounded-none !bg-[#1e1e1e] border-t-0 p-4"><code class="language-python">${escapeHtml(result.code)}</code></pre>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            contentContainer.innerHTML = html;
+            Prism.highlightAll();
+            setupCopyButtons();
+        }
+
+        // Helper: Highlight search terms in text
+        function highlightText(text, query) {
+            if (!query) return text;
+            const escapedText = escapeHtml(text);
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            return escapedText.replace(regex, '<span class="bg-yellow-200 dark:bg-yellow-700/50 text-gray-900 dark:text-white rounded px-1">$1</span>');
+        }
+
+        // Theme Management
+        function initTheme() {
+            // Check local storage or system preference
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+
+        // Start App
+        window.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+</html>
