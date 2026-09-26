@@ -221,51 +221,62 @@ body{overflow-x:hidden}
 }
 
 /* section 2 */
-.task-table{
-  display:grid;
-  gap:12px;
-}
-.task-row{
-  display:grid;
-  grid-template-columns:64px 1fr 1fr;
-  align-items:stretch;
+.task-table-wrap{
+  margin-top:4px;
   border:1px solid #dddcd5;
   border-radius:14px;
   overflow:hidden;
   background:#fff;
 }
-.task-num{
-  display:grid;
-  place-items:center;
+.task-table-clean{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+.task-table-clean col.num-col{width:64px}
+.task-table-clean col.feature-col{width:46%}
+.task-table-clean th,
+.task-table-clean td{
+  border-right:1px solid #dddcd5;
+  border-bottom:1px solid #dddcd5;
+  vertical-align:top;
+}
+.task-table-clean tr:last-child td{border-bottom:0}
+.task-table-clean th:last-child,
+.task-table-clean td:last-child{border-right:0}
+.task-table-clean thead th{
   background:#f5f8f6;
   color:#315c49;
-  font-size:18px;
+  font-size:14px;
   font-weight:900;
-  border-right:1px solid #dddcd5;
-}
-.task-cell{
-  background:#fff;
+  text-align:left;
   padding:12px 14px;
 }
-.task-row .task-cell:nth-child(2){
-  border-right:1px solid #dddcd5;
+.task-table-clean thead th:first-child{
+  text-align:center;
 }
-.task-cell b{
-  display:block;
-  margin-bottom:7px;
-  font-size:13px;
-  color:#35624f;
+.task-table-clean .num-cell{
+  text-align:center;
+  vertical-align:middle;
+  background:#fafbf9;
+  color:#315c49;
+  font-size:17px;
+  font-weight:900;
 }
-.task-cell textarea{
+.task-table-clean td.input-cell{
+  padding:3px 10px;
+}
+.task-table-clean textarea{
   width:100%;
-  min-height:52px;
+  min-height:16px;
+  height:16px;
   border:0;
   outline:none;
   resize:none;
   overflow:hidden;
   background:transparent;
   font:inherit;
-  line-height:1.7;
+  line-height:1.25;
   padding:0;
 }
 
@@ -375,7 +386,7 @@ body{overflow-x:hidden}
   .student-info{grid-template-columns:1fr 1fr}.career-line{grid-template-columns:96px 1fr}
   .paper-inner{padding:24px 18px 28px}
   .section h2{font-size:25px}
-  .task-row{grid-template-columns:1fr}.task-row .task-cell:nth-child(2){border-right:0;border-top:1px solid #dddcd5}.task-row .task-cell:nth-child(3){border-top:1px solid #dddcd5}.task-num{min-height:52px;border-right:0;border-bottom:1px solid #dddcd5}
+  
   .grid2,.plan-grid{grid-template-columns:1fr}
   .sentence-row{display:block}
   .inline-box{margin:6px 0}
@@ -442,32 +453,48 @@ body{overflow-x:hidden}
         <h2>기능을 작은 단계로 나누기</h2>
         <p class="desc">한 번에 전체를 만들지 않고, 실제 작동 흐름을 작은 단계로 나눕니다.</p>
 
-        <div class="task-table">
-          <div class="task-row">
-            <div class="task-num">1</div>
-            <div class="task-cell"><b>세부 기능</b><textarea></textarea></div>
-            <div class="task-cell"><b>구현 내용</b><textarea></textarea></div>
-          </div>
-          <div class="task-row">
-            <div class="task-num">2</div>
-            <div class="task-cell"><b>세부 기능</b><textarea></textarea></div>
-            <div class="task-cell"><b>구현 내용</b><textarea></textarea></div>
-          </div>
-          <div class="task-row">
-            <div class="task-num">3</div>
-            <div class="task-cell"><b>세부 기능</b><textarea></textarea></div>
-            <div class="task-cell"><b>구현 내용</b><textarea></textarea></div>
-          </div>
-          <div class="task-row">
-            <div class="task-num">4</div>
-            <div class="task-cell"><b>세부 기능</b><textarea></textarea></div>
-            <div class="task-cell"><b>구현 내용</b><textarea></textarea></div>
-          </div>
-          <div class="task-row">
-            <div class="task-num">5</div>
-            <div class="task-cell"><b>세부 기능</b><textarea></textarea></div>
-            <div class="task-cell"><b>구현 내용</b><textarea></textarea></div>
-          </div>
+        <div class="task-table-wrap">
+          <table class="task-table-clean">
+            <colgroup>
+              <col class="num-col">
+              <col class="feature-col">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>세부 기능</th>
+                <th>구현 내용</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="num-cell">1</td>
+                <td class="input-cell"><textarea rows="1"></textarea></td>
+                <td class="input-cell"><textarea rows="1"></textarea></td>
+              </tr>
+              <tr>
+                <td class="num-cell">2</td>
+                <td class="input-cell"><textarea rows="1"></textarea></td>
+                <td class="input-cell"><textarea rows="1"></textarea></td>
+              </tr>
+              <tr>
+                <td class="num-cell">3</td>
+                <td class="input-cell"><textarea rows="1"></textarea></td>
+                <td class="input-cell"><textarea rows="1"></textarea></td>
+              </tr>
+              <tr>
+                <td class="num-cell">4</td>
+                <td class="input-cell"><textarea rows="1"></textarea></td>
+                <td class="input-cell"><textarea rows="1"></textarea></td>
+              </tr>
+              <tr>
+                <td class="num-cell">5</td>
+                <td class="input-cell"><textarea rows="1"></textarea></td>
+                <td class="input-cell"><textarea rows="1"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
