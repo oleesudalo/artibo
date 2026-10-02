@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>아티보 프로토타입 제작 활동지</title>
+<title>나의 진로 AI 기획서</title>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <style>
 /* 3차시 활동지(act3_01)와 같은 기본 톤: 책상 배경 · 종이 · 초록 그라데이션 */
@@ -155,10 +155,6 @@ input,textarea{font:inherit;color:inherit}
 .check b{display:block;font-size:15px}
 .check span{color:#6b6f6c;font-size:14px}
 .card.wide{margin-top:14px}
-.log.log4{grid-template-columns:44px 1fr 1fr 170px}
-.mini{display:flex;gap:4px}
-.mini .opt span{padding:7px 10px;font-size:14px}
-@media(max-width:960px){.log.log4{grid-template-columns:36px 1fr}.log.log4 .hd{display:none}.log.log4 .res,.log.log4 .mini{grid-column:2}}
 @media(max-width:960px){.sent-row{display:block}.sent-row .field{margin:6px 0}}
 </style>
 </head>
@@ -167,8 +163,8 @@ input,textarea{font:inherit;color:inherit}
  <div id="capture">
   <div class="document-head">
     <div class="title-row">
-      <div class="title-chip">3차시</div>
-      <h1>아티보 프로토타입 제작 활동지</h1>
+      <div class="title-chip">1차시</div>
+      <h1>나의 진로 AI 기획서</h1>
     </div>
     
     <div class="student-info">
@@ -177,61 +173,59 @@ input,textarea{font:inherit;color:inherit}
       <div class="student-field"><b>번호</b><input type="text" data-k="num" aria-label="번호"></div>
       <div class="student-field"><b>이름</b><input type="text" data-k="name" aria-label="이름"></div>
     </div>
-    <div class="head-lines"><div class="label-line"><b>희망 진로</b><input type="text" data-k="career" aria-label="희망 진로"></div><div class="label-line"><b>프로젝트명</b><input type="text" data-k="project" aria-label="프로젝트명"></div></div>
+    
   </div>
 
-  <nav class="toc" aria-label="활동지 목차"><a href="#s1"><span>1</span>핵심 기능 선택</a><a href="#s2"><span>2</span>작은 단계로 나누기</a><a href="#s3"><span>3</span>MUST · EXTRA</a><a href="#s4"><span>4</span>제작 계획 최종 체크</a><a href="#s5"><span>5</span>MY PROTOTYPE v0.1</a></nav>
+  <nav class="toc" aria-label="활동지 목차"><a href="#s1"><span>1</span>탐색 진로 분야</a><a href="#s2"><span>2</span>현장 문제 정의</a><a href="#s3"><span>3</span>나의 진로 로봇 기획</a><a href="#s4"><span>4</span>아티보 적용 구상</a><a href="#s5"><span>5</span>제미나이 답변 검토</a></nav>
 
   <div class="paper" id="worksheet">
     <div class="paper-inner">
 
       <section class="section" id="s1">
-        <div class="sec-head"><div class="sec-no">1</div><h2>오늘 구현할 핵심 기능 1개 선택</h2></div>
-        <p class="desc">1차시 기획서와 2차시 기능 설계도를 펼치고, 오늘 반드시 작동시킬 기능을 하나 정합니다.</p>
-        <div class="box">
-          <div class="sent-row"><b>내 로봇은</b><div class="field"><input type="text" data-k="c_sit" aria-label="상황"></div><b>상황에서</b></div>
-          <div class="sent-row"><div class="field"><input type="text" data-k="c_sense" aria-label="감지할 것"></div><b>을 감지하고</b></div>
-          <div class="sent-row"><div class="field"><input type="text" data-k="c_act" aria-label="행동"></div><b>행동을 한다.</b></div>
-        </div>
+        <div class="sec-head"><div class="sec-no">1</div><h2>탐색 진로 분야</h2></div>
+        <p class="desc">내가 관심 있는 직업이나 희망하는 진로 분야는 무엇인가요?</p>
+        <div class="card"><textarea data-k="q1" aria-label="탐색 진로 분야" placeholder="예) 의료/보건 분야, 환경 보호 전문가 등"></textarea></div>
       </section>
 
       <section class="section" id="s2">
-        <div class="sec-head"><div class="sec-no">2</div><h2>기능을 작은 단계로 나누기</h2></div>
-        <p class="desc">한 번에 전체를 만들지 않고, 실제 작동 흐름을 작은 단계로 나눕니다. 만들면서 세부 기능마다 작동 여부(○ 작동함 · △ 일부 작동 · × 작동 안 함)를 체크하세요.</p>
-        <div class="log log4">
-          <div class="hd"></div><div class="hd">세부 기능</div><div class="hd">구현 내용</div><div class="hd">작동 확인</div>
-          <div class="no">1</div><div class="field"><input type="text" data-k="f1" aria-label="세부 기능 1" placeholder="세부 기능"></div><div class="field res"><input type="text" data-k="d1" aria-label="구현 내용 1" placeholder="구현 내용"></div><div class="mini"><label class="opt"><input type="radio" name="ok1" value="○" aria-label="세부 기능 1 작동함"><span>○</span></label><label class="opt"><input type="radio" name="ok1" value="△" aria-label="세부 기능 1 일부 작동"><span>△</span></label><label class="opt"><input type="radio" name="ok1" value="×" aria-label="세부 기능 1 작동 안 함"><span>×</span></label></div><div class="no">2</div><div class="field"><input type="text" data-k="f2" aria-label="세부 기능 2" placeholder="세부 기능"></div><div class="field res"><input type="text" data-k="d2" aria-label="구현 내용 2" placeholder="구현 내용"></div><div class="mini"><label class="opt"><input type="radio" name="ok2" value="○" aria-label="세부 기능 2 작동함"><span>○</span></label><label class="opt"><input type="radio" name="ok2" value="△" aria-label="세부 기능 2 일부 작동"><span>△</span></label><label class="opt"><input type="radio" name="ok2" value="×" aria-label="세부 기능 2 작동 안 함"><span>×</span></label></div><div class="no">3</div><div class="field"><input type="text" data-k="f3" aria-label="세부 기능 3" placeholder="세부 기능"></div><div class="field res"><input type="text" data-k="d3" aria-label="구현 내용 3" placeholder="구현 내용"></div><div class="mini"><label class="opt"><input type="radio" name="ok3" value="○" aria-label="세부 기능 3 작동함"><span>○</span></label><label class="opt"><input type="radio" name="ok3" value="△" aria-label="세부 기능 3 일부 작동"><span>△</span></label><label class="opt"><input type="radio" name="ok3" value="×" aria-label="세부 기능 3 작동 안 함"><span>×</span></label></div><div class="no">4</div><div class="field"><input type="text" data-k="f4" aria-label="세부 기능 4" placeholder="세부 기능"></div><div class="field res"><input type="text" data-k="d4" aria-label="구현 내용 4" placeholder="구현 내용"></div><div class="mini"><label class="opt"><input type="radio" name="ok4" value="○" aria-label="세부 기능 4 작동함"><span>○</span></label><label class="opt"><input type="radio" name="ok4" value="△" aria-label="세부 기능 4 일부 작동"><span>△</span></label><label class="opt"><input type="radio" name="ok4" value="×" aria-label="세부 기능 4 작동 안 함"><span>×</span></label></div><div class="no">5</div><div class="field"><input type="text" data-k="f5" aria-label="세부 기능 5" placeholder="세부 기능"></div><div class="field res"><input type="text" data-k="d5" aria-label="구현 내용 5" placeholder="구현 내용"></div><div class="mini"><label class="opt"><input type="radio" name="ok5" value="○" aria-label="세부 기능 5 작동함"><span>○</span></label><label class="opt"><input type="radio" name="ok5" value="△" aria-label="세부 기능 5 일부 작동"><span>△</span></label><label class="opt"><input type="radio" name="ok5" value="×" aria-label="세부 기능 5 작동 안 함"><span>×</span></label></div>
-        </div>
+        <div class="sec-head"><div class="sec-no">2</div><h2>현장 문제 정의 (Pain Point)</h2></div>
+        <p class="desc">선택한 진로 분야의 작업자가 겪는 문제를 4단계 질문으로 정리해 보세요.</p>
+        <div class="grid2"><div class="card"><span class="badge">Q1</span><h3>누가 겪는 문제인가요?</h3><textarea data-k="pp_who" aria-label="누가 겪는 문제인가요?" placeholder="예) 병동에서 일하는 간호사"></textarea></div><div class="card"><span class="badge">Q2</span><h3>어떤 순간에 발생하나요?</h3><textarea data-k="pp_when" aria-label="어떤 순간에 발생하나요?" placeholder="예) 무거운 의료 물품을 운반할 때"></textarea></div><div class="card mint"><span class="badge">Q3</span><h3>얼마나 불편하거나 위험한가요?</h3><textarea data-k="pp_how" aria-label="얼마나 불편하거나 위험한가요?" placeholder="예) 매일 반복되어 허리 통증이 생김"></textarea></div><div class="card"><span class="badge">Q4</span><h3>왜 아직 해결되지 않았나요?</h3><textarea data-k="pp_why" aria-label="왜 아직 해결되지 않았나요?" placeholder="예) 운반을 도와줄 장비가 부족함"></textarea></div></div>
       </section>
 
       <section class="section" id="s3">
-        <div class="sec-head"><div class="sec-no">3</div><h2>반드시 구현할 기능 / 시간이 남으면 추가할 기능</h2></div>
-        <p class="desc">제한된 시간 안에 프로토타입을 완성하려면 핵심 기능과 추가 기능을 구분해야 합니다.</p>
+        <div class="sec-head"><div class="sec-no">3</div><h2>나의 진로 로봇 기획</h2></div>
+        <p class="desc">문제를 해결할 로봇을 구체적으로 기획해보세요.</p>
+        <div class="label-line" style="margin-bottom:14px"><b>로봇 이름</b><input type="text" data-k="robot" aria-label="로봇 이름" placeholder="로봇의 멋진 이름을 지어주세요 (예: 헬스케어 메이트 '나이팅게일 봇')"></div>
         <div class="grid2">
-          <div class="card mint"><span class="badge">MUST</span><h3>오늘 반드시 구현</h3><div class="field"><input type="text" data-k="must1" aria-label="MUST 1"></div><div class="field"><input type="text" data-k="must2" aria-label="MUST 2"></div><div class="field"><input type="text" data-k="must3" aria-label="MUST 3"></div></div>
-          <div class="card"><span class="badge">EXTRA</span><h3>시간이 남으면 추가</h3><div class="field"><input type="text" data-k="extra1" aria-label="EXTRA 1"></div><div class="field"><input type="text" data-k="extra2" aria-label="EXTRA 2"></div><div class="field"><input type="text" data-k="extra3" aria-label="EXTRA 3"></div></div>
+          <div class="card"><span class="badge">SOLUTION</span><h3>문제 해결 방법</h3><textarea data-k="q3a" aria-label="문제 해결 방법" placeholder="로봇이 어떤 기능으로 현장의 문제를 해결할 수 있는지 적어주세요."></textarea></div>
+          <div class="card"><span class="badge">SCENARIO</span><h3>서비스 시나리오</h3><textarea data-k="q3b" aria-label="서비스 시나리오" placeholder="사용자가 로봇을 만났을 때부터 이용하는 과정을 순서대로 적어주세요."></textarea></div>
         </div>
+        <div class="card mint wide"><span class="badge">EFFECT</span><h3>기대 효과</h3><textarea data-k="q3c" aria-label="기대 효과" placeholder="이 로봇을 쓰면 누구에게 무엇이 좋아지나요? (효율성 · 안전성 · 복지)"></textarea></div>
       </section>
 
       <section class="section" id="s4">
-        <div class="sec-head"><div class="sec-no">4</div><h2>제작 계획 최종 체크</h2></div>
-        <p class="desc">제작을 시작하기 전에 아래와 같이 한 장으로 계획을 정리해두면 중간에 방향을 잃지 않습니다.</p>
-        <div class="grid2">
-          <div class="card"><span class="badge">PROJECT</span><h3>프로젝트명</h3><textarea data-k="p_project" aria-label="프로젝트명"></textarea></div>
-          <div class="card"><span class="badge">CORE</span><h3>핵심 기능</h3><textarea data-k="p_core" aria-label="핵심 기능"></textarea></div>
-          <div class="card mint"><span class="badge">SUCCESS</span><h3>오늘의 성공 기준</h3><textarea data-k="p_success" aria-label="오늘의 성공 기준" placeholder="예) 같은 상황에서 3번 연속으로 성공하기"></textarea></div>
-          <div class="card"><span class="badge">EXTRA</span><h3>시간이 남으면 추가할 것</h3><textarea data-k="p_extra" aria-label="시간이 남으면 추가할 것"></textarea></div>
+        <div class="sec-head"><div class="sec-no">4</div><h2>아티보(Artibo) 적용 구상</h2></div>
+        <p class="desc">교육용 로봇 '아티보'의 기능 중 무엇을 쓸지 고르고, 입력 → 처리 → 출력으로 정리해 보세요.</p>
+        <div class="sub-title" style="margin-top:0">사용할 아티보 기능<small>여러 개 선택 가능</small></div>
+        <div class="box">
+          <div class="fn-group"><b>입력</b><label class="opt"><input type="checkbox" data-c="fn_cam"><span>카메라</span></label><label class="opt"><input type="checkbox" data-c="fn_mic"><span>마이크</span></label><label class="opt"><input type="checkbox" data-c="fn_front"><span>전방 센서</span></label><label class="opt"><input type="checkbox" data-c="fn_floor"><span>바닥 센서</span></label></div>
+          <div class="fn-group"><b>출력</b><label class="opt"><input type="checkbox" data-c="fn_spk"><span>스피커</span></label><label class="opt"><input type="checkbox" data-c="fn_lcd"><span>LCD 화면</span></label><label class="opt"><input type="checkbox" data-c="fn_wheel"><span>바퀴</span></label></div>
+        </div>
+        <div class="sub-title">입력 → 처리 → 출력</div>
+        <div class="frame-fields c3">
+          <div class="field"><label for="ipo_in">입력 (무엇을 감지하나요?)</label><input id="ipo_in" data-k="ipo_in" placeholder="예) 카메라로 물품 위치 확인"></div>
+          <div class="field"><label for="ipo_proc">처리 (어떻게 판단하나요?)</label><input id="ipo_proc" data-k="ipo_proc" placeholder="예) 물품이 있으면 운반 시작"></div>
+          <div class="field"><label for="ipo_out">출력 (어떻게 반응하나요?)</label><input id="ipo_out" data-k="ipo_out" placeholder="예) 바퀴로 이동 · LCD 표정 표시"></div>
         </div>
       </section>
 
       <section class="section" id="s5">
-        <div class="sec-head"><div class="sec-no">5</div><h2>MY PROTOTYPE v0.1</h2></div>
-        <p class="desc">수업을 마치기 전에 오늘 만든 프로토타입의 결과를 정리합니다. 다음 시간(4차시)은 여기서부터 시작해요.</p>
-        <div class="grid2">
-          <div class="card"><span class="badge">CHECK</span><h3>오늘 실제로 작동한 기능</h3><textarea data-k="v1_ok" aria-label="오늘 실제로 작동한 기능"></textarea></div>
-          <div class="card"><span class="badge">PROBLEM</span><h3>테스트에서 발견한 문제</h3><textarea data-k="v1_prob" aria-label="테스트에서 발견한 문제"></textarea></div>
-        </div>
-        <div class="card mint wide"><span class="badge">NEXT</span><h3>다음 시간에 수정 · 보완할 점</h3><textarea data-k="v1_next" aria-label="다음 시간에 수정 보완할 점" placeholder="너무 거창한 기능보다, 오늘 발견한 문제를 해결하는 것부터 적어보세요."></textarea></div>
+        <div class="sec-head"><div class="sec-no">5</div><h2>제미나이 답변 검토</h2></div>
+        <p class="desc">AI가 제안한 아이디어를 그대로 옮기지 않았는지 네 가지 기준으로 확인해 보세요.</p>
+        <div class="checks"><label class="check"><input type="checkbox" data-c="rv_real"><div><b>현실성</b><span>실제 직업 현장의 고충을 제대로 반영했나요?</span></div></label><label class="check"><input type="checkbox" data-c="rv_fact"><div><b>사실성</b><span>없는 규정 · 통계 · 기술을 꾸며내지 않았나요?</span></div></label><label class="check"><input type="checkbox" data-c="rv_ethic"><div><b>윤리성</b><span>특정 집단에 대한 편견이나 차별은 없나요?</span></div></label><label class="check"><input type="checkbox" data-c="rv_able"><div><b>실현 가능성</b><span>아티보 기능과 기초 파이썬으로 만들 수 있나요?</span></div></label></div>
+        <div class="card wide"><span class="badge">REVISE</span><h3>다시 질문해서 고친 점</h3><textarea data-k="rv_note" aria-label="다시 질문해서 고친 점" placeholder="예) 아티보에 없는 기능을 빼고, 마이크와 스피커로 바꿨다."></textarea></div>
+        <p class="hint">* 작성 완료 후 [기획서 이미지 저장]을 누르면 이미지로 저장되어 패들렛에 바로 올릴 수 있습니다.</p>
       </section>
 
     </div>
@@ -240,13 +234,13 @@ input,textarea{font:inherit;color:inherit}
 
   <div class="save-row">
     <button class="save-btn ghost" type="button" onclick="resetSheet()">모두 지우기</button>
-    <button class="save-btn primary" type="button" onclick="downloadWorksheet()">활동지 이미지 저장</button>
+    <button class="save-btn primary" type="button" onclick="downloadWorksheet()">기획서 이미지 저장</button>
   </div>
 </div>
 
 
 <script>
-  const KEY='artibo_act3_v2';
+  const KEY='artibo_act1_v3';
   let state={};
   try{ state=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ state={}; }
   const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
@@ -257,10 +251,6 @@ input,textarea{font:inherit;color:inherit}
     el.addEventListener('input',()=>{ state[el.dataset.k]=el.value; save(); });
   });
   document.querySelectorAll('textarea').forEach(el=>{ autoResize(el); el.addEventListener('input',()=>autoResize(el)); });
-  document.querySelectorAll('input[type="radio"]').forEach(r=>{
-    if(state[r.name]===r.value) r.checked=true;
-    r.addEventListener('change',()=>{ state[r.name]=r.value; save(); });
-  });
   document.querySelectorAll('input[type="checkbox"][data-c]').forEach(c=>{
     c.checked=!!state[c.dataset.c];
     c.addEventListener('change',()=>{ state[c.dataset.c]=c.checked; save(); });
@@ -283,7 +273,7 @@ input,textarea{font:inherit;color:inherit}
       });
       const who=(state.name||'').trim();
       const link=document.createElement('a');
-      link.download='아티보_3차시_활동지'+(who?'_'+who:'')+'.png';
+      link.download='진로AI기획서'+(who?'_'+who:'')+'.png';
       link.href=canvas.toDataURL('image/png');
       link.click();
     } finally { if(toc) toc.style.display=''; }

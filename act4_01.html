@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>아티보 프로토타입 완성 활동지</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+/* 3차시 활동지(act3_01)와 같은 기본 톤: 책상 배경 · 종이 · 초록 그라데이션 */
+:root{
+  --desk:#ece9e2; --paper:#fffefb; --ink:#222; --muted:#5f6368; --line:#dddcd5;
+  --green:#1ea672; --green2:#8dbd1a; --deep:#315c49; --mint:#f6fbf8; --mintline:#cfe4d7;
+  --blue:#2f5bb2; --warm:#fbfaf7;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--desk);color:var(--ink);font-family:Pretendard,"Noto Sans KR",system-ui,sans-serif}
+body{overflow-x:hidden}
+.app{max-width:1120px;margin:0 auto;padding:18px}
+input,textarea{font:inherit;color:inherit}
+
+/* 머리 */
+.document-head{width:min(100%,900px);margin:0 auto 18px;background:var(--paper);border:1px solid #ddd8cd;
+  box-shadow:0 12px 28px rgba(0,0,0,.06);padding:26px 34px 22px;border-top:12px solid var(--green)}
+.title-row{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+.title-chip{display:inline-flex;align-items:center;justify-content:center;min-width:78px;height:40px;padding:0 14px;
+  border-radius:10px;background:#eceff1;font-size:18px;font-weight:900}
+.title-row h1{margin:0;font-size:30px;line-height:1.3}
+.student-info{display:grid;grid-template-columns:120px 120px 150px 1fr;gap:18px;align-items:end}
+.student-field{display:flex;align-items:center;gap:8px;border-bottom:1.7px solid #aeb7ae;padding:4px 0 6px;min-width:0}
+.student-field b{white-space:nowrap;font-size:14px}
+.student-field input{width:100%;min-width:0;border:0;outline:none;background:transparent;padding:0}
+.label-line{display:grid;grid-template-columns:120px 1fr;min-height:42px;border:1px solid #d7ddd9;border-radius:10px;overflow:hidden;background:#fff}
+.label-line b{display:flex;align-items:center;padding:0 14px;font-size:14px;white-space:nowrap;background:linear-gradient(90deg,#2aa879,#86b91b);color:#fff}
+.label-line input{width:100%;border:0;outline:none;background:#fff;padding:8px 12px}
+.head-lines{margin-top:18px;display:grid;gap:10px}
+
+/* 목차 */
+.toc{width:min(100%,900px);margin:0 auto 18px;display:flex;flex-wrap:wrap;gap:8px}
+.toc a{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid #d7ddd9;
+  color:var(--deep);font-size:14px;font-weight:800;text-decoration:none}
+.toc a span{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;font-size:12px}
+.toc a:hover{background:var(--mint)}
+
+/* 종이 */
+.paper{width:min(100%,900px);margin:0 auto 28px;background:var(--paper);box-shadow:0 18px 38px rgba(0,0,0,.08);border:1px solid #ddd8cd}
+.paper::before{content:"";display:block;height:14px;background:linear-gradient(90deg,var(--green),var(--green2))}
+.paper-inner{padding:34px 42px 42px}
+.section{padding:4px 0 34px;margin-bottom:30px;border-bottom:1px solid #ebe7df;scroll-margin-top:16px}
+.section:last-child{margin-bottom:0;padding-bottom:0;border-bottom:0}
+.sec-head{display:flex;align-items:center;gap:12px}
+.sec-no{flex:none;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#2aa879,#86b91b);color:#fff;
+  display:grid;place-items:center;font-size:20px;font-weight:900}
+.sec-head h2{margin:0;font-size:27px;line-height:1.3;letter-spacing:-.02em}
+.desc{margin:10px 0 20px 52px;color:#555;line-height:1.7;font-size:15px}
+.sub-title{margin:24px 0 10px;font-size:17px;font-weight:800;color:var(--deep)}
+.sub-title small{font-weight:500;color:#888;font-size:13px;margin-left:6px}
+
+/* 공통 블록 */
+.box{border:1px solid var(--line);background:#fcfcfa;border-radius:16px;padding:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{border:1px solid var(--line);background:#fff;border-radius:16px;padding:16px 18px}
+.card.mint{background:var(--mint);border-color:var(--mintline)}
+.card h3{margin:0 0 8px;font-size:16px}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#eef3fb;color:var(--blue);font-size:12px;font-weight:900;margin-bottom:8px}
+.card textarea{width:100%;min-height:72px;border:0;outline:none;resize:none;overflow:hidden;background:transparent;line-height:1.7;padding:0}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:800;color:var(--deep)}
+.field input,.field textarea.line{width:100%;height:42px;border:1.4px solid #cfd6d0;border-radius:10px;background:#fff;padding:0 12px;outline:none}
+.field input:focus,.card textarea:focus,.label-line input:focus{box-shadow:inset 0 0 0 2px rgba(30,166,114,.25)}
+.field input::placeholder,.card textarea::placeholder{color:#a9b0aa}
+.opt-row{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span{display:inline-block;padding:8px 14px;border:1.4px solid #cfd6d0;border-radius:999px;background:#fff;font-size:15px;cursor:pointer}
+.opt span small{color:#888;font-size:12px;margin-left:4px}
+.opt input:checked+span{background:#2aa879;border-color:#2aa879;color:#fff;font-weight:800}
+.opt input:checked+span small{color:#e8fff3}
+.opt input:focus-visible+span{outline:3px solid rgba(30,166,114,.3)}
+
+/* ① 수정 기록 */
+.log{display:grid;grid-template-columns:44px 1fr 1fr;gap:8px;align-items:center}
+.log .hd{font-size:13px;font-weight:900;color:var(--deep);padding:0 4px}
+.log .no{height:42px;border-radius:10px;background:#f5f8f6;display:grid;place-items:center;font-weight:900;color:var(--deep)}
+
+/* ② 발표 문장 */
+.frame{border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden;margin-bottom:14px}
+.frame-head{display:flex;align-items:center;gap:12px;padding:12px 18px;background:var(--mint);border-bottom:1px solid var(--mintline)}
+.frame-num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:900}
+.frame-head{flex-wrap:wrap}
+.frame-head b{font-size:18px;white-space:nowrap}
+.frame-head .q{color:#5b6b62;font-size:14px}
+.frame-body{padding:16px 18px 14px}
+.frame-fields{display:grid;gap:12px}
+.frame-fields.c2{grid-template-columns:1fr 1fr}
+.frame-fields.c3{grid-template-columns:1fr 1fr 1fr}
+.example{margin-top:12px;padding:10px 14px;border-radius:10px;background:#f7f7f4;color:#6b6f6c;font-size:14px;line-height:1.6}
+.example b{color:#4a7a63;margin-right:6px}
+.script{margin-top:18px;border-radius:18px;border:2px solid var(--green);background:#fff;overflow:hidden}
+.script-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px;background:linear-gradient(90deg,#2aa879,#86b91b);color:#fff}
+.script-head{flex-wrap:wrap}
+.script-head b{font-size:17px;white-space:nowrap}
+.script-head span{font-size:13px;opacity:.95}
+.script-body{padding:18px 22px;font-size:18px;line-height:1.95}
+.script-body p{margin:0 0 10px}
+.script-body p:last-child{margin-bottom:0}
+.script-body .n{display:inline-block;min-width:24px;color:var(--green);font-weight:900}
+.script-body .v{font-weight:800;color:#1b5e44;background:linear-gradient(transparent 62%,#dff3e8 62%)}
+.script-body .e{color:#b3b8b4;letter-spacing:1px}
+
+/* ⑤ 자기 평가 */
+.rate{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.rate th,.rate td{border-bottom:1px solid var(--line);padding:10px 14px;text-align:center}
+.rate th{background:#f5f8f6;color:var(--deep);font-size:14px}
+.rate td:first-child,.rate th:first-child{text-align:left}
+.rate td small{display:block;color:#888;font-size:13px}
+.rate tr:last-child td{border-bottom:0}
+.rate input{accent-color:#1ea672;width:18px;height:18px}
+
+.save-row{width:min(100%,900px);margin:0 auto 30px;display:flex;justify-content:flex-end;gap:8px}
+.save-btn{border:1px solid #cdd8d0;border-radius:12px;padding:11px 16px;background:#fff;color:#2f5a47;font:inherit;font-weight:800;cursor:pointer}
+.save-btn.primary{background:#2aa879;border-color:#2aa879;color:#fff}
+.save-btn:hover{filter:brightness(.97)}
+.save-btn.ghost{color:#888}
+
+@media(max-width:960px){
+  .app{padding:10px}
+  .document-head{padding:20px 18px}
+  .title-row h1{font-size:24px}
+  .student-info{grid-template-columns:1fr 1fr}
+  .paper-inner{padding:24px 18px 28px}
+  .sec-head h2{font-size:22px}
+  .desc{margin-left:0}
+  .grid2,.frame-fields.c2,.frame-fields.c3{grid-template-columns:1fr}
+  .log{grid-template-columns:36px 1fr}
+  .log .hd:nth-child(3),.log .hd:nth-child(2){display:none}
+  .log .res{grid-column:2}
+  .script-body{font-size:16px}
+  .label-line{grid-template-columns:100px 1fr}
+}
+@media print{body{background:#fff}.save-row,.toc{display:none}.document-head,.paper{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="app">
+ <div id="capture">
+  <div class="document-head">
+    <div class="title-row">
+      <div class="title-chip">4차시</div>
+      <h1>아티보 프로토타입 완성 활동지</h1>
+    </div>
+    <div class="student-info">
+      <div class="student-field"><b>학년</b><input type="text" data-k="grade" aria-label="학년"></div>
+      <div class="student-field"><b>반</b><input type="text" data-k="cls" aria-label="반"></div>
+      <div class="student-field"><b>번호</b><input type="text" data-k="num" aria-label="번호"></div>
+      <div class="student-field"><b>이름</b><input type="text" data-k="name" aria-label="이름"></div>
+    </div>
+    <div class="head-lines">
+      <div class="label-line"><b>희망 진로</b><input type="text" data-k="career" aria-label="희망 진로"></div>
+      <div class="label-line"><b>프로젝트명</b><input type="text" data-k="project" aria-label="프로젝트명"></div>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="활동지 목차">
+    <a href="#s1"><span>1</span>고친 내용 기록하기</a>
+    <a href="#s2"><span>2</span>발표 문장 만들기</a>
+    <a href="#s3"><span>3</span>친구 로봇에서 배우기</a>
+    <a href="#s4"><span>4</span>내 로봇 윤리 점검하기</a>
+    <a href="#s5"><span>5</span>1차시와 비교하며 성찰하기</a>
+  </nav>
+
+  <div class="paper" id="worksheet">
+    <div class="paper-inner">
+
+      <!-- ① -->
+      <section class="section" id="s1">
+        <div class="sec-head"><div class="sec-no">1</div><h2>고친 내용 기록하기</h2></div>
+        <p class="desc">3차시 활동지의 MUST · EXTRA와 테스트 결과를 보고, 가장 먼저 고칠 한 가지를 정합니다.</p>
+
+        <div class="sub-title">Step 1. 오늘 고칠 한 가지</div>
+        <div class="field"><input type="text" data-k="fix" aria-label="오늘 고칠 한 가지" placeholder="어떤 상황에서 무엇이 잘 안 되나요?"></div>
+
+        <div class="sub-title">Step 2. 오류가 생긴 단계</div>
+        <div class="opt-row">
+          <label class="opt"><input type="radio" name="stage" value="연결"><span>0 연결<small>반응이 없어요</small></span></label>
+          <label class="opt"><input type="radio" name="stage" value="입력"><span>1 입력<small>입력값이 이상해요</small></span></label>
+          <label class="opt"><input type="radio" name="stage" value="처리"><span>2 처리<small>엉뚱한 결과</small></span></label>
+          <label class="opt"><input type="radio" name="stage" value="출력"><span>3 출력<small>실행이 안 돼요</small></span></label>
+        </div>
+
+        <div class="sub-title">Step 5. 수정 기록<small>한 줄에 하나씩</small></div>
+        <div class="log">
+          <div class="hd"></div><div class="hd">바꾼 것</div><div class="hd">달라진 결과</div>
+          <div class="no">1</div><div class="field"><input type="text" data-k="c1" aria-label="바꾼 것 1" placeholder="무엇을 바꿨나요? (단어 · 기준값 · 속도 등)"></div><div class="field res"><input type="text" data-k="r1" aria-label="달라진 결과 1" placeholder="결과가 어떻게 달라졌나요?"></div>
+          <div class="no">2</div><div class="field"><input type="text" data-k="c2" aria-label="바꾼 것 2"></div><div class="field res"><input type="text" data-k="r2" aria-label="달라진 결과 2"></div>
+          <div class="no">3</div><div class="field"><input type="text" data-k="c3" aria-label="바꾼 것 3"></div><div class="field res"><input type="text" data-k="r3" aria-label="달라진 결과 3"></div>
+        </div>
+
+        <div class="sub-title">MY PROTOTYPE v0.2</div>
+        <div class="grid2">
+          <div class="card"><span class="badge">CORE</span><h3>시연할 핵심 기능</h3><textarea data-k="v_core" aria-label="시연할 핵심 기능"></textarea></div>
+          <div class="card"><span class="badge">CHECK</span><h3>실제로 확인한 동작</h3><textarea data-k="v_check" aria-label="실제로 확인한 동작"></textarea></div>
+          <div class="card mint"><span class="badge">LIMIT</span><h3>아직 남은 한계</h3><textarea data-k="v_limit" aria-label="아직 남은 한계"></textarea></div>
+          <div class="card"><span class="badge">NEXT</span><h3>다음에 개선할 것</h3><textarea data-k="v_next" aria-label="다음에 개선할 것"></textarea></div>
+        </div>
+      </section>
+
+      <!-- ② -->
+      <section class="section" id="s2">
+        <div class="sec-head"><div class="sec-no">2</div><h2>발표 문장 만들기</h2></div>
+        <p class="desc">다섯 단계의 빈칸을 채우면 아래 <b>내 발표 대본</b>이 자동으로 완성됩니다.</p>
+
+        <div class="frame">
+          <div class="frame-head"><span class="frame-num">1</span><b>문제</b><span class="q">어떤 현장에서 누가 어떤 불편을 겪나요?</span></div>
+          <div class="frame-body">
+            <div class="frame-fields c3">
+              <div class="field"><label for="f_job">관심 직업</label><input id="f_job" data-k="f_job" placeholder="내 관심 직업"></div>
+              <div class="field"><label for="f_user">사용자</label><input id="f_user" data-k="f_user" placeholder="불편을 겪는 사람"></div>
+              <div class="field"><label for="f_pain">불편</label><input id="f_pain" data-k="f_pain" placeholder="어떤 불편인가요?"></div>
+            </div>
+            <div class="example"><b>예시</b>저는 안전관리자 현장에서 작업자가 겪는 통로 장애물에 걸려 다치는 문제에 주목했습니다.</div>
+          </div>
+        </div>
+
+        <div class="frame">
+          <div class="frame-head"><span class="frame-num">2</span><b>해결 · 시연</b><span class="q">내 로봇은 어떤 상황에서 무엇을 하나요?</span></div>
+          <div class="frame-body">
+            <div class="frame-fields c3">
+              <div class="field"><label for="f_robot">로봇 이름</label><input id="f_robot" data-k="f_robot" placeholder="내 로봇 이름"></div>
+              <div class="field"><label for="f_sit">언제</label><input id="f_sit" data-k="f_sit" placeholder="예) ~할 때"></div>
+              <div class="field"><label for="f_act">동작</label><input id="f_act" data-k="f_act" placeholder="아티보가 하는 동작"></div>
+            </div>
+            <div class="example"><b>예시</b>그래서 안전 순찰 로봇을 만들었습니다. 통로를 순찰할 때 아티보가 장애물 앞에서 멈추고 경고하는 모습을 보여드릴게요.</div>
+          </div>
+        </div>
+
+        <div class="frame">
+          <div class="frame-head"><span class="frame-num">3</span><b>작동 원리</b><span class="q">입력 → 처리 → 출력은 무엇인가요?</span></div>
+          <div class="frame-body">
+            <div class="frame-fields c3">
+              <div class="field"><label for="f_in">입력</label><input id="f_in" data-k="f_in" placeholder="음성 · 센서값 · 카메라 등"></div>
+              <div class="field"><label for="f_proc">처리 (판단)</label><input id="f_proc" data-k="f_proc" placeholder="if 조건으로 판단하는 것"></div>
+              <div class="field"><label for="f_out">출력</label><input id="f_out" data-k="f_out" placeholder="말 · 화면 · 이동 등"></div>
+            </div>
+            <div class="example"><b>예시</b>아티보가 전방 센서 값을 받으면, 장애물이 있는지 판단한 뒤 멈추고 경고 음성을 말합니다.</div>
+          </div>
+        </div>
+
+        <div class="frame">
+          <div class="frame-head"><span class="frame-num">4</span><b>성장 스토리</b><span class="q">v0.1에서 무엇을 고쳐 어떻게 달라졌나요? (① 수정 기록 참고)</span></div>
+          <div class="frame-body">
+            <div class="frame-fields c3">
+              <div class="field"><label for="f_g1">처음 문제</label><input id="f_g1" data-k="f_g1" placeholder="v0.1에서 안 되던 것"></div>
+              <div class="field"><label for="f_g2">바꾼 것</label><input id="f_g2" data-k="f_g2" placeholder="고친 부분"></div>
+              <div class="field"><label for="f_g3">달라진 결과</label><input id="f_g3" data-k="f_g3" placeholder="고친 뒤의 모습"></div>
+            </div>
+            <div class="example"><b>예시</b>v0.1에서는 장애물 앞에서 너무 늦게 멈췄습니다. 그래서 이동 속도를 고쳤더니 제때 멈추게 되었습니다.</div>
+          </div>
+        </div>
+
+        <div class="frame">
+          <div class="frame-head"><span class="frame-num">5</span><b>가치 · 한계</b><span class="q">누구에게 어떤 도움이 되고, 무엇이 아직 부족한가요?</span></div>
+          <div class="frame-body">
+            <div class="frame-fields c3">
+              <div class="field"><label for="f_vuser">도움받는 사람</label><input id="f_vuser" data-k="f_vuser" placeholder="도움받는 사람"></div>
+              <div class="field"><label for="f_help">도움 <small style="font-weight:500;color:#888">효율성·안전성·복지</small></label><input id="f_help" data-k="f_help" placeholder="어떤 도움인가요?"></div>
+              <div class="field"><label for="f_lim">한계</label><input id="f_lim" data-k="f_lim" placeholder="아직 부족한 점"></div>
+            </div>
+            <div class="example"><b>예시</b>이 로봇은 작업자에게 사고를 미리 막아 주는 도움을 줍니다. 다만 작은 물체 감지는 앞으로 개선하겠습니다.</div>
+          </div>
+        </div>
+
+        <div class="script" aria-live="polite">
+          <div class="script-head"><b>🎤 내 발표 대본</b><span>빈칸을 채우면 자동으로 완성돼요</span></div>
+          <div class="script-body" id="script"></div>
+        </div>
+      </section>
+
+      <!-- ③ -->
+      <section class="section" id="s3">
+        <div class="sec-head"><div class="sec-no">3</div><h2>친구 로봇에서 배우기</h2></div>
+        <p class="desc">인상 깊은 로봇 하나를 골라, 관찰한 동작을 근거로 피드백을 적습니다.</p>
+        <div class="grid2" style="margin-bottom:14px">
+          <div class="label-line"><b>발표자 이름</b><input type="text" data-k="pick_name" aria-label="발표자 이름"></div>
+          <div class="label-line"><b>로봇 이름</b><input type="text" data-k="pick_robot" aria-label="로봇 이름"></div>
+        </div>
+        <div class="grid2">
+          <div class="card mint"><span class="badge">GOOD</span><h3>좋았던 점</h3><textarea data-k="fb_good" aria-label="좋았던 점" placeholder="[상황]에서 [기능]이 작동해 [도움]이 될 것 같아요."></textarea></div>
+          <div class="card"><span class="badge">QUESTION</span><h3>궁금한 점</h3><textarea data-k="fb_q" aria-label="궁금한 점" placeholder="[다른 상황]이 생기면 어떻게 반응하나요?"></textarea></div>
+          <div class="card"><span class="badge">IDEA</span><h3>개선 제안</h3><textarea data-k="fb_idea" aria-label="개선 제안" placeholder="[기능]을 보완하면 더 편하게 쓸 수 있겠어요."></textarea></div>
+          <div class="card"><span class="badge">MY ROBOT</span><h3>내 로봇에 가져올 아이디어</h3><textarea data-k="fb_mine" aria-label="내 로봇에 가져올 아이디어"></textarea></div>
+        </div>
+      </section>
+
+      <!-- ④ -->
+      <section class="section" id="s4">
+        <div class="sec-head"><div class="sec-no">4</div><h2>내 로봇 윤리 점검하기</h2></div>
+        <p class="desc">내 로봇이 실제 현장에 간다면? 가장 중요한 관점 하나를 골라 적습니다.</p>
+        <div class="opt-row" style="margin-bottom:16px">
+          <label class="opt"><input type="radio" name="lens" value="개인정보"><span>개인정보</span></label>
+          <label class="opt"><input type="radio" name="lens" value="오인식과 안전"><span>오인식과 안전</span></label>
+          <label class="opt"><input type="radio" name="lens" value="접근성"><span>누구나 쓸 수 있을까?</span></label>
+        </div>
+        <div class="box" style="display:grid;gap:12px">
+          <div class="field"><label for="e_who">영향받는 사람</label><input id="e_who" data-k="e_who" placeholder="내 로봇 때문에 영향받는 사람은 누구인가요?"></div>
+          <div class="field"><label for="e_prob">생길 수 있는 문제</label><input id="e_prob" data-k="e_prob" placeholder="어떤 문제가 생길 수 있나요?"></div>
+          <div class="field"><label for="e_fix">문제를 줄이는 방법</label><input id="e_fix" data-k="e_fix" placeholder="어떤 기능이나 규칙으로 줄일 수 있나요?"></div>
+        </div>
+        <div class="grid2" style="margin-top:14px">
+          <div class="card"><h3>로봇이 맡을 일</h3><textarea data-k="role_r" aria-label="로봇이 맡을 일" placeholder="예) 반복되거나 위험한 일"></textarea></div>
+          <div class="card mint"><h3>사람이 확인할 일</h3><textarea data-k="role_h" aria-label="사람이 확인할 일" placeholder="예) 상황 판단과 결정, 로봇이 실패했을 때 돕기"></textarea></div>
+        </div>
+      </section>
+
+      <!-- ⑤ -->
+      <section class="section" id="s5">
+        <div class="sec-head"><div class="sec-no">5</div><h2>1차시와 비교하며 성찰하기</h2></div>
+        <p class="desc">1차시 기획서를 다시 열어보고, 처음 아이디어와 지금의 결과물을 비교합니다.</p>
+        <div class="grid2">
+          <div class="card"><span class="badge">1차시</span><h3>처음 상상한 것</h3><textarea data-k="s1" aria-label="처음 상상한 것"></textarea></div>
+          <div class="card"><span class="badge">3차시</span><h3>처음 작동한 것</h3><textarea data-k="s3" aria-label="처음 작동한 것"></textarea></div>
+          <div class="card mint"><span class="badge">4차시</span><h3>달라진 점과 이유</h3><textarea data-k="s4" aria-label="달라진 점과 이유"></textarea></div>
+          <div class="card"><span class="badge">CAREER</span><h3>진로에 대해 새롭게 생각한 점</h3><textarea data-k="s_career" aria-label="진로에 대해 새롭게 생각한 점"></textarea></div>
+        </div>
+        <div class="label-line" style="margin-top:14px"><b>실천할 일</b><input type="text" data-k="action" aria-label="실천할 일" placeholder="이번 달 안에 실천할 진로 행동 1가지"></div>
+
+        <div class="sub-title">자기 평가</div>
+        <table class="rate">
+          <thead><tr><th>기준</th><th>잘함</th><th>보통</th><th>노력</th></tr></thead>
+          <tbody>
+            <tr><td><b>직업적 가치</b><small>현장의 문제를 해결하는가?</small></td><td><input type="radio" name="rt1" value="3" aria-label="직업적 가치 잘함"></td><td><input type="radio" name="rt1" value="2" aria-label="직업적 가치 보통"></td><td><input type="radio" name="rt1" value="1" aria-label="직업적 가치 노력"></td></tr>
+            <tr><td><b>기술 구현력</b><small>계획대로 작동하는가?</small></td><td><input type="radio" name="rt2" value="3" aria-label="기술 구현력 잘함"></td><td><input type="radio" name="rt2" value="2" aria-label="기술 구현력 보통"></td><td><input type="radio" name="rt2" value="1" aria-label="기술 구현력 노력"></td></tr>
+            <tr><td><b>성찰 깊이</b><small>고친 과정을 설명하는가?</small></td><td><input type="radio" name="rt3" value="3" aria-label="성찰 깊이 잘함"></td><td><input type="radio" name="rt3" value="2" aria-label="성찰 깊이 보통"></td><td><input type="radio" name="rt3" value="1" aria-label="성찰 깊이 노력"></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+  </div>
+ </div>
+
+  <div class="save-row">
+    <button class="save-btn ghost" type="button" onclick="resetSheet()">모두 지우기</button>
+    <button class="save-btn primary" type="button" onclick="downloadWorksheet()">활동지 이미지 저장</button>
+  </div>
+</div>
+
+<script>
+  const KEY='artibo_act4_v2';
+  let state={};
+  try{ state=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ state={}; }
+  const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+
+  function autoResize(el){ el.style.height='auto'; el.style.height=(el.scrollHeight+2)+'px'; }
+
+  // 발표 대본 미리보기
+  const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const v=k=>{ const x=(state[k]||'').trim(); return x?`<span class="v">${esc(x)}</span>`:'<span class="e">______</span>'; };
+  function renderScript(){
+    document.getElementById('script').innerHTML=
+      `<p><span class="n">①</span>저는 ${v('f_job')} 현장에서 ${v('f_user')}가 겪는 ${v('f_pain')}에 주목했습니다.</p>`+
+      `<p><span class="n">②</span>그래서 ${v('f_robot')}을(를) 만들었습니다. ${v('f_sit')} 아티보가 ${v('f_act')}하는 모습을 보여드릴게요.</p>`+
+      `<p><span class="n">③</span>아티보가 ${v('f_in')}을(를) 받으면, ${v('f_proc')}한 뒤 ${v('f_out')}합니다.</p>`+
+      `<p><span class="n">④</span>v0.1에서는 ${v('f_g1')}. 그래서 ${v('f_g2')}을(를) 고쳤더니 ${v('f_g3')}.</p>`+
+      `<p><span class="n">⑤</span>이 로봇은 ${v('f_vuser')}에게 ${v('f_help')}을(를) 줍니다. 다만 ${v('f_lim')}은(는) 앞으로 개선하겠습니다.</p>`;
+  }
+
+  document.querySelectorAll('[data-k]').forEach(el=>{
+    if(state[el.dataset.k]!==undefined) el.value=state[el.dataset.k];
+    el.addEventListener('input',()=>{ state[el.dataset.k]=el.value; save(); if(el.dataset.k.startsWith('f_')) renderScript(); });
+  });
+  document.querySelectorAll('input[type="radio"]').forEach(r=>{
+    if(state[r.name]===r.value) r.checked=true;
+    r.addEventListener('change',()=>{ state[r.name]=r.value; save(); });
+  });
+  document.querySelectorAll('textarea').forEach(el=>{ autoResize(el); el.addEventListener('input',()=>autoResize(el)); });
+  renderScript();
+
+  function resetSheet(){
+    if(!confirm('작성한 내용을 모두 지울까요?')) return;
+    state={}; try{ localStorage.removeItem(KEY); }catch(e){}
+    location.reload();
+  }
+
+  async function downloadWorksheet(){
+    if(typeof html2canvas==='undefined'){ alert('이미지 저장 라이브러리를 불러오지 못했습니다.'); return; }
+    const toc=document.querySelector('.toc'); toc.style.display='none';
+    document.querySelectorAll('textarea').forEach(autoResize);
+    try{
+      const canvas=await html2canvas(document.getElementById('capture'),{
+        backgroundColor:'#ece9e2', scale:2, useCORS:true, scrollY:-window.scrollY,
+        windowWidth:document.documentElement.clientWidth
+      });
+      const who=(state.name||'').trim();
+      const link=document.createElement('a');
+      link.download='아티보_4차시_활동지'+(who?'_'+who:'')+'.png';
+      link.href=canvas.toDataURL('image/png');
+      link.click();
+    } finally { toc.style.display=''; }
+  }
+</script>
+</body>
+</html>
