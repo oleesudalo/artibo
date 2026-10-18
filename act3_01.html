@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>아티보 프로토타입 제작 활동지</title>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <style>
 /* 3차시 활동지(act3_01)와 같은 기본 톤: 책상 배경 · 종이 · 초록 그라데이션 */
 :root{
@@ -177,16 +178,26 @@ input,textarea{font:inherit;color:inherit}
       <div class="student-field"><b>번호</b><input type="text" data-k="num" aria-label="번호"></div>
       <div class="student-field"><b>이름</b><input type="text" data-k="name" aria-label="이름"></div>
     </div>
-    <div class="head-lines"><div class="label-line"><b>희망 진로</b><input type="text" data-k="career" aria-label="희망 진로"></div><div class="label-line"><b>프로젝트명</b><input type="text" data-k="project" aria-label="프로젝트명"></div></div>
+    <div class="head-lines"><div class="label-line"><b>관심 직업</b><input type="text" data-k="career" aria-label="관심 직업" placeholder="1차시에 탐색한 관심 직업"></div><div class="label-line"><b>프로젝트명</b><input type="text" data-k="project" aria-label="프로젝트명"></div></div>
   </div>
 
-  <nav class="toc" aria-label="활동지 목차"><a href="#s1"><span>1</span>핵심 기능 선택</a><a href="#s2"><span>2</span>작은 단계로 나누기</a><a href="#s3"><span>3</span>MUST · EXTRA</a><a href="#s4"><span>4</span>제작 계획 최종 체크</a><a href="#s5"><span>5</span>MY PROTOTYPE v0.1</a></nav>
+  <nav class="toc" aria-label="활동지 목차"><a href="#s1"><span>1</span>아티보 적용 구상</a><a href="#s2"><span>2</span>핵심 기능 선택</a><a href="#s3"><span>3</span>작은 단계로 나누기</a><a href="#s4"><span>4</span>MUST · EXTRA</a><a href="#s5"><span>5</span>MY PROTOTYPE v0.1</a></nav>
 
   <div class="paper" id="worksheet">
     <div class="paper-inner">
 
       <section class="section" id="s1">
-        <div class="sec-head"><div class="sec-no">1</div><h2>오늘 구현할 핵심 기능 1개 선택</h2></div>
+        <div class="sec-head"><div class="sec-no">1</div><h2>아티보(Artibo) 적용 구상 - 최종</h2></div>
+        <p class="desc">1차시에서 작성했던 활동지를 참고하여 최종적으로 내 로봇에 적용할 기능을 정리해봅시다.</p>
+        <div class="sub-title" style="margin-top:0">사용할 아티보 기능<small>여러 개 선택 가능</small></div>
+        <div class="box">
+          <div class="fn-group"><b>입력</b><label class="opt"><input type="checkbox" data-c="fn_cam"><span>카메라</span></label><label class="opt"><input type="checkbox" data-c="fn_mic"><span>마이크</span></label><label class="opt"><input type="checkbox" data-c="fn_front"><span>전방 센서</span></label><label class="opt"><input type="checkbox" data-c="fn_floor"><span>바닥 센서</span></label></div>
+          <div class="fn-group"><b>출력</b><label class="opt"><input type="checkbox" data-c="fn_spk"><span>스피커</span></label><label class="opt"><input type="checkbox" data-c="fn_lcd"><span>LCD 화면</span></label><label class="opt"><input type="checkbox" data-c="fn_wheel"><span>바퀴</span></label></div>
+        </div>
+      </section>
+
+      <section class="section" id="s2">
+        <div class="sec-head"><div class="sec-no">2</div><h2>오늘 구현할 핵심 기능 1개 선택</h2></div>
         <p class="desc">1차시 기획서와 2차시 기능 설계도를 펼치고, 오늘 반드시 작동시킬 기능을 하나 정합니다.</p>
         <div class="box">
           <div class="sent-row"><b>내 로봇은</b><div class="field"><input type="text" data-k="c_sit" aria-label="상황"></div><b>상황에서</b></div>
@@ -195,8 +206,8 @@ input,textarea{font:inherit;color:inherit}
         </div>
       </section>
 
-      <section class="section" id="s2">
-        <div class="sec-head"><div class="sec-no">2</div><h2>기능을 작은 단계로 나누기</h2></div>
+      <section class="section" id="s3">
+        <div class="sec-head"><div class="sec-no">3</div><h2>기능을 작은 단계로 나누기</h2></div>
         <p class="desc">한 번에 전체를 만들지 않고, 실제 작동 흐름을 작은 단계로 나눕니다. 만들면서 세부 기능마다 작동 여부(○ 작동함 · △ 일부 작동 · × 작동 안 함)를 체크하세요.</p>
         <div class="log log4">
           <div class="hd"></div><div class="hd">세부 기능</div><div class="hd">구현 내용</div><div class="hd">작동 확인</div>
@@ -204,23 +215,12 @@ input,textarea{font:inherit;color:inherit}
         </div>
       </section>
 
-      <section class="section" id="s3">
-        <div class="sec-head"><div class="sec-no">3</div><h2>반드시 구현할 기능 / 시간이 남으면 추가할 기능</h2></div>
+      <section class="section" id="s4">
+        <div class="sec-head"><div class="sec-no">4</div><h2>반드시 구현할 기능 / 시간이 남으면 추가할 기능</h2></div>
         <p class="desc">제한된 시간 안에 프로토타입을 완성하려면 핵심 기능과 추가 기능을 구분해야 합니다.</p>
         <div class="grid2">
           <div class="card mint"><span class="badge">MUST</span><h3>오늘 반드시 구현</h3><div class="field"><input type="text" data-k="must1" aria-label="MUST 1"></div><div class="field"><input type="text" data-k="must2" aria-label="MUST 2"></div><div class="field"><input type="text" data-k="must3" aria-label="MUST 3"></div></div>
           <div class="card"><span class="badge">EXTRA</span><h3>시간이 남으면 추가</h3><div class="field"><input type="text" data-k="extra1" aria-label="EXTRA 1"></div><div class="field"><input type="text" data-k="extra2" aria-label="EXTRA 2"></div><div class="field"><input type="text" data-k="extra3" aria-label="EXTRA 3"></div></div>
-        </div>
-      </section>
-
-      <section class="section" id="s4">
-        <div class="sec-head"><div class="sec-no">4</div><h2>제작 계획 최종 체크</h2></div>
-        <p class="desc">제작을 시작하기 전에 아래와 같이 한 장으로 계획을 정리해두면 중간에 방향을 잃지 않습니다.</p>
-        <div class="grid2">
-          <div class="card"><span class="badge">PROJECT</span><h3>프로젝트명</h3><textarea data-k="p_project" aria-label="프로젝트명"></textarea></div>
-          <div class="card"><span class="badge">CORE</span><h3>핵심 기능</h3><textarea data-k="p_core" aria-label="핵심 기능"></textarea></div>
-          <div class="card mint"><span class="badge">SUCCESS</span><h3>오늘의 성공 기준</h3><textarea data-k="p_success" aria-label="오늘의 성공 기준" placeholder="예) 같은 상황에서 3번 연속으로 성공하기"></textarea></div>
-          <div class="card"><span class="badge">EXTRA</span><h3>시간이 남으면 추가할 것</h3><textarea data-k="p_extra" aria-label="시간이 남으면 추가할 것"></textarea></div>
         </div>
       </section>
 
@@ -240,7 +240,7 @@ input,textarea{font:inherit;color:inherit}
 
   <div class="save-row">
     <button class="save-btn ghost" type="button" onclick="resetSheet()">모두 지우기</button>
-    <button class="save-btn primary" type="button" onclick="downloadWorksheet()">활동지 이미지 저장</button>
+    <button class="save-btn primary" id="saveBtn" type="button" onclick="downloadWorksheet()">활동지 PDF 저장</button>
   </div>
 </div>
 
@@ -260,6 +260,14 @@ input,textarea{font:inherit;color:inherit}
   document.querySelectorAll('input[type="radio"]').forEach(r=>{
     if(state[r.name]===r.value) r.checked=true;
     r.addEventListener('change',()=>{ state[r.name]=r.value; save(); });
+    // 작동 확인(○ △ ×)은 같은 칸을 다시 누르면 선택 해제
+    if(/^ok\d+$/.test(r.name)){
+      r.addEventListener('click',()=>{
+        if(r.dataset.was==='1'){ r.checked=false; delete state[r.name]; save(); }
+        document.querySelectorAll(`input[name="${r.name}"]`).forEach(o=>o.dataset.was=o.checked?'1':'');
+      });
+      r.dataset.was=r.checked?'1':'';
+    }
   });
   document.querySelectorAll('input[type="checkbox"][data-c]').forEach(c=>{
     c.checked=!!state[c.dataset.c];
@@ -273,20 +281,53 @@ input,textarea{font:inherit;color:inherit}
   }
 
   async function downloadWorksheet(){
-    if(typeof html2canvas==='undefined'){ alert('이미지 저장 라이브러리를 불러오지 못했습니다.'); return; }
-    const toc=document.querySelector('.toc'); if(toc) toc.style.display='none';
+    if(typeof html2canvas==='undefined' || !window.jspdf){ alert('PDF 저장 기능을 불러오지 못했습니다. 인터넷 연결을 확인한 뒤 새로고침해 주세요.'); return; }
+    const btn=document.getElementById('saveBtn'); const label=btn.textContent;
+    btn.disabled=true; btn.textContent='PDF 만드는 중…';
+    const toc=document.querySelector('.toc'); toc.style.display='none';
     document.querySelectorAll('textarea').forEach(autoResize);
     try{
-      const canvas=await html2canvas(document.getElementById('capture'),{
-        backgroundColor:'#ece9e2', scale:2, useCORS:true, scrollY:-window.scrollY,
+      const target=document.getElementById('capture');
+      const scale=2;
+      const canvas=await html2canvas(target,{
+        backgroundColor:'#ffffff', scale, useCORS:true, scrollY:-window.scrollY,
         windowWidth:document.documentElement.clientWidth
       });
+      // A4 세로, 여백 8mm
+      const {jsPDF}=window.jspdf;
+      const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+      const pageW=210, pageH=297, m=8;
+      const imgW=pageW-m*2;
+      const pxPerMm=canvas.width/imgW;
+      const pageHpx=Math.floor((pageH-m*2)*pxPerMm);
+      // 섹션 경계에서 페이지를 나누어 내용이 잘리지 않게 함
+      const top0=target.getBoundingClientRect().top;
+      const breaks=[...target.querySelectorAll('.section, .paper, .frame, .script, .sub-title')].map(el=>Math.round((el.getBoundingClientRect().top-top0)*scale)).filter(y=>y>0);
+      breaks.push(canvas.height);
+      let y=0, first=true;
+      while(y<canvas.height-4){
+        let end=y+pageHpx;
+        if(end<canvas.height){
+          const fit=breaks.filter(bk=>bk>y+pageHpx*0.5 && bk<=end);
+          if(fit.length) end=Math.max(...fit);
+        } else end=canvas.height;
+        const h=end-y;
+        const part=document.createElement('canvas'); part.width=canvas.width; part.height=h;
+        const ctx=part.getContext('2d'); ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,part.width,h);
+        ctx.drawImage(canvas,0,y,canvas.width,h,0,0,canvas.width,h);
+        if(!first) pdf.addPage();
+        pdf.addImage(part.toDataURL('image/jpeg',0.92),'JPEG',m,m,imgW,h/pxPerMm);
+        first=false; y=end;
+      }
       const who=(state.name||'').trim();
-      const link=document.createElement('a');
-      link.download='아티보_3차시_활동지'+(who?'_'+who:'')+'.png';
-      link.href=canvas.toDataURL('image/png');
-      link.click();
-    } finally { if(toc) toc.style.display=''; }
+      const url=URL.createObjectURL(pdf.output('blob'));
+      const link=document.createElement('a'); link.href=url;
+      link.download='아티보_3차시_활동지'+(who?'_'+who:'')+'.pdf';
+      document.body.appendChild(link); link.click(); link.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),4000);
+    } catch(e){
+      alert('PDF 저장 중 문제가 생겼습니다. 다시 시도해 주세요.');
+    } finally { toc.style.display=''; btn.disabled=false; btn.textContent=label; }
   }
 </script>
 
