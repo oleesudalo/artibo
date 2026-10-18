@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>나의 진로 AI 기획서</title>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <style>
 /* 3차시 활동지(act3_01)와 같은 기본 톤: 책상 배경 · 종이 · 초록 그라데이션 */
 :root{
@@ -155,6 +156,10 @@ input,textarea{font:inherit;color:inherit}
 .check b{display:block;font-size:15px}
 .check span{color:#6b6f6c;font-size:14px}
 .card.wide{margin-top:14px}
+.log.log4{grid-template-columns:44px 1fr 1fr 170px}
+.mini{display:flex;gap:4px}
+.mini .opt span{padding:7px 10px;font-size:14px}
+@media(max-width:960px){.log.log4{grid-template-columns:36px 1fr}.log.log4 .hd{display:none}.log.log4 .res,.log.log4 .mini{grid-column:2}}
 @media(max-width:960px){.sent-row{display:block}.sent-row .field{margin:6px 0}}
 </style>
 </head>
@@ -234,7 +239,7 @@ input,textarea{font:inherit;color:inherit}
 
   <div class="save-row">
     <button class="save-btn ghost" type="button" onclick="resetSheet()">모두 지우기</button>
-    <button class="save-btn primary" type="button" onclick="downloadWorksheet()">기획서 이미지 저장</button>
+    <button class="save-btn primary" id="saveBtn" type="button" onclick="downloadWorksheet()">기획서 PDF 저장</button>
   </div>
 </div>
 
@@ -251,6 +256,10 @@ input,textarea{font:inherit;color:inherit}
     el.addEventListener('input',()=>{ state[el.dataset.k]=el.value; save(); });
   });
   document.querySelectorAll('textarea').forEach(el=>{ autoResize(el); el.addEventListener('input',()=>autoResize(el)); });
+  document.querySelectorAll('input[type="radio"]').forEach(r=>{
+    if(state[r.name]===r.value) r.checked=true;
+    r.addEventListener('change',()=>{ state[r.name]=r.value; save(); });
+  });
   document.querySelectorAll('input[type="checkbox"][data-c]').forEach(c=>{
     c.checked=!!state[c.dataset.c];
     c.addEventListener('change',()=>{ state[c.dataset.c]=c.checked; save(); });
@@ -263,20 +272,53 @@ input,textarea{font:inherit;color:inherit}
   }
 
   async function downloadWorksheet(){
-    if(typeof html2canvas==='undefined'){ alert('이미지 저장 라이브러리를 불러오지 못했습니다.'); return; }
-    const toc=document.querySelector('.toc'); if(toc) toc.style.display='none';
+    if(typeof html2canvas==='undefined' || !window.jspdf){ alert('PDF 저장 기능을 불러오지 못했습니다. 인터넷 연결을 확인한 뒤 새로고침해 주세요.'); return; }
+    const btn=document.getElementById('saveBtn'); const label=btn.textContent;
+    btn.disabled=true; btn.textContent='PDF 만드는 중…';
+    const toc=document.querySelector('.toc'); toc.style.display='none';
     document.querySelectorAll('textarea').forEach(autoResize);
     try{
-      const canvas=await html2canvas(document.getElementById('capture'),{
-        backgroundColor:'#ece9e2', scale:2, useCORS:true, scrollY:-window.scrollY,
+      const target=document.getElementById('capture');
+      const scale=2;
+      const canvas=await html2canvas(target,{
+        backgroundColor:'#ffffff', scale, useCORS:true, scrollY:-window.scrollY,
         windowWidth:document.documentElement.clientWidth
       });
+      // A4 세로, 여백 8mm
+      const {jsPDF}=window.jspdf;
+      const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+      const pageW=210, pageH=297, m=8;
+      const imgW=pageW-m*2;
+      const pxPerMm=canvas.width/imgW;
+      const pageHpx=Math.floor((pageH-m*2)*pxPerMm);
+      // 섹션 경계에서 페이지를 나누어 내용이 잘리지 않게 함
+      const top0=target.getBoundingClientRect().top;
+      const breaks=[...target.querySelectorAll('.section, .paper, .frame, .script, .sub-title')].map(el=>Math.round((el.getBoundingClientRect().top-top0)*scale)).filter(y=>y>0);
+      breaks.push(canvas.height);
+      let y=0, first=true;
+      while(y<canvas.height-4){
+        let end=y+pageHpx;
+        if(end<canvas.height){
+          const fit=breaks.filter(bk=>bk>y+pageHpx*0.5 && bk<=end);
+          if(fit.length) end=Math.max(...fit);
+        } else end=canvas.height;
+        const h=end-y;
+        const part=document.createElement('canvas'); part.width=canvas.width; part.height=h;
+        const ctx=part.getContext('2d'); ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,part.width,h);
+        ctx.drawImage(canvas,0,y,canvas.width,h,0,0,canvas.width,h);
+        if(!first) pdf.addPage();
+        pdf.addImage(part.toDataURL('image/jpeg',0.92),'JPEG',m,m,imgW,h/pxPerMm);
+        first=false; y=end;
+      }
       const who=(state.name||'').trim();
-      const link=document.createElement('a');
-      link.download='진로AI기획서'+(who?'_'+who:'')+'.png';
-      link.href=canvas.toDataURL('image/png');
-      link.click();
-    } finally { if(toc) toc.style.display=''; }
+      const url=URL.createObjectURL(pdf.output('blob'));
+      const link=document.createElement('a'); link.href=url;
+      link.download='진로AI기획서'+(who?'_'+who:'')+'.pdf';
+      document.body.appendChild(link); link.click(); link.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),4000);
+    } catch(e){
+      alert('PDF 저장 중 문제가 생겼습니다. 다시 시도해 주세요.');
+    } finally { toc.style.display=''; btn.disabled=false; btn.textContent=label; }
   }
 </script>
 
