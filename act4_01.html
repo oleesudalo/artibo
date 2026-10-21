@@ -88,6 +88,12 @@ input,textarea{font:inherit;color:inherit}
 .card.wide{grid-column:1 / -1}
 .auto-note{display:inline-block;padding:0 6px;border:1.5px dashed #6fbf98;border-radius:6px;color:#1f7a50;font-weight:700}
 input.auto{border-style:dashed !important;border-color:#6fbf98 !important;background:#f6fbf8}
+body.pdf-compact .section{padding-bottom:20px;margin-bottom:18px}
+body.pdf-compact .desc{margin-bottom:12px}
+body.pdf-compact .frame{margin-bottom:8px}
+body.pdf-compact .frame-head{padding:8px 16px}
+body.pdf-compact .frame-body{padding:10px 16px 10px}
+body.pdf-compact .paper-inner{padding-top:24px;padding-bottom:24px}
 .frame{border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden;margin-bottom:14px}
 .frame-head{display:flex;align-items:center;gap:12px;padding:12px 18px;background:var(--mint);border-bottom:1px solid var(--mintline)}
 .frame-num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:900}
@@ -181,9 +187,9 @@ input.auto{border-style:dashed !important;border-color:#6fbf98 !important;backgr
         <div class="sec-head"><div class="sec-no">1</div><h2>수정 내용 기록하기</h2></div>
         <p class="desc">3차시 MUST · EXTRA와 테스트 결과를 보고 개선할 기능을 정한 뒤, 수정한 결과를 적습니다.</p>
         <div class="frame-fields c3">
-          <div class="field"><label for="fix">안 되던 점</label><input id="fix" data-k="fix" placeholder="예) &quot;진찰받는 곳&quot;을 못 알아들음"></div>
+          <div class="field"><label for="fix">안 되던 점</label><input id="fix" data-k="fix" placeholder="예) &quot;진찰받는 곳&quot;을 못 알아듣는 점"></div>
           <div class="field"><label for="c1">수정한 부분</label><input id="c1" data-k="c1" placeholder="예) if 조건"></div>
-          <div class="field res"><label for="r1">달라진 결과</label><input id="r1" data-k="r1" placeholder="예) &quot;진찰받는 곳&quot;도 안내함"></div>
+          <div class="field res"><label for="r1">달라진 결과</label><input id="r1" data-k="r1" placeholder="예) &quot;진찰받는 곳&quot;도 안내하는 것"></div>
         </div>
       </section>
 
@@ -197,11 +203,11 @@ input.auto{border-style:dashed !important;border-color:#6fbf98 !important;backgr
         </div>
         <div class="frame">
           <div class="frame-head"><span class="frame-num">2</span><b>해결 · 시연</b><span class="q">내 로봇은 어떤 상황에서 무엇을 하나요?</span></div>
-          <div class="frame-body"><div class="frame-fields c3"><div class="field"><label for="f_robot">로봇 이름</label><input id="f_robot" data-k="f_robot" placeholder="예) 병원 길안내 도우미 로봇"></div><div class="field"><label for="f_sit">상황</label><input id="f_sit" data-k="f_sit" placeholder="예) 환자가 진료실을 묻는 상황"></div><div class="field"><label for="f_act">동작</label><input id="f_act" data-k="f_act" placeholder="예) 음성으로 길을 안내"></div></div></div>
+          <div class="frame-body"><div class="frame-fields c3"><div class="field"><label for="f_robot">로봇 이름</label><input id="f_robot" data-k="f_robot" placeholder="예) 병원 길안내 도우미 로봇"></div><div class="field"><label for="f_sit">상황</label><input id="f_sit" data-k="f_sit" placeholder="예) 진료실을 묻는 상황"></div><div class="field"><label for="f_act">동작</label><input id="f_act" data-k="f_act" placeholder="예) 음성으로 길을 안내"></div></div></div>
         </div>
         <div class="frame">
           <div class="frame-head"><span class="frame-num">3</span><b>원리</b><span class="q">입력 → 처리 → 출력은?</span></div>
-          <div class="frame-body"><div class="frame-fields c3"><div class="field"><label for="f_in">입력</label><input id="f_in" data-k="f_in" placeholder="예) 환자의 음성"></div><div class="field"><label for="f_proc">처리 (판단)</label><input id="f_proc" data-k="f_proc" placeholder="예) 장소 단어가 있는지 판단"></div><div class="field"><label for="f_out">출력</label><input id="f_out" data-k="f_out" placeholder="예) 안내 음성을 출력"></div></div></div>
+          <div class="frame-body"><div class="frame-fields c3"><div class="field"><label for="f_in">입력</label><input id="f_in" data-k="f_in" placeholder="예) 환자의 음성"></div><div class="field"><label for="f_proc">처리 (판단)</label><input id="f_proc" data-k="f_proc" placeholder="예) 어떤 장소인지 판단"></div><div class="field"><label for="f_out">출력</label><input id="f_out" data-k="f_out" placeholder="예) 음성으로 안내"></div></div></div>
         </div>
         <div class="frame">
           <div class="frame-head"><span class="frame-num">4</span><b>성장</b><span class="q">① 수정 내용 기록하기에 쓴 내용이 대본에 자동으로 들어가요.</span></div>
@@ -247,7 +253,8 @@ input.auto{border-style:dashed !important;border-color:#6fbf98 !important;backgr
       <!-- ⑤ -->
       <section class="section" id="s5">
         <div class="sec-head"><div class="sec-no">5</div><h2>나의 성장 돌아보기</h2></div>
-        <p class="desc">오늘 프로젝트를 세 가지 기준으로 스스로 평가해 봅니다.</p>
+        <p class="desc">1차시 기획서와 비교해 달라진 점을 쓰고, 세 가지 기준으로 스스로 평가해 봅니다.</p>
+        <div class="field" style="margin-bottom:16px"><label for="s4">1차시와 비교해 달라진 점</label><input id="s4" data-k="s4" placeholder="예) 모든 질문에 답하는 로봇을 상상했지만, 자주 묻는 장소 안내에 집중했다."></div>
         <table class="rate">
           <thead><tr><th>기준</th><th>잘함</th><th>보통</th><th>노력</th></tr></thead>
           <tbody>
@@ -328,7 +335,7 @@ input.auto{border-style:dashed !important;border-color:#6fbf98 !important;backgr
     if(typeof html2canvas==='undefined' || !window.jspdf){ alert('PDF 저장 기능을 불러오지 못했습니다. 인터넷 연결을 확인한 뒤 새로고침해 주세요.'); return; }
     const btn=document.getElementById('saveBtn'); const label=btn.textContent;
     btn.disabled=true; btn.textContent='PDF 만드는 중…';
-    const toc=document.querySelector('.toc'); toc.style.display='none';
+    const toc=document.querySelector('.toc'); toc.style.display='none'; document.body.classList.add('pdf-compact');
     document.querySelectorAll('textarea').forEach(autoResize);
     try{
       const target=document.getElementById('capture');
@@ -371,7 +378,7 @@ input.auto{border-style:dashed !important;border-color:#6fbf98 !important;backgr
       setTimeout(()=>URL.revokeObjectURL(url),4000);
     } catch(e){
       alert('PDF 저장 중 문제가 생겼습니다. 다시 시도해 주세요.');
-    } finally { toc.style.display=''; btn.disabled=false; btn.textContent=label; }
+    } finally { toc.style.display=''; document.body.classList.remove('pdf-compact'); btn.disabled=false; btn.textContent=label; }
   }
 </script>
 </body>
