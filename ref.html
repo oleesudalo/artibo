@@ -6,13 +6,14 @@
     <title>ARTIBO Python API 레퍼런스</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Noto Sans KR (Korean support) & Fira Code (Coding) -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Fonts: Pretendard & Fira Code -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
             background-color: #f3f4f6;
             color: #1f2937;
         }
@@ -60,6 +61,10 @@
             background-color: #fef2f2;
             color: #dc2626;
             border-right: 4px solid #dc2626;
+        }
+        /* 추가: 모든 섹션 제목의 상단 여백(Margin)을 강제 초기화하여 일관성 유지 */
+        .search-section h3 {
+            margin-top: 0 !important;
         }
     </style>
 </head>
@@ -117,7 +122,8 @@
 
     <!-- Main Content -->
     <main class="flex-1 overflow-y-auto h-screen bg-gray-50 scroll-smooth pt-16 md:pt-0 pb-20" id="main-content">
-        <div class="max-w-5xl mx-auto p-4 md:p-8 space-y-12">
+        <!-- space-y-12 제거, py-8 md:py-12 (padding-top/bottom)로 상단 여백 고정 -->
+        <div class="max-w-5xl mx-auto px-4 py-8 md:px-10 md:py-12 content-wrapper">
             
             <!-- SECTION: Charge -->
             <section id="charge" class="scroll-mt-20 search-section hidden">
