@@ -51,6 +51,16 @@
             border-right: 4px solid #2563eb;
             font-weight: 700;
         }
+        #link-charge.active {
+            background-color: #f0fdf4;
+            color: #16a34a;
+            border-right: 4px solid #16a34a;
+        }
+        #link-notice.active {
+            background-color: #fef2f2;
+            color: #dc2626;
+            border-right: 4px solid #dc2626;
+        }
     </style>
 </head>
 <body class="flex h-screen overflow-hidden">
@@ -82,8 +92,9 @@
         </div>
 
         <nav class="flex-1 px-3 py-4 space-y-1 text-sm font-medium" id="nav-links">
-            <a href="#notice" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-red-600"><i class="fa-solid fa-triangle-exclamation w-6"></i> 시작 전에 꼭 읽을 것</a>
-            <a href="#connect" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-green-600"><i class="fa-solid fa-wifi w-6"></i> 0. 아티보 연결하기</a>
+            <a href="#charge" id="link-charge" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-green-600 font-bold"><i class="fa-solid fa-battery-full w-6"></i> 기기 충전 및 환경 (필독)</a>
+            <a href="#connect" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-blue-600 font-bold"><i class="fa-solid fa-wifi w-6"></i> 아티보 연결하기</a>
+            <a href="#notice" id="link-notice" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-red-600 font-bold"><i class="fa-solid fa-triangle-exclamation w-6"></i> 시작 전에 꼭 읽을 것</a>
             <div class="my-2 border-t border-gray-100"></div>
             <a href="#head" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-gray-700"><i class="fa-solid fa-face-smile w-6"></i> 1. 헤드 (말하기·표정)</a>
             <a href="#body" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-gray-700"><i class="fa-solid fa-car w-6"></i> 2. 바디 (이동·센서)</a>
@@ -108,175 +119,165 @@
     <main class="flex-1 overflow-y-auto h-screen bg-gray-50 scroll-smooth pt-16 md:pt-0 pb-20" id="main-content">
         <div class="max-w-5xl mx-auto p-4 md:p-8 space-y-12">
             
-            <!-- SECTION 0: Notice -->
-            <section id="notice" class="scroll-mt-20 search-section">
+            <!-- SECTION: Charge -->
+            <section id="charge" class="scroll-mt-20 search-section hidden">
                 <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-red-500 pb-2 mb-6 flex items-center">
-                    <i class="fa-solid fa-triangle-exclamation text-red-500 mr-2"></i> 시작 전에 꼭 읽을 것
+                    <i class="fa-solid fa-battery-full text-red-500 mr-2"></i> 기기 충전 및 환경 (필독)
+                </h3>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <table class="w-full text-left text-sm border-b">
+                        <tbody>
+                            <tr class="border-b"><th class="p-3 bg-gray-50 w-1/4">권장 기기</th><td class="p-3">Windows 노트북</td></tr>
+                            <tr class="border-b"><th class="p-3 bg-gray-50">네트워크</th><td class="p-3 text-red-600 font-bold">2.4GHz Wi-Fi 또는 2.4GHz 모바일 핫스팟</td></tr>
+                            <tr><th class="p-3 bg-gray-50">플랫폼</th><td class="p-3">Chrome에서 아티보 AI 코딩 플랫폼 사용</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="p-6">
+                        <h4 class="font-bold text-lg mb-4">충전·전원</h4>
+                        <div class="space-y-4 text-gray-800">
+                            <div class="flex items-start">
+                                <span class="bg-gray-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-0.5">1</span>
+                                <div>
+                                    <p class="bg-red-700 text-white font-bold inline-block px-2 py-1 mb-2">헤드와 바디의 전원을 모두 끕니다.</p>
+                                    <p class="text-red-600 font-bold">전원을 켜두어 방전이 된 후, 전원이 켜있는 상태에서 그대로 충전선을 꽂고 충전하게 되면 아티보의 펌웨어가 삭제되거나 손상될 수 있습니다.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-gray-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">2</span>
+                                <p>각 블록의 충전 단자에 충전선을 연결합니다.</p>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-gray-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">3</span>
+                                <p>상태 LED가 빨간색이면 충전 중, 파란색이면 충전 완료입니다.</p>
+                            </div>
+                            <div class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <p class="font-bold">* 완충까지 2시간 소요 / 2시간 사용 가능</p>
+                                <p class="font-bold mt-1">* 전원을 <span class="text-blue-600">끔</span> → 충전기 <span class="text-blue-600">연결</span> → 전원 <span class="text-blue-600">켜서 사용</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: Connect -->
+            <section id="connect" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 mb-6 flex items-center">
+                    <i class="fa-solid fa-wifi text-blue-500 mr-2"></i> 아티보 연결하기
                 </h3>
                 
                 <div class="space-y-4">
-                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg shadow-sm">
-                        <h4 class="font-bold text-red-800 mb-2">1. 인자 순서가 반대인 함수 한쌍 주의!</h4>
-                        <p class="text-sm text-red-700 mb-2">아티보용 코드를 자비스로 옮길 때 가장 자주 틀리는 곳입니다.</p>
-                        <div class="bg-white rounded border border-red-200 overflow-hidden text-sm">
-                            <table class="w-full text-left">
-                                <thead class="bg-red-100 text-red-800">
-                                    <tr><th class="p-2 border-b border-red-200">함수</th><th class="p-2 border-b border-red-200">인자 순서</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="p-2 font-mono border-b border-red-100">artibo_speak(text, voice_id)</td><td class="p-2 border-b border-red-100">글자 → 목소리</td></tr>
-                                    <tr><td class="p-2 font-mono">jarvis_speak(voice, text)</td><td class="p-2">목소리 → 글자</td></tr>
-                                </tbody>
-                            </table>
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 search-item">
+                        <h4 class="font-bold text-lg text-blue-700 mb-3"><i class="fa-solid fa-1 text-sm bg-blue-100 p-1.5 rounded-full mr-1"></i> 사전 확인 (교육기관용 셋팅 기기)</h4>
+                        <p class="text-sm text-gray-700 mb-2">아티보는 교육기관 편의를 위해 사전에 계정 생성 및 세팅이 완료되어 출고됩니다. (별도 매니저 앱 세팅 불필요)</p>
+                        <ul class="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                            <li>각 아티보 패키지에 부착된 <strong>라벨지 상의 계정(ID/PW)과 네트워크 정보</strong>를 꼭 확인해주세요.</li>
+                            <li>반드시 <strong>Windows 기반 노트북 또는 PC</strong>를 사용해야 합니다. (크롬북, 태블릿 비권장)</li>
+                            <li>PC의 경우 2.4GHz를 지원하는 와이파이 동글이 필수입니다.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 search-item">
+                        <h4 class="font-bold text-lg text-blue-700 mb-3"><i class="fa-solid fa-2 text-sm bg-blue-100 p-1.5 rounded-full mr-1"></i> PC 네트워크(모바일 핫스팟) 설정</h4>
+                        <ol class="text-sm text-gray-700 list-decimal pl-5 space-y-2">
+                            <li>Windows 시작 메뉴 → 설정 → 네트워크 및 인터넷 → <strong>모바일 핫스팟</strong> 선택</li>
+                            <li>"네트워크 속성 편집"을 열어 네트워크 이름과 암호를 <strong>라벨지와 동일하게</strong> 수정합니다.</li>
+                            <li><span class="bg-yellow-100 text-red-600 font-bold px-1">중요:</span> 네트워크 대역을 반드시 <strong>2.4GHz</strong>로 선택하고 저장합니다. (5GHz 연결 불가)</li>
+                            <li>'모바일 핫스팟'을 켭니다.</li>
+                            <li>아티보 헤드와 바디의 전원을 켭니다. 약 10~15초 후 연결이 완료되면 아티보 헤드에 '웃는 표정'이 나오고 바디 바퀴가 살짝 움직입니다.</li>
+                        </ol>
+                        <div class="mt-3 bg-red-50 p-3 rounded text-sm text-red-700">
+                            <strong>연결이 안 되고 화면에 'Ready'만 뜬다면?</strong><br>
+                            오타가 없는지, 네트워크 대역이 2.4GHz로 설정되었는지 다시 확인해주세요.
                         </div>
                     </div>
 
-                    <div class="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-lg shadow-sm">
-                        <h4 class="font-bold text-orange-800 mb-2">2. 센서 함수의 반환값은 "응답 없음"일 수 있습니다</h4>
-                        <p class="text-sm text-orange-700 mb-2">로봇이 응답하지 않으면 프로그램이 멈추지 않도록 "정상처럼 보이는 값"이 돌아옵니다. 화면 오른쪽 센서 패널과 말풍선에 "응답 없음"이 뜨는지 확인하세요.</p>
-                        <div class="bg-white rounded border border-orange-200 overflow-hidden text-sm">
-                            <table class="w-full text-left">
-                                <thead class="bg-orange-100 text-orange-800">
-                                    <tr><th class="p-2 border-b border-orange-200">함수</th><th class="p-2 border-b border-orange-200">실패 시 값</th><th class="p-2 border-b border-orange-200">주의</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td class="p-2 font-mono border-b border-orange-100">is_obstacle_detected()</td><td class="p-2 font-mono font-bold text-blue-600 border-b border-orange-100">False</td><td class="p-2 border-b border-orange-100">장애물 없음 또는 로봇 응답 없음</td></tr>
-                                    <tr><td class="p-2 font-mono border-b border-orange-100">get_left/right_floor_sensor_value()</td><td class="p-2 font-mono font-bold text-blue-600 border-b border-orange-100">0</td><td class="p-2 border-b border-orange-100">0 = 흰 바닥 또는 로봇 응답 없음</td></tr>
-                                    <tr><td class="p-2 font-mono">카메라·마이크 함수</td><td class="p-2 font-mono font-bold text-blue-600">""</td><td class="p-2">(빈 문자열) 20초 안에 사진/소리가 안 오면 빈값</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 search-item">
+                        <h4 class="font-bold text-lg text-blue-700 mb-3"><i class="fa-solid fa-3 text-sm bg-blue-100 p-1.5 rounded-full mr-1"></i> AI 코딩 플랫폼 로그인</h4>
+                        <ol class="text-sm text-gray-700 list-decimal pl-5 space-y-2">
+                            <li>Chrome 브라우저에서 <a href="https://coding.cubroid.com" target="_blank" class="text-blue-500 underline font-bold">coding.cubroid.com</a> 에 접속합니다.</li>
+                            <li><span class="text-red-500 font-bold">주의:</span> 우측 상단의 Google 자동 번역이 뜨면 <strong>'X'를 눌러 번역을 끄세요.</strong> (오류 원인)</li>
+                            <li>플랫폼 자체의 우측 상단 언어 선택 메뉴에서 "한국어"로 변경합니다.</li>
+                            <li>아티보 상자 라벨지에 적힌 ID/PW로 로그인합니다.</li>
+                            <li>'나의 페이지'의 '나의 아티보 목록'에 연결된 아티보가 보이는지 확인합니다.</li>
+                        </ol>
                     </div>
 
-                    <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg shadow-sm">
-                        <h4 class="font-bold text-purple-800 mb-1">3. 이 파이썬은 진짜 파이썬이 아닙니다</h4>
-                        <p class="text-sm text-purple-700">문법 제한이 있습니다. 아래의 <a href="#appendix-b" class="underline font-bold hover:text-purple-900">부록: 문법 주의사항</a>을 꼭 먼저 확인하세요.</p>
+                    <div class="mt-6 text-center">
+                        <a href="https://www.cubroid.co.kr/178" target="_blank" class="inline-flex items-center justify-center px-5 py-3 text-base font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-md">
+                            <i class="fa-solid fa-book-open mr-2"></i> 공식 홈페이지 연결 가이드 자세히 보기
+                        </a>
                     </div>
+                </div>
+            </section>
 
-                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg shadow-sm">
-                        <h4 class="font-bold text-blue-800 mb-2">4. 실행 및 대기 시간에 대해 (부록 C)</h4>
-                        <ul class="text-sm text-blue-700 list-disc pl-5 space-y-1">
-                            <li>로봇 명령은 <strong>순서대로 실행</strong>됩니다. (함수 안에서도 동일)</li>
-                            <li><code>artibo_move</code>는 최소 <strong>1초</strong>, 소리 함수는 약 <strong>2초</strong>, LCD 전송은 약 <strong>1초</strong>를 기다린 뒤 다음 줄로 넘어갑니다.</li>
-                            <li>정지 버튼을 누르면 진행 중이던 명령 뒤의 코드는 실행되지 않습니다.</li>
+            <!-- SECTION Notice -->
+            <section id="notice" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-red-600 border-b-2 border-red-200 pb-2 mb-6 flex items-center">
+                    <i class="fa-solid fa-triangle-exclamation text-red-500 mr-2"></i> 시작 전에 꼭 읽을 것
+                </h3>
+                <div class="space-y-6">
+                    <!-- 1. 인자 순서 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 search-item">
+                        <h4 class="font-bold text-lg text-red-700 mb-3">1. 인자 순서가 반대인 함수 한쌍</h4>
+                        <table class="w-full text-sm text-left border-collapse">
+                            <thead class="bg-gray-50 border-b"><tr><th class="p-2">함수</th><th class="p-2">순서</th></tr></thead>
+                            <tbody>
+                                <tr class="border-b"><td class="p-2 font-mono font-bold text-blue-600">artibo_speak(text, voice_id)</td><td class="p-2">글자 → 목소리</td></tr>
+                                <tr><td class="p-2 font-mono font-bold text-blue-600">jarvis_speak(voice, text)</td><td class="p-2">목소리 → 글자</td></tr>
+                            </tbody>
+                        </table>
+                        <p class="text-sm text-gray-600 mt-2 bg-gray-50 p-2 rounded">아티보용 코드를 자비스로 옮길 때 가장 자주 틀리는 곳입니다.</p>
+                    </div>
+                    
+                    <!-- 2. 센서 반환값 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 search-item">
+                        <h4 class="font-bold text-lg text-red-700 mb-3">2. 센서 함수의 반환값은 "응답 없음"일 수 있습니다</h4>
+                        <table class="w-full text-sm text-left border-collapse">
+                            <thead class="bg-gray-50 border-b"><tr><th class="p-2">함수</th><th class="p-2">실패 시 값</th><th class="p-2">주의</th></tr></thead>
+                            <tbody>
+                                <tr class="border-b"><td class="p-2 font-mono">is_obstacle_detected()</td><td class="p-2 font-bold text-red-500">False</td><td class="p-2">False = 장애물 없음 또는 로봇 응답 없음</td></tr>
+                                <tr class="border-b"><td class="p-2 font-mono">get_left/right_floor_sensor_value()</td><td class="p-2 font-bold text-red-500">0</td><td class="p-2">0 = 흰 바닥 또는 로봇 응답 없음</td></tr>
+                                <tr><td class="p-2">카메라·마이크 함수</td><td class="p-2 font-bold text-red-500">"" (빈 문자열)</td><td class="p-2">20초 안에 사진이 안 오면 빈 값</td></tr>
+                            </tbody>
+                        </table>
+                        <p class="text-sm text-gray-600 mt-2 bg-yellow-50 p-2 border border-yellow-200 rounded">로봇이 응답하지 않으면 프로그램이 멈추지 않도록 "정상처럼 보이는 값"이 돌아옵니다. 값이 이상하면 오른쪽 센서 패널의 "응답 없음" 표시를 확인하세요.</p>
+                    </div>
+                    
+                    <!-- 3. 파이썬 문법 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 search-item">
+                        <h4 class="font-bold text-lg text-red-700 mb-2">3. 이 파이썬은 진짜 파이썬이 아닙니다</h4>
+                        <p class="text-sm text-gray-600">문법 제한이 있습니다. 자세한 내용은 사이드바 메뉴 맨 아래의 <a href="#appendix-b" class="text-purple-600 font-bold underline">부록: 문법 주의사항</a>을 꼭 읽어주세요.</p>
+                    </div>
+                    
+                    <!-- 4. 실행 및 대기 시간 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 search-item">
+                        <h4 class="font-bold text-lg text-red-700 mb-3">4. 실행 및 대기 시간에 대해</h4>
+                        <ul class="text-sm text-gray-700 list-disc pl-5 space-y-1">
+                            <li>로봇 명령은 순서대로 실행됩니다. 함수(def) 안에서도 마찬가지입니다.</li>
+                            <li><code class="text-blue-600 font-bold bg-blue-50 px-1 rounded">artibo_move</code>는 <strong>최소 1초</strong>, 소리 함수는 <strong>약 2초</strong>, LCD 전송은 <strong>약 1초</strong>를 기다린 뒤 다음 줄로 넘어갑니다.</li>
+                            <li>정지 버튼을 누르면 진행 중이던 명령 뒤의 것은 실행되지 않습니다.</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- SECTION 0.5: Connect Artibo -->
-            <section id="connect" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-green-500 pb-2 mb-6 flex items-center">
-                    <i class="fa-solid fa-wifi text-green-500 mr-2"></i> 0. 아티보 연결하기
-                </h3>
-                
-                <div class="space-y-6">
-                    <!-- Text Guide -->
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                        <div class="bg-green-50 px-4 py-3 border-b border-green-200">
-                            <h4 class="font-bold text-lg text-green-800 flex items-center">
-                                <i class="fa-solid fa-list-check mr-2"></i> PC(노트북) 핫스팟으로 아티보 연결하는 방법
-                            </h4>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-600 mb-6 text-sm">※ 학교나 교육기관을 위해 <strong>사전 셋팅이 완료된 아티보</strong>를 윈도우(Windows) 노트북/PC에 연결하는 기준입니다.</p>
-                            
-                            <div class="space-y-6">
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mr-4 mt-1">1</div>
-                                    <div>
-                                        <h5 class="font-bold text-gray-800 text-lg mb-2">PC 네트워크 설정하기 (모바일 핫스팟)</h5>
-                                        <ul class="text-sm text-gray-600 space-y-2 list-disc pl-4">
-                                            <li>각 아티보 패키지(상자)에 부착된 <strong>라벨지상의 계정 정보와 네트워크 정보</strong>를 확인합니다.</li>
-                                            <li>윈도우 [시작 메뉴] → [설정] → [네트워크 및 인터넷] → <strong>[모바일 핫스팟]</strong> 메뉴로 이동합니다.</li>
-                                            <li>"네트워크 속성 편집"을 누르고 라벨지에 적힌 네트워크 이름과 암호와 <strong>똑같이</strong> 수정합니다.</li>
-                                            <li><strong class="text-red-500">중요:</strong> 네트워크 대역(대역폭)을 반드시 <strong>2.4GHz</strong>로 선택하고 저장하세요. (5GHz는 연결 불가)</li>
-                                            <li>설정을 마친 후 모바일 핫스팟 스위치를 <strong>'켬'</strong>으로 바꿉니다.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mr-4 mt-1">2</div>
-                                    <div>
-                                        <h5 class="font-bold text-gray-800 text-lg mb-2">아티보 전원 켜기</h5>
-                                        <p class="text-sm text-gray-600 mb-2">아티보 헤드와 바디의 전원을 켭니다.</p>
-                                        <div class="bg-blue-50 border-l-4 border-blue-400 p-3 text-sm text-blue-800 rounded">
-                                            <strong>정상 연결 확인법:</strong> 약 10~15초 후 아티보 LCD에 '웃는 표정'이 나오고 바디의 바퀴가 좌우로 한 번씩 돌아가면 성공! PC의 연결된 장치 목록에도 아티보가 나타납니다.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mr-4 mt-1">3</div>
-                                    <div>
-                                        <h5 class="font-bold text-gray-800 text-lg mb-2">AI 코딩 플랫폼(에디터) 접속 및 로그인</h5>
-                                        <ul class="text-sm text-gray-600 space-y-2 list-disc pl-4">
-                                            <li>크롬(Chrome) 브라우저를 열고 <a href="https://coding.cubroid.com" target="_blank" class="text-blue-600 font-bold hover:underline">coding.cubroid.com</a> 에 접속합니다. <br><span class="text-xs text-red-500">(※ 구글 자동 번역 팝업이 뜨면 번역하지 않고 X를 눌러 닫아주세요.)</span></li>
-                                            <li>플랫폼 우측 상단 메뉴에서 언어를 <strong>'한국어'</strong>로 변경합니다.</li>
-                                            <li>[로그인] 버튼을 누르고, 아티보 상자 라벨지에 적힌 <strong>ID와 Password</strong>를 똑같이 입력하여 로그인합니다.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold mr-4 mt-1">4</div>
-                                    <div>
-                                        <h5 class="font-bold text-gray-800 text-lg mb-2">나의 아티보 확인</h5>
-                                        <p class="text-sm text-gray-600">마이페이지(나의 페이지)로 이동하여 <strong>'나의 아티보 목록'</strong>에 연결된 아티보 기기가 정상적으로 보이는지 확인합니다. 확인되었다면 코딩을 시작할 수 있습니다!</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-6 bg-red-50 border border-red-200 rounded-lg p-4">
-                                <h5 class="font-bold text-red-700 mb-2 flex items-center"><i class="fa-solid fa-circle-exclamation mr-2"></i> 아티보 LCD에 'Ready'만 뜨고 연결이 안 되나요?</h5>
-                                <ul class="text-sm text-red-600 space-y-1 list-disc pl-5">
-                                    <li>PC 핫스팟의 이름과 암호에 띄어쓰기나 대소문자 등 <strong>오타</strong>가 없는지 다시 확인해주세요.</li>
-                                    <li>네트워크 대역이 5GHz로 되어있지 않은지 확인해주세요. (반드시 <strong>2.4GHz</strong>여야 합니다)</li>
-                                </ul>
-                            </div>
-
-                            <div class="mt-8 pt-6 border-t border-gray-100">
-                                <a href="https://www.cubroid.co.kr/178" target="_blank" class="flex items-center justify-center w-full md:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-sm transition-colors duration-200">
-                                    <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> 공식 홈페이지 연결 가이드 자세히 보기
-                                </a>
-                                <p class="text-xs text-gray-500 text-center md:text-left mt-2">※ 텍스트로 해결되지 않는다면 공식 매뉴얼을 참고해 주세요.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 1: Artibo Head -->
+            <!-- SECTION 1: Head -->
             <section id="head" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">1. Artibo_head - 말하기·표정·번역</h3>
-                
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">1. Artibo_head — 말하기·표정·번역</h3>
                 <div class="grid grid-cols-1 gap-6">
+                    <!-- 1.1 artibo_speak -->
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
                             <h4 class="font-bold text-lg font-mono text-blue-700">artibo_speak(text, voice_id)</h4>
                         </div>
                         <div class="p-4">
-                            <p class="text-sm text-gray-600 mb-3">아티보 스피커로 글자를 읽습니다. (40자를 넘으면 첫 문장만 읽는 안전 정책 적용)</p>
+                            <p class="text-sm text-gray-600 mb-3">아티보 스피커로 글자를 읽습니다. (40자를 넘으면 첫 문장만 읽음)</p>
                             <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>artibo_speak("안녕하세요", "Korean_Seoyeon")</code></pre>
-                            <div class="text-sm text-gray-700">
-                                <strong>voice_id 목록:</strong>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mt-2 bg-gray-50 p-3 rounded border">
-                                    <div>🇰🇷 <b>Korean_Seoyeon</b> (한국어)</div>
-                                    <div>🇬🇧 <b>English_British_Brian / Emma</b></div>
-                                    <div>🇺🇸 <b>English_US_Matthew / Joanna</b></div>
-                                    <div>🇯🇵 <b>Japanese_Mizuki / Takumi</b></div>
-                                    <div>🇨🇳 <b>Chinese_Zhiyu</b> (중국어)</div>
-                                    <div>🇫🇷 <b>French_Lea / Mathieu</b></div>
-                                    <div>🇩🇪 <b>German_Hans / Marlene</b></div>
-                                    <div>🇮🇹 <b>Italian_Giorgio / Bianca</b></div>
-                                    <div>🇪🇸 <b>Spanish_Miguel / Mia</b></div>
-                                    <div>🇵🇹 <b>Portuguese_Cristiano / Ines</b></div>
-                                    <div>🇷🇺 <b>Russian_Maxim / Tatyana</b></div>
-                                    <div>🇸🇦 <b>Arabic_Zeina</b> (아랍어)</div>
-                                    <div>🇮🇳 <b>Hindi_Aditi</b> (힌디어)</div>
-                                </div>
-                            </div>
+                            <p class="text-sm text-gray-700"><span class="font-bold">voice_id:</span> Korean_Seoyeon (한국어), English_US_Matthew (미국 영어), Japanese_Mizuki (일본어) 등 18개</p>
                         </div>
                     </div>
 
+                    <!-- 1.2 artibo_speak_google -->
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
                             <h4 class="font-bold text-lg font-mono text-blue-700">artibo_speak_google(voice_name, text)</h4>
@@ -284,12 +285,11 @@
                         <div class="p-4">
                             <p class="text-sm text-gray-600 mb-3">Google 목소리로 말합니다. (주의: artibo_speak와 <strong class="text-red-500">인자 순서가 반대</strong>입니다.)</p>
                             <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>artibo_speak_google("ko-KR-Neural2-C", "안녕하세요")</code></pre>
-                            <div class="text-sm">
-                                <span class="font-bold">voice_name 허용값:</span> <code>ko-KR-Neural2-C</code> (한국어 남성), <code>ko-KR-Neural2-A</code> (한국어 여성), <code>en-US-Neural2-D</code> (영어 남성), <code>ja-JP-Neural2-B</code> (일본어 여성)
-                            </div>
+                            <p class="text-sm text-gray-700"><span class="font-bold">voice_name 허용값:</span> ko-KR-Neural2-C/A(한국어 남/여), en-US-Neural2-D(영어 남), ja-JP-Neural2-B(일본어 여)</p>
                         </div>
                     </div>
 
+                    <!-- 1.3 artibo_set_mood -->
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
                             <h4 class="font-bold text-lg font-mono text-blue-700">artibo_set_mood(mood)</h4>
@@ -304,25 +304,26 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 gap-6">
-                        <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                                <h4 class="font-bold text-lg font-mono text-blue-700">artibo_display_text(text, font_size)</h4>
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm text-gray-600 mb-3">아티보 화면에 글자를 표시합니다. (font_size: 양의 정수)</p>
-                                <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>artibo_display_text("Hello", 27)</code></pre>
-                            </div>
+                    <!-- 1.4 artibo_display_text -->
+                    <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_display_text(text, font_size)</h4>
                         </div>
-                        <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                                <h4 class="font-bold text-lg font-mono text-blue-700">artibo_translate(language, text)</h4>
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm text-gray-600 mb-3">글자를 번역해 문자열로 돌려줍니다.</p>
-                                <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>result = artibo_translate("ko", "Hello")<br>artibo_speak(result, "Korean_Seoyeon")</code></pre>
-                                <p class="text-xs text-gray-500">지원 언어 코드: ko, en, ja, zh, zh-TW, fr, de, es, it, pt, ru, ar, hi, id, th</p>
-                            </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600 mb-3">아티보 화면에 글자를 표시합니다. (font_size: 양의 정수)</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>artibo_display_text("Hello", 27)</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- 1.5 artibo_translate -->
+                    <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_translate(language, text)</h4>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600 mb-3">글자를 번역해 문자열로 돌려줍니다.</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>result = artibo_translate("ko", "Hello")<br>artibo_speak(result, "Korean_Seoyeon")</code></pre>
+                            <p class="text-xs text-gray-500">지원 언어 코드: ko, en, ja, zh, zh-TW, fr, de, es, it, pt, ru, ar, hi, id, th</p>
                         </div>
                     </div>
                 </div>
@@ -761,9 +762,9 @@
                 let hash = window.location.hash.substring(1);
                 let targetSection = document.getElementById(hash);
                 
-                // 해시가 없거나 섹션이 아닐 경우 기본값(시작 전 주의사항)으로 이동
+                // 해시가 없거나 섹션이 아닐 경우 기본값(충전 및 환경)으로 이동
                 if (!hash || !targetSection || targetSection.tagName.toLowerCase() !== 'section') {
-                    hash = 'notice';
+                    hash = 'charge';
                     window.location.hash = hash;
                 }
                 showSection(hash);
