@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARTIBO Python API 레퍼런스</title>
+    <title>ARTIBO Python API 레퍼런스 v3.0</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Fonts: Pretendard & Fira Code -->
@@ -62,7 +62,6 @@
             color: #dc2626;
             border-right: 4px solid #dc2626;
         }
-        /* 추가: 모든 섹션 제목의 상단 여백(Margin)을 강제 초기화하여 일관성 유지 */
         .search-section h3 {
             margin-top: 0 !important;
         }
@@ -73,7 +72,7 @@
     <!-- Mobile Header -->
     <div class="md:hidden fixed top-0 left-0 right-0 h-16 bg-white shadow-sm z-50 flex items-center justify-between px-4">
         <div class="font-bold text-xl text-blue-600">
-            <i class="fa-solid fa-robot mr-2"></i>ARTIBO API
+            <i class="fa-solid fa-robot mr-2"></i>ARTIBO API <span class="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">v3.0</span>
         </div>
         <button id="mobile-menu-btn" class="text-gray-600 hover:text-blue-600 focus:outline-none text-2xl">
             <i class="fa-solid fa-bars"></i>
@@ -86,7 +85,7 @@
             <h1 class="text-2xl font-black text-blue-600 flex items-center">
                 <i class="fa-solid fa-robot mr-3"></i>ARTIBO API
             </h1>
-            <p class="text-xs text-gray-500 mt-1">버전 2026-09-07 (v2.1)</p>
+            <p class="text-xs text-gray-500 mt-1">버전 2026-11-18 (v3.0)</p>
         </div>
         
         <div class="p-4 sticky top-0 md:top-[85px] bg-white z-10 border-b border-gray-100">
@@ -112,8 +111,9 @@
             <a href="#lcd" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-gray-700"><i class="fa-solid fa-tv w-6"></i> 9. Artibo LCD</a>
             <a href="#sound" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-gray-700"><i class="fa-solid fa-music w-6"></i> 10. 소리 (효과음)</a>
             <a href="#info" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-gray-700"><i class="fa-solid fa-clock w-6"></i> 11. 정보 (날씨·시계)</a>
+            <a href="#keyboard" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-indigo-700 font-semibold"><i class="fa-solid fa-keyboard w-6"></i> 12. 키보드 입력 (Py3)</a>
             <div class="my-2 border-t border-gray-100"></div>
-            <a href="#appendix-b" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-purple-600"><i class="fa-solid fa-code w-6"></i> 부록: 문법 주의사항</a>
+            <a href="#appendix-b" class="sidebar-link block px-3 py-2 rounded-md hover:bg-gray-50 text-purple-600 font-semibold"><i class="fa-solid fa-code w-6"></i> 부록: 문법·실행 주의사항</a>
         </nav>
     </aside>
 
@@ -122,7 +122,6 @@
 
     <!-- Main Content -->
     <main class="flex-1 overflow-y-auto h-screen bg-gray-50 scroll-smooth pt-16 md:pt-0 pb-20" id="main-content">
-        <!-- space-y-12 제거, py-8 md:py-12 (padding-top/bottom)로 상단 여백 고정 -->
         <div class="max-w-5xl mx-auto px-4 py-8 md:px-10 md:py-12 content-wrapper">
             
             <!-- SECTION: Charge -->
@@ -135,7 +134,7 @@
                         <tbody>
                             <tr class="border-b"><th class="p-3 bg-gray-50 w-1/4">권장 기기</th><td class="p-3">Windows 노트북</td></tr>
                             <tr class="border-b"><th class="p-3 bg-gray-50">네트워크</th><td class="p-3 text-red-600 font-bold">2.4GHz Wi-Fi 또는 2.4GHz 모바일 핫스팟</td></tr>
-                            <tr><th class="p-3 bg-gray-50">플랫폼</th><td class="p-3">Chrome에서 아티보 AI 코딩 플랫폼 사용</td></tr>
+                            <tr><th class="p-3 bg-gray-50">플랫폼</th><td class="p-3">Chrome에서 아티보 AI 코딩 플랫폼 사용 (<code>artibo.cubroid.com</code> / <code>coding.cubroid.com</code>)</td></tr>
                         </tbody>
                     </table>
                     <div class="p-6">
@@ -184,11 +183,36 @@
 
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 search-item">
                         <h4 class="font-bold text-lg text-blue-700 mb-3"><i class="fa-solid fa-2 text-sm bg-blue-100 p-1.5 rounded-full mr-1"></i> PC 네트워크(모바일 핫스팟) 설정</h4>
+                        <div class="my-4 rounded-xl overflow-hidden shadow-sm border border-gray-200 bg-gray-900">
+                            <div class="aspect-video w-full">
+                                <iframe class="w-full h-full" src="https://www.youtube-nocookie.com/embed/U9eYwb7opzY?rel=0" title="아티보 PC 네트워크(모바일 핫스팟) 설정 가이드" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="bg-gray-800 px-4 py-2.5 flex items-center justify-between text-xs text-gray-300">
+                                <span><i class="fa-brands fa-youtube text-red-500 mr-1.5"></i>영상이 재생되지 않으면 새 창에서 확인하세요.</span>
+                                <a href="https://youtu.be/U9eYwb7opzY" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-md transition-colors">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i>YouTube에서 직접 보기
+                                </a>
+                            </div>
+                        </div>
                         <ol class="text-sm text-gray-700 list-decimal pl-5 space-y-2">
-                            <li>Windows 시작 메뉴 → 설정 → 네트워크 및 인터넷 → <strong>모바일 핫스팟</strong> 선택</li>
-                            <li>"네트워크 속성 편집"을 열어 네트워크 이름과 암호를 <strong>라벨지와 동일하게</strong> 수정합니다.</li>
+                            <li>
+                                Windows 시작 메뉴 → 설정 → 네트워크 및 인터넷 → <strong>모바일 핫스팟</strong> 선택
+                                <div class="my-3">
+                                    <img src="image_8a48f0.png" alt="Windows 설정에서 네트워크 및 인터넷, 모바일 핫스팟 선택 화면" onerror="this.onerror=null; this.src='https://placehold.co/650x430/f8fafc/334155?text=1.+설정+→+2.+네트워크+및+인터넷+→+3.+모바일+핫스팟';" class="w-full max-w-xl rounded-xl border border-gray-200 shadow-sm">
+                                </div>
+                            </li>
+                            <li class="pt-4">
+                                "네트워크 속성 편집"을 열어 네트워크 이름과 암호를 <strong>라벨지와 동일하게</strong> 수정합니다.
+                                <div class="my-3">
+                                    <img src="image_8a49a9.png" alt="네트워크 정보 편집에서 이름, 암호, 2.4GHz 대역 설정 화면" onerror="this.onerror=null; this.src='https://placehold.co/480x510/f8fafc/334155?text=네트워크+정보+편집+(이름,+암호,+2.4GHz)';" class="w-full max-w-md rounded-xl border border-gray-200 shadow-sm">
+                                </div>
+                            </li>
                             <li><span class="bg-yellow-100 text-red-600 font-bold px-1">중요:</span> 네트워크 대역을 반드시 <strong>2.4GHz</strong>로 선택하고 저장합니다. (5GHz 연결 불가)</li>
-                            <li>'모바일 핫스팟'을 켭니다.</li>
+                            <li class="pt-4">'모바일 핫스팟'을 켭니다.
+                                <div class="my-3">
+                                    <img src="image_8a49a10.png" alt="네트워크 정보 편집에서 이름, 암호, 2.4GHz 대역 설정 화면" onerror="this.onerror=null; this.src='https://placehold.co/480x510/f8fafc/334155?text=네트워크+정보+편집+(이름,+암호,+2.4GHz)';" class="w-full max-w-md rounded-xl border border-gray-200 shadow-sm">
+                                </div>
+                            </li>
                             <li>아티보 헤드와 바디의 전원을 켭니다. 약 10~15초 후 연결이 완료되면 아티보 헤드에 '웃는 표정'이 나오고 바디 바퀴가 살짝 움직입니다.</li>
                         </ol>
                         <div class="mt-3 bg-red-50 p-3 rounded text-sm text-red-700">
@@ -224,7 +248,7 @@
                 <div class="space-y-6">
                     <!-- 1. 인자 순서 -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 search-item">
-                        <h4 class="font-bold text-lg text-red-700 mb-3">1. 인자 순서가 반대인 함수 한쌍</h4>
+                        <h4 class="font-bold text-lg text-red-700 mb-3">1. 인자 순서가 반대인 함수 한 쌍</h4>
                         <table class="w-full text-sm text-left border-collapse">
                             <thead class="bg-gray-50 border-b"><tr><th class="p-2">함수</th><th class="p-2">순서</th></tr></thead>
                             <tbody>
@@ -242,27 +266,57 @@
                             <thead class="bg-gray-50 border-b"><tr><th class="p-2">함수</th><th class="p-2">실패 시 값</th><th class="p-2">주의</th></tr></thead>
                             <tbody>
                                 <tr class="border-b"><td class="p-2 font-mono">is_obstacle_detected()</td><td class="p-2 font-bold text-red-500">False</td><td class="p-2">False = 장애물 없음 또는 로봇 응답 없음</td></tr>
-                                <tr class="border-b"><td class="p-2 font-mono">get_left/right_floor_sensor_value()</td><td class="p-2 font-bold text-red-500">0</td><td class="p-2">0 = 흰 바닥 또는 로봇 응답 없음</td></tr>
+                                <tr class="border-b"><td class="p-2 font-mono">get_left_floor_sensor_value()</td><td class="p-2 font-bold text-red-500">0</td><td class="p-2">0 = 흰 바닥 또는 로봇 응답 없음</td></tr>
+                                <tr class="border-b"><td class="p-2 font-mono">get_right_floor_sensor_value()</td><td class="p-2 font-bold text-red-500">0</td><td class="p-2">위와 같음</td></tr>
                                 <tr><td class="p-2">카메라·마이크 함수</td><td class="p-2 font-bold text-red-500">"" (빈 문자열)</td><td class="p-2">20초 안에 사진이 안 오면 빈 값</td></tr>
                             </tbody>
                         </table>
-                        <p class="text-sm text-gray-600 mt-2 bg-yellow-50 p-2 border border-yellow-200 rounded">로봇이 응답하지 않으면 프로그램이 멈추지 않도록 "정상처럼 보이는 값"이 돌아옵니다. 값이 이상하면 오른쪽 센서 패널의 "응답 없음" 표시를 확인하세요.</p>
+                        <p class="text-sm text-gray-600 mt-2 bg-yellow-50 p-2 border border-yellow-200 rounded">로봇이 응답하지 않으면 프로그램이 멈추지 않도록 "정상처럼 보이는 값"이 돌아옵니다. 화면 오른쪽 센서 패널과 말풍선에 "응답 없음" 표시가 함께 뜨니, 값이 이상하면 그것부터 확인하세요.</p>
                     </div>
                     
-                    <!-- 3. 파이썬 문법 -->
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 search-item">
-                        <h4 class="font-bold text-lg text-red-700 mb-2">3. 이 파이썬은 진짜 파이썬이 아닙니다</h4>
-                        <p class="text-sm text-gray-600">문법 제한이 있습니다. 자세한 내용은 사이드바 메뉴 맨 아래의 <a href="#appendix-b" class="text-purple-600 font-bold underline">부록: 문법 주의사항</a>을 꼭 읽어주세요.</p>
+                    <!-- 3. 두 가지 실행 방식 (v3.0 신규) -->
+                    <div class="bg-white rounded-xl shadow-sm border border-indigo-200 p-5 search-item">
+                        <h4 class="font-bold text-lg text-indigo-700 mb-3">3. 파이썬이 두 가지 방식으로 실행됩니다 (v3.0 핵심)</h4>
+                        <p class="text-sm text-gray-700 mb-3">실행 버튼은 하나지만, 코드를 보고 자동으로 실행 엔진을 선택합니다.</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left border-collapse border border-gray-200">
+                                <thead class="bg-indigo-50 text-indigo-900">
+                                    <tr>
+                                        <th class="p-2.5 border">구분</th>
+                                        <th class="p-2.5 border">기존 방식</th>
+                                        <th class="p-2.5 border">진짜 파이썬 (Python 3, 베타)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="p-2.5 bg-gray-50 border">언제 실행?</th>
+                                        <td class="p-2.5 border">진짜 파이썬 문법이 없는 코드 (기존 교안 코드)</td>
+                                        <td class="p-2.5 border font-medium text-indigo-700">딕셔너리 반복·f-string·import·class·try·슬라이싱·컴프리헨션·lambda·키보드 함수가 있는 코드, 또는 맨 위에 <code># [Python 3]</code></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-2.5 bg-gray-50 border">문법</th>
+                                        <td class="p-2.5 border">제한 있음 (<a href="#appendix-b" class="text-purple-600 underline font-bold">부록 B-2</a>)</td>
+                                        <td class="p-2.5 border">학교에서 배우는 파이썬 그대로 (<a href="#appendix-b" class="text-purple-600 underline font-bold">부록 B-1</a>)</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="p-2.5 bg-gray-50 border">확인 방법</th>
+                                        <td class="p-2.5 border">바로 코드 출력 실행</td>
+                                        <td class="p-2.5 border">출력창에 <strong>"진짜 파이썬(Python 3)으로 실행해요"</strong>가 먼저 나옴</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-sm text-indigo-800 mt-3 bg-indigo-50 p-2.5 rounded font-medium">💡 새로 만드는 교안은 코드 맨 위에 <code># [Python 3]</code>를 넣는 것을 권합니다. 그러면 문법 제한 없이 항상 같은 방식으로 실행됩니다.</p>
                     </div>
                     
-                    <!-- 4. 실행 및 대기 시간 -->
+                    <!-- 4. 스크래치 코드 변환 (v3.0 신규) -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 search-item">
-                        <h4 class="font-bold text-lg text-red-700 mb-3">4. 실행 및 대기 시간에 대해</h4>
-                        <ul class="text-sm text-gray-700 list-disc pl-5 space-y-1">
-                            <li>로봇 명령은 순서대로 실행됩니다. 함수(def) 안에서도 마찬가지입니다.</li>
-                            <li><code class="text-blue-600 font-bold bg-blue-50 px-1 rounded">artibo_move</code>는 <strong>최소 1초</strong>, 소리 함수는 <strong>약 2초</strong>, LCD 전송은 <strong>약 1초</strong>를 기다린 뒤 다음 줄로 넘어갑니다.</li>
-                            <li>정지 버튼을 누르면 진행 중이던 명령 뒤의 것은 실행되지 않습니다.</li>
-                        </ul>
+                        <h4 class="font-bold text-lg text-blue-700 mb-2">4. 스크래치 코드를 파이썬으로 가져올 수 있습니다</h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            스크래치 화면 <strong>설정 → 파이썬 코드로 보기</strong>를 누르면 블록이 파이썬 코드로 바뀌어 파이썬 에디터에 열립니다.<br>
+                            • 깃발 코드는 본문, "신호를 받았을 때"는 <code>def on_신호()</code> 함수, 내 블록은 <code>def</code>로 옮겨집니다.<br>
+                            • 파이썬에 없는 블록은 <code># [변환 안 됨]</code> 주석으로 남습니다. 스크래치는 여러 묶음이 동시에 돌지만 파이썬은 위에서 아래로 실행되므로 순서가 달라질 수 있습니다.
+                        </p>
                     </div>
                 </div>
             </section>
@@ -273,13 +327,21 @@
                 <div class="grid grid-cols-1 gap-6">
                     <!-- 1.1 artibo_speak -->
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
                             <h4 class="font-bold text-lg font-mono text-blue-700">artibo_speak(text, voice_id)</h4>
+                            <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-bold">v3.0 동작 변경</span>
                         </div>
-                        <div class="p-4">
-                            <p class="text-sm text-gray-600 mb-3">아티보 스피커로 글자를 읽습니다. (40자를 넘으면 첫 문장만 읽음)</p>
-                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>artibo_speak("안녕하세요", "Korean_Seoyeon")</code></pre>
-                            <p class="text-sm text-gray-700"><span class="font-bold">voice_id:</span> Korean_Seoyeon (한국어), English_US_Matthew (미국 영어), Japanese_Mizuki (일본어) 등 18개</p>
+                        <div class="p-4 space-y-3">
+                            <p class="text-sm text-gray-600">아티보 스피커로 글자를 읽습니다. <strong>40자를 넘으면 첫 문장만 읽습니다(안전 정책).</strong> 반환값 없음.</p>
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-gray-800 space-y-1">
+                                <p>• <strong>진짜 파이썬 (Python 3):</strong> 말이 끝날 때까지(글자 수에 따라 약 6~16초) <strong>기다린 뒤 다음 줄</strong>로 갑니다. 말하는 도중에 표정·동작이 겹치지 않습니다. (대신 말하면서 동시에 움직일 수는 없습니다.)</p>
+                                <p>• <strong>기존 방식:</strong> 보내자마자 다음 줄로 갑니다. 이어서 또 말하면 앞 말이 끝날 때까지 기다렸다가 말합니다.</p>
+                            </div>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>artibo_speak("안녕하세요", "Korean_Seoyeon")</code></pre>
+                            <div class="text-xs text-gray-600 bg-gray-50 p-3 rounded border">
+                                <p class="font-bold mb-1">voice_id 허용값 (대소문자 무관, 18종):</p>
+                                <p>Korean_Seoyeon (한국어), English_US_Matthew / English_US_Joanna (미국 영어), English_British_Brian / English_British_Emma (영국 영어), Japanese_Mizuki / Japanese_Takumi (일본어), Chinese_Zhiyu (중국어), French_Mathieu / French_Lea (프랑스어), German_Hans / German_Marlene (독일어), Italian_Giorgio / Italian_Bianca (이탈리아어), Spanish_Miguel / Spanish_Mia (스페인어), Portuguese_Cristiano / Portuguese_Ines (포르투갈어), Russian_Maxim / Russian_Tatyana (러시아어), Arabic_Zeina (아랍어), Hindi_Aditi (힌디어)</p>
+                            </div>
                         </div>
                     </div>
 
@@ -289,9 +351,9 @@
                             <h4 class="font-bold text-lg font-mono text-blue-700">artibo_speak_google(voice_name, text)</h4>
                         </div>
                         <div class="p-4">
-                            <p class="text-sm text-gray-600 mb-3">Google 목소리로 말합니다. (주의: artibo_speak와 <strong class="text-red-500">인자 순서가 반대</strong>입니다.)</p>
+                            <p class="text-sm text-gray-600 mb-3">Google 목소리로 말합니다. (주의: <code>artibo_speak</code>와 <strong class="text-red-500">인자 순서가 반대</strong>입니다.)</p>
                             <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>artibo_speak_google("ko-KR-Neural2-C", "안녕하세요")</code></pre>
-                            <p class="text-sm text-gray-700"><span class="font-bold">voice_name 허용값:</span> ko-KR-Neural2-C/A(한국어 남/여), en-US-Neural2-D(영어 남), ja-JP-Neural2-B(일본어 여)</p>
+                            <p class="text-sm text-gray-700"><span class="font-bold">voice_name 허용값:</span> <code>ko-KR-Neural2-C</code>(한국어 남), <code>ko-KR-Neural2-A</code>(한국어 여), <code>en-US-Neural2-D</code>(영어 남), <code>ja-JP-Neural2-B</code>(일본어 여)</p>
                         </div>
                     </div>
 
@@ -316,7 +378,7 @@
                             <h4 class="font-bold text-lg font-mono text-blue-700">artibo_display_text(text, font_size)</h4>
                         </div>
                         <div class="p-4">
-                            <p class="text-sm text-gray-600 mb-3">아티보 화면에 글자를 표시합니다. (font_size: 양의 정수)</p>
+                            <p class="text-sm text-gray-600 mb-3">아티보 화면에 글자를 표시합니다. (<code>font_size</code>: 양의 정수, 클수록 큰 글자)</p>
                             <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>artibo_display_text("Hello", 27)</code></pre>
                         </div>
                     </div>
@@ -329,7 +391,7 @@
                         <div class="p-4">
                             <p class="text-sm text-gray-600 mb-3">글자를 번역해 문자열로 돌려줍니다.</p>
                             <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>result = artibo_translate("ko", "Hello")<br>artibo_speak(result, "Korean_Seoyeon")</code></pre>
-                            <p class="text-xs text-gray-500">지원 언어 코드: ko, en, ja, zh, zh-TW, fr, de, es, it, pt, ru, ar, hi, id, th</p>
+                            <p class="text-xs text-gray-500">지원 언어 코드 (15개): ko(한국어), en(영어), ja(일본어), zh(중국어 간체), zh-TW(중국어 번체), fr(프랑스어), de(독일어), es(스페인어), it(이탈리아어), pt(포르투갈어), ru(러시아어), ar(아랍어), hi(힌디어), id(인도네시아어), th(태국어)</p>
                         </div>
                     </div>
                 </div>
@@ -337,43 +399,54 @@
 
             <!-- SECTION 2: Artibo Body -->
             <section id="body" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">2. Artibo_body - 이동·센서</h3>
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">2. Artibo_body — 이동·센서</h3>
                 
                 <div class="grid grid-cols-1 gap-6">
+                    <!-- 2.1 artibo_move -->
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_move(direction, power, seconds)</h4>
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_move(direction, seconds)</h4>
+                            <span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold">인자 변경 (power 제거)</span>
                         </div>
                         <div class="p-4">
-                            <p class="text-sm text-gray-600 mb-3">바디를 움직입니다. (한 번 호출에 최소 1초 걸립니다 - seconds가 1보다 작아도 1초 대기)</p>
-                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>artibo_move("Go", 100, 1)</code></pre>
+                            <p class="text-sm text-gray-600 mb-2">바디를 움직입니다. 한 번 호출에 <strong>최소 1초</strong> 걸립니다(seconds가 1보다 작아도 1초 대기).</p>
+                            <p class="text-xs text-gray-600 bg-yellow-50 border border-yellow-200 p-2 rounded mb-3">
+                                ※ 모터 강도는 항상 100입니다(DC 모터 좌우 편차로 직진이 흐트러지는 것을 막기 위해 강도 인자 제거).<br>
+                                ※ 옛 코드의 3인자 형태 <code>artibo_move("Go", 100, 1)</code>도 그대로 동작하며 가운데 값은 무시됩니다.
+                            </p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>artibo_move("Go", 1)</code></pre>
                             <ul class="text-sm text-gray-700 list-disc pl-5 space-y-1">
                                 <li><strong>direction:</strong> "Go"(전진), "Back"(후진), "Left"(좌회전), "Right"(우회전), "Stop"(정지)</li>
-                                <li><strong>power:</strong> 0 ~ 100</li>
                                 <li><strong>seconds:</strong> 동작 시간(초). 0.5 같은 소수 가능</li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 gap-6">
-                        <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                                <h4 class="font-bold text-lg font-mono text-blue-700">is_obstacle_detected()</h4>
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm text-gray-600 mb-3">앞쪽 장애물 여부. (장애물 있음: <code>True</code> / 없음 또는 응답 없음: <code>False</code>)</p>
-                                <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>if is_obstacle_detected():<br>    artibo_move("Stop", 0, 1)</code></pre>
-                            </div>
+                    <!-- 2.2 is_obstacle_detected -->
+                    <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="font-bold text-lg font-mono text-blue-700">is_obstacle_detected()</h4>
                         </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600 mb-3">앞쪽 장애물 여부. (장애물 있음: <code>True</code> / 없음 또는 응답 없음: <code>False</code>)</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>if is_obstacle_detected():<br>    artibo_move("Stop", 1)</code></pre>
+                        </div>
+                    </div>
 
-                        <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
-                            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                                <h4 class="font-bold text-base md:text-lg font-mono text-blue-700">get_left/right_floor_sensor_value()</h4>
-                            </div>
-                            <div class="p-4">
-                                <p class="text-sm text-gray-600 mb-3">바닥 센서 정수값. 검은 선 위에서 값이 커집니다. (0: 흰 바닥 또는 응답 없음)</p>
-                                <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>left = get_left_floor_sensor_value()<br>right = get_right_floor_sensor_value()</code></pre>
-                            </div>
+                    <!-- 2.3 & 2.4 floor sensor -->
+                    <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                            <h4 class="font-bold text-base md:text-lg font-mono text-blue-700">get_left_floor_sensor_value()<br>get_right_floor_sensor_value()</h4>
+                            <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-bold">v3.0 좌우 기준 교정</span>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600 mb-3">바닥 센서 정수값. 검은 선 위에서 값이 커집니다. (<code>0</code>은 흰 바닥 또는 응답 없음)</p>
+                            <ul class="text-sm text-gray-700 list-disc pl-5 space-y-1 mb-3 bg-gray-50 p-3 rounded border">
+                                <li><strong>왼쪽·오른쪽 기준:</strong> 로봇이 바라보는 방향 기준입니다 (2026-11-05 수정 — 이전에는 로봇을 마주 본 사람 기준이라 반대였음).</li>
+                                <li><strong>공중 감지:</strong> 로봇을 들어 올리면 값이 아주 커집니다. 실측 기준 약 <code>3000</code>보다 크면 "들었다"로 볼 수 있습니다(교실 바닥 색에 따라 다르니 출력해서 확인).</li>
+                                <li>센서 값을 읽는 데 시간이 걸려서, 움직이면서 선을 따라가기보다 <strong>멈춘 채로 쓰는 것</strong>이 잘 맞습니다.</li>
+                            </ul>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>left = get_left_floor_sensor_value()<br>right = get_right_floor_sensor_value()<br>if left > 3000 and right > 3000:<br>    artibo_speak("와, 하늘을 나는 것 같아!", "Korean_Seoyeon")</code></pre>
                         </div>
                     </div>
                 </div>
@@ -381,14 +454,14 @@
 
             <!-- SECTION 3: Vision -->
             <section id="vision" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">3. Image_recognition - 사물·글자 인식</h3>
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">3. Image_recognition — 사물·글자 인식</h3>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
                             <h4 class="font-bold text-lg font-mono text-blue-700">artibo_image_recognition(timer)</h4>
                         </div>
                         <div class="p-4">
-                            <p class="text-sm text-gray-600 mb-3">사진을 찍어 사물 이름을 문자열로 돌려줍니다. (timer = 촬영 전 대기 초)</p>
+                            <p class="text-sm text-gray-600 mb-3">사진을 찍어 사물 이름을 문자열로 돌려줍니다. (<code>timer</code> = 촬영 전 대기 초)</p>
                             <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>result = artibo_image_recognition(3)</code></pre>
                         </div>
                     </div>
@@ -406,29 +479,30 @@
 
             <!-- SECTION 4: Speech -->
             <section id="speech" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">4. Speech_recognition - 음성 인식·통역</h3>
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">4. Speech_recognition — 음성 인식·통역</h3>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                            <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_text(lang, record_time, timer)</h4>
+                            <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_text(language_code, recording_time, timer)</h4>
                         </div>
                         <div class="p-4">
-                            <p class="text-sm text-gray-600 mb-3">마이크로 녹음해 글자로 바꿉니다. (lang: 2글자 언어 코드, record_time: 녹음시간, timer: 대기시간)</p>
+                            <p class="text-sm text-gray-600 mb-3">아티보 마이크로 녹음해 글자로 바꿉니다. (<code>language_code</code>: 2글자 코드, <code>recording_time</code>: 녹음 초, <code>timer</code>: 녹음 전 대기 초)</p>
                             <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>result = artibo_speech_to_text("ko", 3, 3)</code></pre>
                         </div>
                     </div>
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                            <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_translate(src, tgt, r_time, timer)</h4>
+                            <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_translate(source_language, target_language, recording_time, timer)</h4>
                         </div>
                         <div class="p-4">
-                            <p class="text-sm text-gray-600 mb-3">녹음한 말을 번역해 돌려줍니다. (src는 <code>ko-KR</code>형식, tgt는 <code>en</code> 2글자 형식)</p>
-                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>res = artibo_speech_to_translate("ko-KR", "en", 3, 3)</code></pre>
+                            <p class="text-sm text-gray-600 mb-3">녹음한 말을 다른 언어로 번역해 돌려줍니다. <code>source</code>는 지역 코드(<code>ko-KR</code>), <code>target</code>은 2글자(<code>en</code>) 형식입니다.</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>result = artibo_speech_to_translate("ko-KR", "en", 3, 3)</code></pre>
+                            <p class="text-xs text-gray-500"><strong>source_language 허용값 (16):</strong> ko-KR, en-US, ja-JP, zh, zh-TW, fr-FR, de-DE, es-MX, it-IT, pt-BR, ru-RU, ar-AE, hi-IN, id-ID, th-TH, vi-VN</p>
                         </div>
                     </div>
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                            <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_text_by_whisper(r_time, timer)</h4>
+                            <h4 class="font-bold text-sm md:text-base font-mono text-blue-700">artibo_speech_to_text_by_whisper(recording_time, timer)</h4>
                         </div>
                         <div class="p-4">
                             <p class="text-sm text-gray-600 mb-3">Whisper로 음성 인식. 언어 자동 감지.</p>
@@ -440,28 +514,33 @@
 
             <!-- SECTION 5: Face Recognition -->
             <section id="face" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">5. Facial_recognition - 얼굴 인식</h3>
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">5. Facial_recognition — 얼굴</h3>
                 <div class="grid grid-cols-1 gap-6">
+                    <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
+                        <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_recognize_celebrities(timer)</h4>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-sm text-gray-600">닮은 유명인 이름을 문자열로 돌려줍니다.</p>
+                        </div>
+                    </div>
+
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
                             <h4 class="font-bold text-lg font-mono text-blue-700">artibo_detect_face(option, timer)</h4>
                         </div>
                         <div class="p-4">
-                            <p class="text-sm text-gray-600 mb-3">나이·성별·감정 중 하나를 문자열로, 얼굴 없으면 빈 문자열 반환.</p>
-                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>age = artibo_detect_face("Age", 3)<br>gender = artibo_detect_face("Gender", 3)<br>mood = artibo_detect_face("Mood", 3)</code></pre>
+                            <p class="text-sm text-gray-600 mb-3">나이·성별·감정 중 하나를 문자열로, 얼굴 없으면 빈 문자열 반환. (<code>option</code>은 대소문자 무관)</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>age = artibo_detect_face("Age", 3)<br>gender = artibo_detect_face("Gender", 3)<br>mood = artibo_detect_face("Mood", 3)</code></pre>
                         </div>
                     </div>
                     
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_recognize_celebrities(timer)</h4>
-                            <h4 class="font-bold text-lg font-mono text-blue-700 mt-2">artibo_face_comparison(timer)</h4>
+                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_face_comparison(timer)</h4>
                         </div>
                         <div class="p-4 text-sm text-gray-700">
-                            <ul class="list-disc pl-4 space-y-2">
-                                <li><strong>celebrities:</strong> 닮은 유명인 이름을 문자열로 반환.</li>
-                                <li><strong>comparison:</strong> 촬영한 얼굴을 나의 페이지에 등록한 얼굴과 비교합니다. (사전 등록 필수)</li>
-                            </ul>
+                            <p>촬영한 얼굴을 나의 페이지에 등록한 얼굴과 비교합니다. (사전 등록 필수)</p>
                         </div>
                     </div>
                 </div>
@@ -469,7 +548,7 @@
 
             <!-- SECTION 6: AI -->
             <section id="ai" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">6. AI - 대화·시각·이미지 생성</h3>
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">6. AI — 대화·시각·이미지 생성</h3>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
@@ -477,17 +556,17 @@
                         </div>
                         <div class="p-4">
                             <p class="text-sm text-gray-600 mb-3">ChatGPT 답변을 문자열로 반환합니다.</p>
-                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>ans = artibo_gpt_chat("고구려 수렵도를 30자 이내로 설명해줘.")<br>artibo_speak(ans, "Korean_Seoyeon")</code></pre>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>answer = artibo_gpt_chat("고구려 수렵도를 30자 이내로 설명해줘.")<br>artibo_speak(answer, "Korean_Seoyeon")</code></pre>
                         </div>
                     </div>
 
                     <div class="function-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden search-item">
                         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_gpt_vision(lang_code, timer)</h4>
+                            <h4 class="font-bold text-lg font-mono text-blue-700">artibo_gpt_vision(language_code, timer)</h4>
                         </div>
                         <div class="p-4">
-                            <p class="text-sm text-gray-600 mb-3">아티보 카메라 화면을 AI가 설명합니다. (lang: en, ko, ja, zh / timer가 0이면 즉시)</p>
-                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>desc = artibo_gpt_vision("ko", 0)</code></pre>
+                            <p class="text-sm text-gray-600 mb-3">아티보 카메라 화면을 AI가 설명합니다. (<code>language_code</code>: en, ko, ja, zh / <code>timer</code>가 0이면 즉시)</p>
+                            <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>description = artibo_gpt_vision("ko", 0)</code></pre>
                         </div>
                     </div>
 
@@ -498,7 +577,7 @@
                         <div class="p-4">
                             <p class="text-sm text-gray-600 mb-3">글로 설명한 이미지를 생성해 화면에 표시합니다.</p>
                             <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>artibo_image_generation("귀여운 고양이 우주비행사", "sk-...")</code></pre>
-                            <p class="text-xs text-red-500 font-bold mt-3">※ 주의: 발급받은 OpenAI API 키가 필요하며, 없으면 경고창만 뜹니다. (일반 수업용 아님)</p>
+                            <p class="text-xs text-red-500 font-bold mt-3">※ 주의: 사용자가 발급받은 OpenAI API 키가 필요하며, 없으면 경고창만 뜹니다. (일반 수업용 아님)</p>
                         </div>
                     </div>
                 </div>
@@ -507,13 +586,13 @@
             <!-- SECTION 7: Jarvis -->
             <section id="jarvis" class="scroll-mt-20 search-section hidden">
                 <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6 flex items-center">
-                    <i class="fa-solid fa-desktop text-gray-500 mr-2"></i> 7. Jarvis - PC 스피커·카메라·화면
+                    <i class="fa-solid fa-desktop text-gray-500 mr-2"></i> 7. Jarvis — PC 스피커·카메라·화면
                 </h3>
                 <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg mb-6 shadow-sm">
                     <p class="text-sm text-yellow-800">로봇 없이 PC에서 동작합니다. 아티보용 함수와 이름이 비슷하니 <strong>인자 순서에 주의</strong>하세요.</p>
                 </div>
                 
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-4">
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm">
                             <thead class="bg-gray-100 text-gray-700">
@@ -526,17 +605,17 @@
                                     <span class="text-xs text-gray-500">voice: alloy, echo, fable, onyx, nova, shimmer</span></td>
                                 </tr>
                                 <tr class="hover:bg-gray-50 search-item">
-                                    <td class="p-3 font-mono font-bold text-purple-700">jarvis_gpt_vision(lang_code, timer)</td>
+                                    <td class="p-3 font-mono font-bold text-purple-700">jarvis_gpt_vision(language_code, timer)</td>
                                     <td class="p-3">PC 카메라 화면 설명 (en, ko, ja, zh)</td>
                                 </tr>
                                 <tr class="hover:bg-gray-50 search-item">
-                                    <td class="p-3 font-mono font-bold text-purple-700">jarvis_speech_to_text(record_time, timer)</td>
+                                    <td class="p-3 font-mono font-bold text-purple-700">jarvis_speech_to_text(recording_time, timer)</td>
                                     <td class="p-3">PC 마이크 음성 인식</td>
                                 </tr>
                                 <tr class="hover:bg-gray-50 search-item">
                                     <td class="p-3 font-mono font-bold text-purple-700">jarvis_set_mood(mood)</td>
-                                    <td class="p-3">자비스 화면 표정 변경<br>
-                                    <span class="text-xs text-gray-500">mood: defaultAppearance, smilingAppearance, cryingAppearance 등 8종</span></td>
+                                    <td class="p-3">자비스 화면 표정 변경 (8종)<br>
+                                    <span class="text-xs text-gray-500">defaultAppearance, smilingAppearance, cryingAppearance, surprisedAppearance, angryAppearance, cyberHeroAI, hackerAI, intelligentStrategyAI</span></td>
                                 </tr>
                                 <tr class="hover:bg-gray-50 search-item">
                                     <td class="p-3 font-mono font-bold text-purple-700">jarvis_display_text(text, font_size)</td>
@@ -544,8 +623,8 @@
                                 </tr>
                                 <tr class="hover:bg-gray-50 search-item">
                                     <td class="p-3 font-mono font-bold text-purple-700">jarvis_sing(song_name)</td>
-                                    <td class="p-3">내장 음악 재생<br>
-                                    <span class="text-xs text-gray-500">song_name: AI_Explorer, Hello AI World, Robots Me 등 7종</span></td>
+                                    <td class="p-3">내장 음악 재생 (8종)<br>
+                                    <span class="text-xs text-gray-500">AI_Explorer, Build_Code_Create, Code_the_Future, Ctrl_Alt_Innovate, Dream_Code_Repeat, Hello_AI_World, Next_Level_Coding, Robots_Me</span></td>
                                 </tr>
                                 <tr class="hover:bg-gray-50 search-item">
                                     <td class="p-3 font-mono font-bold text-purple-700">jarvis_sing_url(url)</td>
@@ -559,11 +638,13 @@
                         </table>
                     </div>
                 </div>
+                <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto mb-3"><code>jarvis_speak("nova", "안녕하세요")<br>jarvis_set_mood("smilingAppearance")<br>jarvis_sing("Hello_AI_World")</code></pre>
+                <p class="text-xs text-gray-600 bg-gray-100 p-3 rounded">※ 일부 PC 환경에서 자비스 음성의 첫 음절이 짧게 잘린다는 제보가 있습니다(블루투스 스피커 등 환경 의존).</p>
             </section>
 
             <!-- SECTION 8: Extension -->
             <section id="extension" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">8. Extension (기본 도구)</h3>
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">8. Extension — 기본 도구</h3>
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 md:p-6 space-y-4">
                     <div class="search-item pb-4 border-b">
                         <h4 class="font-bold font-mono text-blue-700 mb-1">sleep(seconds)</h4>
@@ -577,26 +658,27 @@
                         <h4 class="font-bold font-mono text-blue-700 mb-1">print(값, ...)</h4>
                         <p class="text-sm text-gray-600">화면 오른쪽 실행 로그에 출력</p>
                     </div>
-                    <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mt-4 overflow-x-auto"><code>n = randint(1, 6)<br>print("주사위 :", n)<br>sleep(1)</code></pre>
+                    <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mt-4 overflow-x-auto"><code>n = randint(1, 6)<br>print("주사위:", n)<br>sleep(1)</code></pre>
                 </div>
             </section>
 
             <!-- SECTION 9: LCD -->
             <section id="lcd" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">9. Artibo LCD (표정·그림·글자)</h3>
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">9. Artibo LCD — 표정·그림·글자</h3>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 space-y-4 text-sm">
                         <div class="search-item pb-3 border-b">
                             <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_lcd_face(face_id)</h4>
-                            <p class="text-gray-600">LCD 표정 표시 (11종): smile, grin, blank, happy, unamused, surprised, suspicious, neutral, friendly, cute, beaming</p>
+                            <p class="text-gray-700 mb-1">LCD에 표정을 한 번 표시합니다. <strong>허용값 (11종):</strong> smile, grin, blank, happy, unamused, surprised, suspicious, neutral, friendly, cute, beaming</p>
+                            <p class="text-xs text-gray-500 bg-gray-50 p-2 rounded">※ 구버전 이름도 동작하지만 다른 표정으로 변환됩니다 (normal→smile, wink→smile, sad→unamused, angry→unamused, love→happy, dead→neutral). 새 교안에는 위 11개만 쓰세요.</p>
                         </div>
                         <div class="search-item pb-3 border-b">
                             <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_lcd_face_blink(face_id)<br>artibo_lcd_blink_stop()</h4>
-                            <p class="text-gray-600">3초마다 눈 깜빡이는 표정 지속 / 명시적 멈춤</p>
+                            <p class="text-gray-600">눈을 3초마다 깜빡이는 표정을 계속 표시합니다. 다른 LCD 출력을 하면 자동으로 멈추고, 명시적으로 멈추려면 <code>artibo_lcd_blink_stop()</code>을 호출합니다.</p>
                         </div>
                         <div class="search-item pb-3 border-b">
                             <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_scroll_text(text, speed)<br>artibo_scroll_stop()</h4>
-                            <p class="text-gray-600">글자 흐르게 표시 (speed: 2~12, 기본 6) / 정지</p>
+                            <p class="text-gray-600">글자를 흐르게 표시 (<code>speed</code>: 2~12, 기본 6, 범위 밖이면 6) / 스크롤 정지</p>
                         </div>
                         <div class="search-item pb-3 border-b">
                             <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_lcd_image(icon_id)</h4>
@@ -608,21 +690,21 @@
                         </div>
                         <div class="search-item">
                             <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_lcd_drawing_popup(slot)<br>artibo_lcd_drawing_send(slot)</h4>
-                            <p class="text-gray-600">그림판 창을 열어 직접 그리고, 지정한 슬롯(1~5)에 저장한 후 로봇으로 전송합니다.</p>
+                            <p class="text-gray-600">그림판 창을 열어 마우스로 그리고(슬롯 1~5, 생략 시 1), 저장한 슬롯을 로봇으로 보냅니다.</p>
                             <pre class="bg-gray-800 text-green-400 p-2 rounded-lg text-xs mt-2 overflow-x-auto"><code>artibo_lcd_drawing_popup(1)<br>artibo_lcd_drawing_send(1)</code></pre>
                         </div>
                     </div>
                     
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 text-sm h-fit search-item">
-                        <h4 class="font-bold font-mono text-blue-700 mb-2 border-b pb-2">직접 그리기 (가로 128 x 세로 64)</h4>
-                        <p class="text-gray-600 mb-3 bg-yellow-50 p-2 rounded text-xs border border-yellow-200">그리기 함수는 화면 밖 캔버스에 그리고, 반드시 <code class="bg-yellow-200 text-red-600 px-1 rounded font-bold">artibo_lcd_send()</code>를 불러야 전송됩니다.</p>
+                        <h4 class="font-bold font-mono text-blue-700 mb-2 border-b pb-2">직접 그리기 (가로 128 × 세로 64, 왼쪽 위가 0, 0)</h4>
+                        <p class="text-gray-600 mb-3 bg-yellow-50 p-2 rounded text-xs border border-yellow-200">그리기 함수는 화면 밖 캔버스에 그리고, 반드시 <code class="bg-yellow-200 text-red-600 px-1 rounded font-bold">artibo_lcd_send()</code>를 불러야 로봇에 전송됩니다 (약 1초 소요).</p>
                         <ul class="list-disc pl-4 text-gray-700 mb-4 space-y-1">
                             <li><code class="font-mono text-blue-600">artibo_lcd_pixel(x, y)</code> - 점</li>
                             <li><code class="font-mono text-blue-600">artibo_lcd_line(x1, y1, x2, y2)</code> - 선</li>
-                            <li><code class="font-mono text-blue-600">artibo_lcd_circle(cx, cy, r)</code> - 원</li>
-                            <li><code class="font-mono text-blue-600">artibo_lcd_rect(x, y, w, h)</code> - 사각형</li>
-                            <li><code class="font-mono text-blue-600">artibo_lcd_text(text, x, y, size)</code> - 글자</li>
-                            <li><code class="font-mono text-blue-600">artibo_lcd_clear()</code> - 화면 초기화</li>
+                            <li><code class="font-mono text-blue-600">artibo_lcd_circle(cx, cy, r)</code> - 원 (중심, 반지름)</li>
+                            <li><code class="font-mono text-blue-600">artibo_lcd_rect(x, y, w, h)</code> - 사각형 (왼쪽 위, 너비, 높이)</li>
+                            <li><code class="font-mono text-blue-600">artibo_lcd_text(text, x, y, size)</code> - 글자 (size 기본 12)</li>
+                            <li><code class="font-mono text-blue-600">artibo_lcd_clear()</code> - LCD 지우기</li>
                         </ul>
                         <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-xs overflow-x-auto"><code>artibo_lcd_clear()<br>artibo_lcd_circle(64, 32, 20)<br>artibo_lcd_text("Hi", 54, 26, 12)<br>artibo_lcd_send()</code></pre>
                     </div>
@@ -631,91 +713,194 @@
 
             <!-- SECTION 10: Sounds -->
             <section id="sound" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">10. 소리 (효과음·캐릭터)</h3>
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">10. 소리 — 효과음·캐릭터 멘트</h3>
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 md:p-6 space-y-4">
                     <div class="search-item">
-                        <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_play_effect(name)</h4>
-                        <p class="text-sm text-gray-600 mb-2">아티보 스피커로 효과음 (18종)</p>
+                        <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_play_effect(effect_name)</h4>
+                        <p class="text-sm text-gray-600 mb-2">아티보 스피커로 효과음 재생 (18종)</p>
                         <p class="text-xs text-gray-500 bg-gray-50 p-2 rounded">beep, ding, whoosh, boot, shutdown, hello_beep, connected, disconnected, charging, success, fail, correct, wrong, warning, level_up, fanfare, giggle, curious</p>
                     </div>
                     <div class="search-item pt-4 border-t">
                         <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_play_character(name)</h4>
-                        <p class="text-sm text-gray-600">캐릭터 멘트 재생 (robot_ment_01 등)</p>
+                        <p class="text-sm text-gray-600 mb-1">캐릭터 멘트 재생 (32종)</p>
+                        <p class="text-xs text-gray-500">• 한국어: <code>robot_ment_01</code> ~ <code>robot_ment_13</code><br>• 영어: <code>robot_ment_en_01</code> ~ <code>robot_ment_en_10</code><br>• 일본어: <code>robot_ment_jp_01</code> ~ <code>robot_ment_jp_09</code></p>
                     </div>
                     <div class="search-item pt-4 border-t">
                         <h4 class="font-bold font-mono text-blue-700 mb-1">artibo_play_robot_sfx(name)</h4>
-                        <p class="text-sm text-gray-600">로봇 소리 재생 (robot_misc_01~05, robot_vox_01~10)</p>
+                        <p class="text-sm text-gray-600">로봇 소리 재생 (15종): <code>robot_misc_01</code> ~ <code>robot_misc_05</code>, <code>robot_vox_01</code> ~ <code>robot_vox_10</code></p>
                     </div>
                 </div>
             </section>
 
             <!-- SECTION 11: Info -->
             <section id="info" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">11. 정보 (날씨·시계)</h3>
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-6">11. 정보 — 날씨·시계</h3>
                 <div class="grid grid-cols-1 gap-6">
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 search-item">
                         <h4 class="font-bold font-mono text-blue-700 mb-2 border-b pb-2">artibo_weather(city, info)</h4>
-                        <p class="text-sm text-gray-600 mb-3">실시간 날씨 문자열로 반환</p>
+                        <p class="text-sm text-gray-600 mb-3">실시간 날씨 항목을 문자열로 반환</p>
                         <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>temp = artibo_weather("서울", "기온")</code></pre>
-                        <p class="text-xs text-gray-500"><strong>city:</strong> 서울, 부산, 대구 등 주요도시 18곳<br><strong>info:</strong> 기온, 하늘상태, 강수, 습도, 풍속</p>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            <strong>city (18곳):</strong> 서울, 부산, 대구, 인천, 광주, 대전, 울산, 세종, 수원, 춘천, 강릉, 청주, 전주, 목포, 여수, 포항, 창원, 제주<br>
+                            <strong>info (5종):</strong> 기온 / temperature, 하늘상태 / weather, 강수 / precipitation, 습도 / humidity, 풍속 / windSpeed
+                        </p>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 search-item">
                         <h4 class="font-bold font-mono text-blue-700 mb-2 border-b pb-2">artibo_clock(info)</h4>
-                        <p class="text-sm text-gray-600 mb-3">현재 날짜·시간 문자열로 반환</p>
+                        <p class="text-sm text-gray-600 mb-3">현재 날짜·시간 항목을 문자열로 반환</p>
                         <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm mb-3 overflow-x-auto"><code>now = artibo_clock("시각")</code></pre>
-                        <p class="text-xs text-gray-500"><strong>info 허용값:</strong> 시각(14:05), 시분초(14, 5, 30), 년월일(2026, 9, 7), 요일(월요일), 날짜(2026-09-07)</p>
+                        <p class="text-xs text-gray-600"><strong>info 허용값:</strong> 시각 / time (14:05), 시분초 / hour minute second (14, 5, 30), 년월일 / year month date (2026, 9, 7), 요일 / weekday (월요일), 날짜 / fulldate (2026-09-07)</p>
                     </div>
                 </div>
             </section>
 
-            <!-- SECTION Appendix B: Syntax -->
-            <section id="appendix-b" class="scroll-mt-20 search-section hidden">
-                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-purple-500 pb-2 mb-6 flex items-center">
-                    <i class="fa-solid fa-code text-purple-500 mr-2"></i> 부록 B. 문법 - 되는 것과 안 되는 것
+            <!-- SECTION 12: Keyboard (v3.0 NEW) -->
+            <section id="keyboard" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-indigo-800 border-b-2 border-indigo-300 pb-2 mb-6 flex items-center">
+                    <i class="fa-solid fa-keyboard text-indigo-600 mr-2"></i> 12. 키보드 — 화살표·스페이스 입력 <span class="ml-2 text-xs bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-full">진짜 파이썬 전용</span>
                 </h3>
-                <div class="bg-purple-50 p-4 rounded-lg shadow-sm border border-purple-200 mb-6">
-                    <p class="text-purple-800">아티보 파이썬은 브라우저에서 도는 파이썬 해석기라 <strong>일부 문법이 제한</strong>됩니다. 안 되는 것을 쓰면 오류가 나거나, 오류 없이 틀린 값이 나옵니다.</p>
+                <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 mb-6 text-sm text-indigo-900">
+                    실행하는 동안 누른 키를 읽습니다. 이 함수를 쓰면 <strong>자동으로 진짜 파이썬(Python 3)</strong>으로 실행됩니다. 실행 중에 누른 키는 편집기에 써지지 않고, 실행이 끝나면 다시 평소처럼 입력됩니다.
                 </div>
 
-                <div class="grid grid-cols-1 gap-6">
-                    <!-- 되는 것 -->
-                    <div class="bg-white rounded-xl shadow-sm border border-green-200 overflow-hidden">
-                        <div class="bg-green-50 px-4 py-3 border-b border-green-200">
-                            <h4 class="font-bold text-green-700 flex items-center"><i class="fa-solid fa-check-circle mr-2"></i>되는 것 (안전)</h4>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6 search-item">
+                    <table class="w-full text-sm text-left border-collapse">
+                        <thead class="bg-gray-100 text-gray-700">
+                            <tr>
+                                <th class="p-3 border-b">함수</th>
+                                <th class="p-3 border-b">하는 일</th>
+                                <th class="p-3 border-b">돌려주는 값</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr>
+                                <td class="p-3 font-mono font-bold text-indigo-700">wait_key()</td>
+                                <td class="p-3">키를 누를 때까지 기다림 (정지 버튼으로 풀림)</td>
+                                <td class="p-3">누른 키 이름</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-mono font-bold text-indigo-700">get_key()</td>
+                                <td class="p-3">기다리지 않고 마지막에 누른 키를 꺼냄 (읽으면 비워짐)</td>
+                                <td class="p-3">키 이름, 없으면 <code>""</code></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-mono font-bold text-indigo-700">is_key_pressed(name)</td>
+                                <td class="p-3">지금 그 키를 누르고 있는지 확인</td>
+                                <td class="p-3"><code>True</code> / <code>False</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="p-4 bg-gray-50 border-t text-xs text-gray-700">
+                        <strong>키 이름:</strong> <code>"up"</code>, <code>"down"</code>, <code>"left"</code>, <code>"right"</code>, <code>"space"</code>, <code>"enter"</code>, <code>"esc"</code>, <code>"backspace"</code>, <code>"tab"</code>, 글자·숫자는 소문자 그대로 (<code>"a"</code>, <code>"1"</code>)
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 search-item">
+                    <h4 class="font-bold text-sm text-gray-700 mb-2">예제: 방향키로 아티보 조종하기</h4>
+                    <pre class="bg-gray-800 text-green-400 p-3 rounded-lg text-sm overflow-x-auto"><code>MOVES = {"up": "Go", "down": "Back", "left": "Left", "right": "Right"}<br>while True:<br>    key = wait_key()<br>    if key == "space":<br>        break<br>    if key in MOVES:<br>        artibo_move(MOVES[key], 0.3)<br>        artibo_move("Stop", 0.2)</code></pre>
+                </div>
+            </section>
+
+            <!-- SECTION Appendix: Syntax & Execution (v3.0 Updated) -->
+            <section id="appendix-b" class="scroll-mt-20 search-section hidden">
+                <h3 class="text-2xl font-bold text-gray-800 border-b-2 border-purple-500 pb-2 mb-6 flex items-center">
+                    <i class="fa-solid fa-code text-purple-500 mr-2"></i> 부록 A·B·C. 구버전 함수 / 문법 비교 / 실행 특성
+                </h3>
+
+                <!-- 부록 A -->
+                <div class="bg-gray-100 border border-gray-300 rounded-xl p-4 mb-6 search-item">
+                    <h4 class="font-bold text-gray-800 mb-1">부록 A. 이 문서에서 의도적으로 뺀 함수 (구버전)</h4>
+                    <p class="text-sm text-gray-600">다음 함수는 엔진에 남아 있지만 구버전이라 새 교안에 쓰지 않습니다: <code class="text-xs bg-white px-1.5 py-0.5 rounded border">artibo_gpt_3_5_chat</code>, <code class="text-xs bg-white px-1.5 py-0.5 rounded border">chat_gpt_3_5_manual</code>, <code class="text-xs bg-white px-1.5 py-0.5 rounded border">chat_gpt_4</code>, <code class="text-xs bg-white px-1.5 py-0.5 rounded border">artibo_gpt_4_chat</code>, <code class="text-xs bg-white px-1.5 py-0.5 rounded border">text_to_image</code>, <code class="text-xs bg-white px-1.5 py-0.5 rounded border">ai_assistants</code> → 대화는 <strong><code>artibo_gpt_chat</code></strong>을 쓰세요.</p>
+                </div>
+
+                <!-- 부록 B-1: 진짜 파이썬 -->
+                <div class="bg-white rounded-xl shadow-sm border border-indigo-200 overflow-hidden mb-6 search-item">
+                    <div class="bg-indigo-50 px-4 py-3 border-b border-indigo-200">
+                        <h4 class="font-bold text-indigo-800 flex items-center"><i class="fa-brands fa-python mr-2"></i> 부록 B-1. 진짜 파이썬 (Python 3, 베타)</h4>
+                    </div>
+                    <div class="p-4 text-sm text-gray-700 space-y-4">
+                        <p>브라우저 안에서 진짜 <strong>CPython 3.14</strong>가 돕니다. 학교에서 배우는 파이썬 문법은 모두 됩니다: 딕셔너리(<code>.items()</code>, <code>.keys()</code>, <code>.get()</code>), <code>f-string</code>, 슬라이싱, 컴프리헨션, <code>class</code>·상속, <code>try / except</code>, <code>lambda</code>, 기본 모듈(<code>random</code>, <code>math</code>, <code>collections</code> 등), <strong><code>numpy</code>, <code>pandas</code></strong>(처음 import 할 때 몇 초 더 걸림). 그 밖의 외부 라이브러리(<code>pip install</code>, <code>keyboard</code> 등)는 안 됩니다.</p>
+
+                        <div>
+                            <h5 class="font-bold text-red-700 mb-2">⚠️ 로봇 함수 규칙 (실행 전 한국어 안내 후 차단)</h5>
+                            <table class="w-full text-sm text-left border border-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr><th class="p-2.5 border">❌ 쓰지 말 것</th><th class="p-2.5 border">⭕ 대신 쓸 것</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="p-2.5 border">로봇 명령이 든 함수를 <code>map</code>, <code>filter</code>, <code>sorted(key=)</code>에 넘기기, <code>f = artibo_speak</code>처럼 다른 이름에 담기</td><td class="p-2.5 border">이름 그대로 직접 부르기 <code>artibo_speak(...)</code></td></tr>
+                                    <tr><td class="p-2.5 border"><code>lambda</code>, 괄호 <code>(... for ...)</code>, 클래스 본문, <code>__init__</code>, <code>yield</code> 함수, 기본값 자리 안의 로봇 명령</td><td class="p-2.5 border">보통 <code>def</code> 함수나 <code>for</code> 문 안에서 부르기</td></tr>
+                                    <tr><td class="p-2.5 border">로봇 함수에 키워드 인자 <code>artibo_speak(text="안녕")</code></td><td class="p-2.5 border">순서대로 <code>artibo_speak("안녕", "Korean_Seoyeon")</code></td></tr>
+                                    <tr><td class="p-2.5 border"><code>exec()</code>, <code>compile()</code></td><td class="p-2.5 border">코드를 직접 쓰기</td></tr>
+                                </tbody>
+                            </table>
+                            <p class="text-xs text-gray-500 mt-1">※ 로봇 명령이 없는 보통 함수는 어디에 넘겨도 됩니다. 로봇 함수 앞에 <code>await</code>를 쓰지 않아도 앞 명령이 끝날 때까지 자동으로 기다립니다.</p>
                         </div>
-                        <div class="p-4 text-sm text-gray-700 space-y-2">
-                            <p>✔️ if / elif / else, for... in range(), for... in 리스트, while, def, return, break, continue</p>
-                            <p>✔️ 비교·산술 연산(+, -, *, /, //, %), and, or, in(문자열·리스트·dict), +=, -=, *=, /=</p>
-                            <p>✔️ 내장: len, str, int, float, abs, round, sum, max, min, sorted, range, print</p>
-                            <p>✔️ 문자열/리스트 메서드: .upper(), .lower(), .strip(), .join(), .format(), .replace()(첫번째만), .append(), .insert(), .remove(), .sort()(문자열기준)</p>
-                            <p>✔️ <code class="bg-gray-100 text-red-500 px-1 rounded">not(조건)</code> - 괄호 필수!</p>
+
+                        <div class="bg-amber-50 border border-amber-200 p-3 rounded-lg text-xs text-amber-900 space-y-1">
+                            <p class="font-bold">알아 둘 한계:</p>
+                            <p>• 로봇 명령이 없는 함수 안의 무한 반복은 정지 버튼이 듣지 않습니다(10초 초과 시 자동 중단). 오래 도는 반복은 맨 바깥에 두거나 반복 안에 <code>sleep(0.1)</code>을 넣으세요.</p>
+                            <p>• 함수가 돌려준 딕셔너리를 반복하는 코드(<code>for k in get_dict():</code>)는 진짜 파이썬 문법인지 자동 감지하지 못합니다. 맨 위에 <code># [Python 3]</code>를 넣으세요.</p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- 안 되는 것 -->
-                    <div class="bg-white rounded-xl shadow-sm border border-red-200 overflow-hidden">
-                        <div class="bg-red-50 px-4 py-3 border-b border-red-200">
-                            <h4 class="font-bold text-red-700 flex items-center"><i class="fa-solid fa-xmark-circle mr-2"></i>안 되는 것 (절대 쓰지 말 것!)</h4>
+                <!-- 부록 B-2: 기존 방식 -->
+                <div class="bg-white rounded-xl shadow-sm border border-red-200 overflow-hidden mb-6 search-item">
+                    <div class="bg-red-50 px-4 py-3 border-b border-red-200">
+                        <h4 class="font-bold text-red-700 flex items-center"><i class="fa-solid fa-triangle-exclamation mr-2"></i> 부록 B-2. 기존 방식 (브라우저 해석기) 주의사항</h4>
+                    </div>
+                    <div class="p-4 text-sm text-gray-700 space-y-4">
+                        <p>진짜 파이썬 문법이 없는 코드는 기존 방식으로 실행됩니다. <strong>삼항식·다중 할당·키워드 인자·음수 인덱스·문자열 반복·기본값 인자 등은 자동 전환되지 않으므로, 이런 문법을 쓰는 교안은 맨 위에 <code># [Python 3]</code>를 넣으세요.</strong></p>
+
+                        <div class="bg-green-50/70 p-3 rounded border border-green-200 text-xs space-y-1">
+                            <p class="font-bold text-green-800">✔️ 기존 방식에서 되는 것:</p>
+                            <p>if/elif/else, for in range(), for in 리스트, while, def, return, break, continue / 산술·비교 연산, and, or, in, +=, -=, *=, /= / len, str, int, float, abs, round, sum, max, min, sorted, range, print / .upper(), .lower(), .strip(), .join(), .format(), .replace()(첫 번째만), .append(), .insert(), .remove(), .sort()(문자열 기준), <code>not(조건)</code>(괄호 필수)</p>
                         </div>
-                        <div class="p-0 overflow-x-auto">
-                            <table class="w-full text-sm text-left">
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left border border-gray-200">
                                 <thead class="bg-gray-50 text-gray-600 border-b">
-                                    <tr><th class="p-3">❌ 쓰지 말 것</th><th class="p-3">⭕ 대신 쓸 것 / 결과</th></tr>
+                                    <tr><th class="p-2.5 border">❌ 쓰지 말 것 (오류 발생)</th><th class="p-2.5 border">⭕ 대신 쓸 것</th></tr>
                                 </thead>
-                                <tbody class="divide-y divide-gray-100 text-gray-700">
-                                    <tr><td class="p-3 font-mono">f"안녕 {name}"</td><td class="p-3">"안녕 " + str(name) 또는 .format()</td></tr>
-                                    <tr><td class="p-3 font-mono">[0:2] (슬라이싱)</td><td class="p-3">인덱스 하나씩 접근 또는 반복문</td></tr>
-                                    <tr><td class="p-3 font-mono">[x*2 for x in a]</td><td class="p-3">일반 for문 사용</td></tr>
-                                    <tr><td class="p-3 font-mono">"a" if c else "b"</td><td class="p-3">if / else 문 사용</td></tr>
-                                    <tr><td class="p-3 font-mono">not x (괄호 없이)</td><td class="p-3"><code class="font-bold">not(x)</code> 사용</td></tr>
-                                    <tr class="bg-red-50/50"><td class="p-3 font-mono">"ab" * 3</td><td class="p-3 text-red-600 font-bold">오류없이 null 출력 (위험)</td></tr>
-                                    <tr class="bg-red-50/50"><td class="p-3 font-mono">a[-1] (음수 인덱스)</td><td class="p-3 text-red-600 font-bold">오류없이 null 출력 (위험)</td></tr>
-                                    <tr class="bg-red-50/50"><td class="p-3 font-mono">[1] + [2]</td><td class="p-3 text-red-600 font-bold">문자열 "12"가 됨 (위험)</td></tr>
-                                    <tr class="bg-red-50/50"><td class="p-3 font-mono">.sort() 숫자 리스트</td><td class="p-3 text-red-600 font-bold">문자열로 정렬되어 10이 2보다 앞에 옴</td></tr>
+                                <tbody class="divide-y divide-gray-100">
+                                    <tr><td class="p-2.5 border font-mono">f"안녕 {name}"</td><td class="p-2.5 border">"안녕 " + str(name) 또는 .format()</td></tr>
+                                    <tr><td class="p-2.5 border font-mono">[0:2] (슬라이싱)</td><td class="p-2.5 border">인덱스 하나씩 접근 또는 반복문</td></tr>
+                                    <tr><td class="p-2.5 border font-mono">[x*2 for x in a]</td><td class="p-2.5 border">일반 for 문</td></tr>
+                                    <tr><td class="p-2.5 border font-mono">"a" if c else "b"</td><td class="p-2.5 border">if / else 문</td></tr>
+                                    <tr><td class="p-2.5 border font-mono">lambda / 다중 할당(a, b = 1, 2) / 키워드 인자 f(b=1)</td><td class="p-2.5 border">def / 한 줄씩 할당 / 위치 인자</td></tr>
+                                    <tr><td class="p-2.5 border font-mono">not x / not in</td><td class="p-2.5 border"><code>not(x)</code> / <code>(x in y) == False</code></td></tr>
+                                    <tr><td class="p-2.5 border font-mono">식 전체 괄호: if (a > b): / f((a*2))</td><td class="p-2.5 border">괄호 없이 <code>if a > b:</code>, <code>f(a*2)</code></td></tr>
+                                    <tr><td class="p-2.5 border font-mono">문자열 안 \" 이스케이프</td><td class="p-2.5 border">작은따옴표로 감싸기 <code>'안녕 "친구"'</code></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left border border-red-200">
+                                <thead class="bg-red-50 text-red-800 border-b">
+                                    <tr><th class="p-2.5 border">🚨 안 되는 것 - 오류 없이 틀린 값 (더 위험!)</th><th class="p-2.5 border">실제 결과</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    <tr><td class="p-2.5 border font-mono">"ab" * 3 / s[-1] (음수 인덱스)</td><td class="p-2.5 border text-red-600 font-bold">null 출력</td></tr>
+                                    <tr><td class="p-2.5 border font-mono">[1] + [2]</td><td class="p-2.5 border text-red-600 font-bold">문자열 "12"가 됨</td></tr>
+                                    <tr><td class="p-2.5 border font-mono">def f(a, b=10)</td><td class="p-2.5 border text-red-600 font-bold">b가 채워지지 않음</td></tr>
+                                    <tr><td class="p-2.5 border font-mono">try / except</td><td class="p-2.5 border text-red-600 font-bold">예외가 잡히지 않음 (1/0 이 Infinity)</td></tr>
+                                    <tr><td class="p-2.5 border font-mono">dict.get() / .keys() / .values()</td><td class="p-2.5 border text-red-600 font-bold">동작 안 함 (<code>d["key"]</code> 직접 접근만 가능)</td></tr>
+                                    <tr><td class="p-2.5 border font-mono">.sort() 숫자 리스트</td><td class="p-2.5 border text-red-600 font-bold">문자열 정렬되어 10이 2보다 앞에 옴</td></tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
+
+                <!-- 부록 C -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 text-sm text-gray-700 search-item">
+                    <h4 class="font-bold text-gray-800 mb-2">부록 C. 실행 및 정지 버튼에 대해</h4>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>로봇 명령은 순서대로 실행됩니다(<code>def</code> 안에서도 동일). <code>artibo_move</code>는 최소 1초, 소리 함수는 약 2초, LCD 전송은 약 1초, 진짜 파이썬의 <code>artibo_speak</code>는 말이 끝날 때까지(약 6~16초) 기다립니다.</li>
+                        <li>정지 버튼을 누르면 진행 중이던 명령 뒤의 것은 실행되지 않습니다. 단, <strong>바퀴 동작 하나는 정지를 눌러도 그 동작을 끝낸 뒤 멈춥니다</strong>(로봇이 움직이는 동안은 명령을 받지 않음). 이동 시간은 짧게(0.3~0.5초) 여러 번 나누는 것이 좋습니다.</li>
+                    </ul>
                 </div>
             </section>
 
@@ -727,20 +912,16 @@
             const searchInput = document.getElementById('search-input');
             const navLinks = document.querySelectorAll('.sidebar-link');
             const mainContent = document.getElementById('main-content');
-
-            // HTML 구조상 모든 섹션이 개별적으로 분리되어 있으므로 직관적인 선택 가능
             const searchSections = document.querySelectorAll('.max-w-5xl > section');
             const searchItems = document.querySelectorAll('.search-item');
 
             // --- 1. 탭(카테고리) 이동 로직 ---
             function showSection(targetId) {
-                // 탭 이동 시 검색어 초기화
                 if (searchInput.value) {
                     searchInput.value = '';
                     searchItems.forEach(item => item.style.display = '');
                 }
 
-                // 선택된 카테고리만 보이고 나머지는 숨김
                 searchSections.forEach(sec => {
                     if (sec.id === targetId) {
                         sec.classList.remove('hidden');
@@ -749,7 +930,6 @@
                     }
                 });
 
-                // 사이드바 메뉴 활성화 스타일 적용
                 navLinks.forEach(link => {
                     const href = link.getAttribute('href').substring(1);
                     if (href === targetId) {
@@ -759,16 +939,13 @@
                     }
                 });
                 
-                // 스크롤 맨 위로 초기화
                 mainContent.scrollTop = 0;
             }
 
-            // URL의 해시(#) 값을 기반으로 화면 표시
             function handleRoute() {
                 let hash = window.location.hash.substring(1);
                 let targetSection = document.getElementById(hash);
                 
-                // 해시가 없거나 섹션이 아닐 경우 기본값(충전 및 환경)으로 이동
                 if (!hash || !targetSection || targetSection.tagName.toLowerCase() !== 'section') {
                     hash = 'charge';
                     window.location.hash = hash;
@@ -776,7 +953,6 @@
                 showSection(hash);
             }
 
-            // 사이드바 링크 클릭 이벤트
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -784,24 +960,33 @@
                     window.location.hash = targetId; 
                     showSection(targetId);
                     
-                    // 모바일 환경이면 클릭 후 메뉴 닫기
                     if (window.innerWidth < 768) { 
                         toggleMenu(); 
                     }
                 });
             });
 
+            // 본문 내 앵커 링크(#appendix-b 등) 클릭 처리
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                if (!anchor.classList.contains('sidebar-link')) {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetId = anchor.getAttribute('href').substring(1);
+                        window.location.hash = targetId;
+                        showSection(targetId);
+                    });
+                }
+            });
+
             // --- 2. 검색 기능 ---
             searchInput.addEventListener('input', (e) => {
                 const term = e.target.value.toLowerCase().trim();
                 
-                // 검색어가 지워지면 다시 현재 탭 보기로 돌아감
                 if (term === '') {
                     handleRoute(); 
                     return;
                 }
 
-                // 글로벌 검색: 모든 탭의 내용을 검사하여 일치하는 항목이 있는 섹션만 표시
                 searchSections.forEach(section => {
                     let sectionHasMatch = false;
                     const items = section.querySelectorAll('.search-item');
@@ -816,7 +1001,6 @@
                             }
                         });
                     } else {
-                        // 세부 검색 카드가 없는 섹션(예: 주의사항)의 경우 통째로 검색
                         if (section.innerText.toLowerCase().includes(term)) {
                             sectionHasMatch = true;
                         }
@@ -829,7 +1013,6 @@
                     }
                 });
 
-                // 전체 검색 중에는 특정 탭이 선택된 느낌을 지우기 위해 active 해제
                 navLinks.forEach(l => l.classList.remove('active'));
             });
 
@@ -849,24 +1032,18 @@
             // --- 4. 코드 복사 기능 ---
             const preElements = document.querySelectorAll('pre');
             preElements.forEach(pre => {
-                // 코드 블록을 감싸는 wrapper 생성
                 const wrapper = document.createElement('div');
                 wrapper.className = 'relative group w-full';
                 
-                // 기존 pre 태그를 wrapper 안으로 이동
                 pre.parentNode.insertBefore(wrapper, pre);
                 wrapper.appendChild(pre);
 
-                // 복사 버튼 생성
                 const copyBtn = document.createElement('button');
                 copyBtn.className = 'absolute top-2 right-2 px-2 py-1 bg-gray-600/80 hover:bg-gray-500 text-gray-100 text-xs rounded-md opacity-0 group-hover:opacity-100 transition-all focus:outline-none focus:opacity-100 flex items-center gap-1 shadow-sm backdrop-blur-sm z-10';
                 copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> 복사';
                 
                 copyBtn.addEventListener('click', () => {
-                    // 코드 텍스트 추출
                     const codeText = pre.querySelector('code').innerText;
-                    
-                    // iframe 보안 및 호환성을 위해 execCommand 방식 사용
                     const textarea = document.createElement('textarea');
                     textarea.value = codeText;
                     textarea.style.position = 'fixed';
@@ -877,8 +1054,6 @@
                     try {
                         document.execCommand('copy');
                         copyBtn.innerHTML = '<i class="fa-solid fa-check text-green-400"></i> <span class="text-green-400 font-bold">복사됨</span>';
-                        
-                        // 2초 후 원래 버튼 모양으로 복구
                         setTimeout(() => {
                             copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> 복사';
                         }, 2000);
@@ -892,7 +1067,6 @@
                 wrapper.appendChild(copyBtn);
             });
 
-            // 최초 화면 로드 시 실행
             handleRoute();
         });
     </script>
