@@ -20,18 +20,20 @@ input,textarea{font:inherit;color:inherit}
 
 /* 머리 */
 .document-head{width:min(100%,900px);margin:0 auto 12px;background:var(--paper);border:1px solid #ddd8cd;
-  box-shadow:0 8px 20px rgba(0,0,0,.05);padding:16px 26px 14px;border-top:8px solid var(--green)}
-.title-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+  box-shadow:0 8px 20px rgba(0,0,0,.05);padding:16px 26px;border-top:8px solid var(--green)}
+.title-row{display:flex;align-items:center;gap:10px;margin:0;flex-wrap:wrap}
 .title-chip{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:32px;padding:0 12px;
   border-radius:8px;background:#eceff1;font-size:15px;font-weight:900}
 .title-row h1{margin:0;font-size:23px;line-height:1.25}
-.student-info{display:grid;grid-template-columns:100px 100px 130px 1fr;gap:14px;align-items:end}
-.student-field{display:flex;align-items:center;gap:6px;border-bottom:1.5px solid #aeb7ae;padding:2px 0 4px;min-width:0}
-.student-field b{white-space:nowrap;font-size:14px}
-.student-field input{width:100%;min-width:0;border:0;outline:none;background:transparent;padding:0;font-size:15px}
+
+/* 라벨형 입력칸 (관심 직업 · 로봇 이름) */
 .label-line{display:grid;grid-template-columns:108px 1fr;min-height:38px;border:1px solid #d7ddd9;border-radius:9px;overflow:hidden;background:#fff}
-.label-line b{display:flex;align-items:center;padding:0 12px;font-size:14px;white-space:nowrap;background:linear-gradient(90deg,#2aa879,#86b91b);color:#fff}
-.label-line input{width:100%;border:0;outline:none;background:#fff;padding:6px 12px;font-size:15.5px}
+.label-line b{display:flex;align-items:center;padding:8px 12px;font-size:14px;white-space:nowrap;background:linear-gradient(90deg,#2aa879,#86b91b);color:#fff}
+.label-line textarea{
+  display:block;width:100%;min-width:0;min-height:36px;border:0;outline:none;resize:none;overflow:hidden;
+  background:#fff;padding:7px 12px;font-size:15.5px;line-height:1.45;
+  white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word;
+}
 
 /* 목차 */
 .toc{width:min(100%,900px);margin:0 auto 12px;display:flex;flex-wrap:wrap;gap:6px}
@@ -55,18 +57,22 @@ input,textarea{font:inherit;color:inherit}
 /* 공통 블록 */
 .box{border:1px solid var(--line);background:#fcfcfa;border-radius:12px;padding:10px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 13px}
+.card{min-width:0;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 13px}
 .card.mint{background:var(--mint);border-color:var(--mintline)}
 .card-head{display:flex;align-items:center;gap:7px;margin-bottom:6px;flex-wrap:wrap}
 .card h3{margin:0;font-size:14px;line-height:1.3}
 .badge{display:inline-block;padding:2px 8px;border-radius:999px;background:#e4eefc;color:var(--blue);font-size:11.5px;font-weight:900;flex:none}
-.card textarea{display:block;width:100%;min-height:28px;border:0;outline:none;resize:none;overflow:hidden;background:transparent;font-size:15.5px;line-height:1.5;padding:2px 8px}
-.card textarea:focus,.label-line input:focus{box-shadow:inset 0 0 0 2px rgba(30,166,114,.22);border-radius:6px}
-.card textarea::placeholder,.label-line input::placeholder{color:#9ea59f;font-size:14.5px}
+.card textarea{
+  display:block;width:100%;min-width:0;min-height:28px;border:0;outline:none;resize:none;overflow:hidden;
+  background:transparent;font-size:15.5px;line-height:1.5;padding:2px 8px;
+  white-space:pre-wrap;overflow-wrap:break-word;word-break:break-word;
+}
+.card textarea:focus,.label-line textarea:focus{box-shadow:inset 0 0 0 2px rgba(30,166,114,.22);border-radius:6px}
+.card textarea::placeholder,.label-line textarea::placeholder{color:#9ea59f;font-size:14.5px}
 
 /* 1번 진로 분야 선택 버튼 (4열 컴팩트) */
 .career-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
-.career-opt{position:relative;display:block}
+.career-opt{position:relative;display:block;min-width:0}
 .career-opt input{position:absolute;opacity:0;width:1px;height:1px}
 .career-opt .btn-box{
   display:flex;flex-direction:column;justify-content:center;gap:2px;
@@ -103,7 +109,6 @@ input,textarea{font:inherit;color:inherit}
   .app{padding:8px}
   .document-head{padding:14px 16px}
   .title-row h1{font-size:20px}
-  .student-info{grid-template-columns:1fr 1fr}
   .paper-inner{padding:18px 16px 20px}
   .sec-head h2{font-size:18px}
   .desc{margin-left:0}
@@ -124,13 +129,6 @@ input,textarea{font:inherit;color:inherit}
     <div class="title-row">
       <div class="title-chip">1차시</div>
       <h1>나의 진로 AI 기획서</h1>
-    </div>
-
-    <div class="student-info">
-      <div class="student-field"><b>학년</b><input type="text" data-k="grade" aria-label="학년"></div>
-      <div class="student-field"><b>반</b><input type="text" data-k="cls" aria-label="반"></div>
-      <div class="student-field"><b>번호</b><input type="text" data-k="num" aria-label="번호"></div>
-      <div class="student-field"><b>이름</b><input type="text" data-k="name" aria-label="이름"></div>
     </div>
   </div>
 
@@ -203,7 +201,7 @@ input,textarea{font:inherit;color:inherit}
 
         <div class="label-line" style="margin-top:10px">
           <b>관심 직업</b>
-          <input type="text" data-k="q1" aria-label="관심 직업" placeholder="예) 병동 간호사, AI·생명과학 연구원, 데이터 분석가">
+          <textarea rows="1" wrap="soft" data-k="q1" aria-label="관심 직업" placeholder="예) 병동 간호사, AI·생명과학 연구원, 데이터 분석가"></textarea>
         </div>
       </section>
 
@@ -213,19 +211,19 @@ input,textarea{font:inherit;color:inherit}
         <div class="grid2">
           <div class="card mint">
             <div class="card-head"><span class="badge">Q1</span><h3>누가 겪는 문제인가요?</h3></div>
-            <textarea rows="1" data-k="pp_who" aria-label="누가 겪는 문제인가요?" placeholder="예) 병동에서 일하는 간호사"></textarea>
+            <textarea rows="1" wrap="soft" data-k="pp_who" aria-label="누가 겪는 문제인가요?" placeholder="예) 병동에서 일하는 간호사"></textarea>
           </div>
           <div class="card mint">
             <div class="card-head"><span class="badge">Q2</span><h3>어떤 순간에 발생하나요?</h3></div>
-            <textarea rows="1" data-k="pp_when" aria-label="어떤 순간에 발생하나요?" placeholder="예) 무거운 의료 물품을 운반할 때"></textarea>
+            <textarea rows="1" wrap="soft" data-k="pp_when" aria-label="어떤 순간에 발생하나요?" placeholder="예) 무거운 의료 물품을 운반할 때"></textarea>
           </div>
           <div class="card mint">
             <div class="card-head"><span class="badge">Q3</span><h3>얼마나 불편하거나 위험한가요?</h3></div>
-            <textarea rows="1" data-k="pp_how" aria-label="얼마나 불편하거나 위험한가요?" placeholder="예) 매일 반복되어 허리 통증이 생김"></textarea>
+            <textarea rows="1" wrap="soft" data-k="pp_how" aria-label="얼마나 불편하거나 위험한가요?" placeholder="예) 매일 반복되어 허리 통증이 생김"></textarea>
           </div>
           <div class="card mint">
             <div class="card-head"><span class="badge">Q4</span><h3>왜 아직 해결되지 않았나요?</h3></div>
-            <textarea rows="1" data-k="pp_why" aria-label="왜 아직 해결되지 않았나요?" placeholder="예) 운반을 도와줄 장비가 부족함"></textarea>
+            <textarea rows="1" wrap="soft" data-k="pp_why" aria-label="왜 아직 해결되지 않았나요?" placeholder="예) 운반을 도와줄 장비가 부족함"></textarea>
           </div>
         </div>
       </section>
@@ -233,20 +231,23 @@ input,textarea{font:inherit;color:inherit}
       <section class="section" id="s3">
         <div class="sec-head"><div class="sec-no">3</div><h2>나의 진로 로봇 기획</h2></div>
         <p class="desc">문제를 해결할 로봇을 구체적으로 기획해보세요.</p>
-        <div class="label-line" style="margin-bottom:10px"><b>로봇 이름</b><input type="text" data-k="robot" aria-label="로봇 이름" placeholder="로봇의 멋진 이름을 지어주세요 (예: 헬스케어 메이트 '나이팅게일 봇')"></div>
+        <div class="label-line" style="margin-bottom:10px">
+          <b>로봇 이름</b>
+          <textarea rows="1" wrap="soft" data-k="robot" aria-label="로봇 이름" placeholder="로봇의 멋진 이름을 지어주세요 (예: 헬스케어 메이트 '나이팅게일 봇')"></textarea>
+        </div>
         <div class="grid2">
           <div class="card mint">
             <div class="card-head"><span class="badge">SOLUTION</span><h3>문제 해결 방법</h3></div>
-            <textarea rows="1" data-k="q3a" aria-label="문제 해결 방법" placeholder="로봇이 어떤 기능으로 현장의 문제를 해결할 수 있는지 적어주세요."></textarea>
+            <textarea rows="1" wrap="soft" data-k="q3a" aria-label="문제 해결 방법" placeholder="로봇이 어떤 기능으로 현장의 문제를 해결할 수 있는지 적어주세요."></textarea>
           </div>
           <div class="card mint">
             <div class="card-head"><span class="badge">SCENARIO</span><h3>서비스 시나리오</h3></div>
-            <textarea rows="1" data-k="q3b" aria-label="서비스 시나리오" placeholder="사용자가 로봇을 만났을 때부터 이용하는 과정을 순서대로 적어주세요."></textarea>
+            <textarea rows="1" wrap="soft" data-k="q3b" aria-label="서비스 시나리오" placeholder="사용자가 로봇을 만났을 때부터 이용하는 과정을 순서대로 적어주세요."></textarea>
           </div>
         </div>
         <div class="card mint wide">
           <div class="card-head"><span class="badge">EFFECT</span><h3>기대 효과</h3></div>
-          <textarea rows="1" data-k="q3c" aria-label="기대 효과" placeholder="이 로봇을 쓰면 누구에게 무엇이 좋아지나요? (효율성 · 안전성 · 복지)"></textarea>
+          <textarea rows="1" wrap="soft" data-k="q3c" aria-label="기대 효과" placeholder="이 로봇을 쓰면 누구에게 무엇이 좋아지나요? (효율성 · 안전성 · 복지)"></textarea>
         </div>
       </section>
 
@@ -261,7 +262,7 @@ input,textarea{font:inherit;color:inherit}
         </div>
         <div class="card mint wide">
           <div class="card-head"><span class="badge">REVISE</span><h3>다시 질문해서 고친 점</h3></div>
-          <textarea rows="1" data-k="rv_note" aria-label="다시 질문해서 고친 점" placeholder="예) 구현하기 어려운 기능을 빼고, 실제 현장에 꼭 필요한 기능으로 수정했다."></textarea>
+          <textarea rows="1" wrap="soft" data-k="rv_note" aria-label="다시 질문해서 고친 점" placeholder="예) 구현하기 어려운 기능을 빼고, 실제 현장에 꼭 필요한 기능으로 수정했다."></textarea>
         </div>
         <p class="hint">* 작성 완료 후 [기획서 PDF 저장]을 누르면 PDF로 저장되어 패들렛에 바로 올릴 수 있습니다.</p>
       </section>
@@ -277,13 +278,14 @@ input,textarea{font:inherit;color:inherit}
 </div>
 
 <script>
-  const KEY='career_ai_act1_v4';
+  const KEY='career_ai_act1_v5';
   let state={};
   try{ state=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ state={}; }
   const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
   function autoResize(el){
+    const minH=el.closest('.label-line') ? 36 : 28;
     el.style.height='auto';
-    el.style.height=Math.max(28, el.scrollHeight)+'px';
+    el.style.height=Math.max(minH, el.scrollHeight)+'px';
   }
 
   document.querySelectorAll('[data-k]').forEach(el=>{
@@ -293,14 +295,15 @@ input,textarea{font:inherit;color:inherit}
   document.querySelectorAll('textarea').forEach(el=>{
     autoResize(el);
     el.addEventListener('input',()=>autoResize(el));
+    el.addEventListener('change',()=>autoResize(el));
+    el.addEventListener('paste',()=>setTimeout(()=>autoResize(el),0));
   });
   window.addEventListener('resize',()=>{
     document.querySelectorAll('textarea').forEach(autoResize);
   });
-  document.querySelectorAll('input[type="radio"]').forEach(r=>{
-    if(state[r.name]===r.value) r.checked=true;
-    r.addEventListener('change',()=>{ state[r.name]=r.value; save(); });
-  });
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(()=>document.querySelectorAll('textarea').forEach(autoResize));
+  }
   document.querySelectorAll('input[type="checkbox"][data-c]').forEach(c=>{
     c.checked=!!state[c.dataset.c];
     c.addEventListener('change',()=>{ state[c.dataset.c]=c.checked; save(); });
@@ -317,13 +320,35 @@ input,textarea{font:inherit;color:inherit}
     const btn=document.getElementById('saveBtn'); const label=btn.textContent;
     btn.disabled=true; btn.textContent='PDF 만드는 중…';
     const toc=document.querySelector('.toc'); toc.style.display='none';
-    document.querySelectorAll('textarea').forEach(autoResize);
+    const origTextareas=[...document.querySelectorAll('#capture textarea')];
+    origTextareas.forEach(autoResize);
     try{
       const target=document.getElementById('capture');
       const scale=2;
       const canvas=await html2canvas(target,{
         backgroundColor:'#ffffff', scale, useCORS:true, scrollY:-window.scrollY,
-        windowWidth:document.documentElement.clientWidth
+        windowWidth:document.documentElement.clientWidth,
+        onclone:(doc)=>{
+          // 모든 textarea가 PDF에서 줄바꿈되며 잘리지 않도록 div로 치환
+          const clonedTextareas=[...doc.querySelectorAll('#capture textarea')];
+          clonedTextareas.forEach((ta,i)=>{
+            const orig=origTextareas[i];
+            const cs=window.getComputedStyle(orig);
+            const div=doc.createElement('div');
+            div.textContent=orig.value || '';
+            div.style.width='100%';
+            div.style.minHeight=cs.minHeight;
+            div.style.padding=cs.padding;
+            div.style.backgroundColor=cs.backgroundColor;
+            div.style.font=cs.font;
+            div.style.lineHeight=cs.lineHeight;
+            div.style.color=cs.color;
+            div.style.whiteSpace='pre-wrap';
+            div.style.overflowWrap='break-word';
+            div.style.wordBreak='break-word';
+            ta.parentNode.replaceChild(div,ta);
+          });
+        }
       });
       // A4 세로, 여백 8mm
       const {jsPDF}=window.jspdf;
@@ -351,10 +376,9 @@ input,textarea{font:inherit;color:inherit}
         pdf.addImage(part.toDataURL('image/jpeg',0.92),'JPEG',m,m,imgW,h/pxPerMm);
         first=false; y=end;
       }
-      const who=(state.name||'').trim();
       const url=URL.createObjectURL(pdf.output('blob'));
       const link=document.createElement('a'); link.href=url;
-      link.download='진로AI기획서'+(who?'_'+who:'')+'.pdf';
+      link.download='진로AI기획서.pdf';
       document.body.appendChild(link); link.click(); link.remove();
       setTimeout(()=>URL.revokeObjectURL(url),4000);
     } catch(e){
